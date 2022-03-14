@@ -9,7 +9,7 @@ from __future__ import division
 from __future__ import print_function
 import logger
 
-from ..base import BaseModel
+from _base import BaseModel
 
 import os
 
@@ -23,9 +23,16 @@ DBMLIB_FTREMOR_CONFIG = os.path.abspath(os.path.join(DBMLIB_PATH, '../../../../r
 
 class Movement(BaseModel):
     def __init__(self):
+        self._keyword = "movement"
         pass
 
-    def process(self,video_uri, out_dir, r_config, dlib_model):
+    
+    def process(self, loader, file, **kwargs):
+
+        video_uri = file
+        out_dir = loader.output_path
+        r_config = loader.r_config
+
 
         logger.info('Processing movement variables from data in {}'.format(video_uri))
 
@@ -33,7 +40,7 @@ class Movement(BaseModel):
         head_motion.run_head_movement(video_uri, out_dir, r_config)
     
         logger.info('processing eye blink....')
-        eye_blink.run_eye_blink(video_uri, out_dir, r_config, dlib_model)
+        eye_blink.run_eye_blink(video_uri, out_dir, r_config )
 
         logger.info('processing eye gaze....')
         eye_gaze.run_eye_gaze(video_uri, out_dir, r_config)
