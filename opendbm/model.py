@@ -1,6 +1,7 @@
 import pandas as pd
 from dbm_lib.dbm_features.raw_features.video import open_face_process as of
 from dbm_lib.config import config_reader, config_raw_feature, config_derive_feature
+from dbm_lib.controller import process_feature as pf
 import os
 
 OPENFACE_PATH = 'pkg/open_dbm/OpenFace/build/bin/FeatureExtraction'
@@ -10,7 +11,7 @@ class Model(object):
         self.s_config = config_reader.ConfigReader()
         self.r_config = config_raw_feature.ConfigRawReader()
         self.d_config = config_derive_feature.ConfigDeriveReader()
-        
+
     def _fit_transform(self, path):
         pass
     def _fit(self, path):
@@ -37,9 +38,22 @@ class AudioModel(Model) :
     def __init__(self):
         super().__init__()
 
-    def _fit_transform(self, path):
-        # super()._fit_transform(path)
-        pass
+    def prep_func(func, save=False):
+
+        def wrapper(self, *args, **kwargs):
+            path = args[0]
+            istmp = False
+            if not path.endswith('.wav'):
+                istmp = True
+                tpath = pf.audio_to_wav(path, tmp=True)
+                df = func(self, tpath)
+                df['dbm_master_url'] = path
+                os.remove(tpath)
+            else:
+                 df = func(self, path)
+            return df
+        return wrapper
+
     def _fit(self, path):
         pass
     def _to_dataframe(self):

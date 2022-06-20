@@ -6,10 +6,10 @@ import pandas as pd
 class Shimmer(AudioModel):
     def __init__(self):
         super().__init__()
-        
+
+    @AudioModel.prep_func
     def fit_transform(self, path):
-        df = run_shimmer(path, '.', self.r_config, save=False)
-        return df
+        return run_shimmer(path, '.', self.r_config, save=False)
         
     def fit(self, path):
         pass
