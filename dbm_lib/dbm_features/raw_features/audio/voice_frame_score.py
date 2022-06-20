@@ -48,7 +48,7 @@ def voice_segment(path):
     voiced_percentage = (voiced_frames/total_frames)*100
     return voiced_percentage, voiced_frames, total_frames
 
-def calc_vfs(video_uri, audio_file, out_loc, fl_name, r_config):
+def calc_vfs(video_uri, audio_file, out_loc, fl_name, r_config, save=True):
     """
         creating dataframe matrix for voice frame score
         Args:
@@ -66,11 +66,12 @@ def calc_vfs(video_uri, audio_file, out_loc, fl_name, r_config):
     
     df_vfs['Frames'] = df_vfs.index
     df_vfs['dbm_master_url'] = video_uri
+    if save: 
+        logger.info('Saving Output file {} '.format(out_loc))
+        ut.save_output(df_vfs, out_loc, fl_name, vfs_dir, csv_ext) 
+    return df_vfs
     
-    logger.info('Saving Output file {} '.format(out_loc))
-    ut.save_output(df_vfs, out_loc, fl_name, vfs_dir, csv_ext) 
-    
-def empty_vfs(video_uri, out_loc, fl_name, r_config):
+def empty_vfs(video_uri, out_loc, fl_name, r_config, save=True):
     """
     Preparing empty VFS matrix if something fails
     """
@@ -78,11 +79,12 @@ def empty_vfs(video_uri, out_loc, fl_name, r_config):
     out_val = [[np.nan, np.nan, np.nan, np.nan, error_txt]]
     df_vfs = pd.DataFrame(out_val, columns = cols)
     df_vfs['dbm_master_url'] = video_uri
-    
-    logger.info('Saving Output file {} '.format(out_loc))
-    ut.save_output(df_vfs, out_loc, fl_name, vfs_dir, csv_ext)  
+    if save: 
+        logger.info('Saving Output file {} '.format(out_loc))
+        ut.save_output(df_vfs, out_loc, fl_name, vfs_dir, csv_ext)  
+    return df_vfs
 
-def run_vfs(video_uri, out_dir, r_config):
+def run_vfs(video_uri, out_dir, r_config, save=True):
     """
     Processing all participants for fetching voice frame score
     ---------------
@@ -103,9 +105,9 @@ def run_vfs(video_uri, out_dir, r_config):
             if float(aud_dur) < 0.064:
                 logger.info('Output file {} size is less than 0.064sec'.format(audio_file))
 
-                empty_vfs(video_uri, out_loc, fl_name, r_config)
-                return
-
-            calc_vfs(video_uri, audio_file, out_loc, fl_name, r_config)
+                df = empty_vfs(video_uri, out_loc, fl_name, r_config, save=save)
+            else:
+                df = calc_vfs(video_uri, audio_file, out_loc, fl_name, r_config, save=save)
+            return df
     except Exception as e:
         logger.error('Failed to process audio file')

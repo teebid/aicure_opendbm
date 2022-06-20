@@ -66,7 +66,7 @@ def formant_score(path):
     f_score = formant_list(formant,sound_pat)
     return f_score
 
-def calc_formant(video_uri, audio_file, out_loc, fl_name, r_config):
+def calc_formant(video_uri, audio_file, out_loc, fl_name, r_config, save=True):
     """
     Preparing Formant freq matrix
     Args:
@@ -86,11 +86,13 @@ def calc_formant(video_uri, audio_file, out_loc, fl_name, r_config):
     
     df_formant['Frames'] = df_formant.index
     df_formant['dbm_master_url'] = video_uri
+
+    if save: 
+        logger.info('Saving Output file {} '.format(out_loc))
+        ut.save_output(df_formant, out_loc, fl_name, formant_dir, csv_ext)
+    return df_formant
     
-    logger.info('Saving Output file {} '.format(out_loc))
-    ut.save_output(df_formant, out_loc, fl_name, formant_dir, csv_ext)
-    
-def empty_fm(video_uri, out_loc, fl_name, r_config):
+def empty_fm(video_uri, out_loc, fl_name, r_config, save=True):
     
     """
     Preparing empty formant frequency matrix if something fails
@@ -99,11 +101,13 @@ def empty_fm(video_uri, out_loc, fl_name, r_config):
     out_val = [[np.nan, np.nan, np.nan, np.nan, np.nan, error_txt]]
     df_fm = pd.DataFrame(out_val, columns = cols)
     df_fm['dbm_master_url'] = video_uri
-    
-    logger.info('Saving Output file {} '.format(out_loc))
-    ut.save_output(df_fm, out_loc, fl_name, formant_dir, csv_ext)
 
-def run_formant(video_uri, out_dir, r_config):
+    if save: 
+        logger.info('Saving Output file {} '.format(out_loc))
+        ut.save_output(df_fm, out_loc, fl_name, formant_dir, csv_ext)
+    return df_fm
+
+def run_formant(video_uri, out_dir, r_config, save=True):
     
     """
     Processing all patient's for fetching Formant freq
@@ -125,9 +129,9 @@ def run_formant(video_uri, out_dir, r_config):
             if float(aud_dur) < 0.064:
                 logger.info('Output file {} size is less than 0.064sec'.format(audio_file))
 
-                empty_fm(video_uri, out_loc, fl_name, r_config)
-                return
-
-            calc_formant(video_uri, audio_file, out_loc, fl_name, r_config)
+                df = empty_fm(video_uri, out_loc, fl_name, r_config, save=save)
+            else:
+                df = calc_formant(video_uri, audio_file, out_loc, fl_name, r_config, save=save)
+            return df
     except Exception as e:
         logger.error('Failed to process audio file')

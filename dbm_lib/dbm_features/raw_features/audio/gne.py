@@ -38,7 +38,7 @@ def gne_ratio(sound):
     gne = np.nanmax(gne_all_bands) # following http://www.fon.hum.uva.nl/rob/NKI_TEVA/TEVA/HTML/NKI_TEVA.pdf
     return gne
 
-def empty_gne(video_uri, out_loc, fl_name, r_config, error_txt):
+def empty_gne(video_uri, out_loc, fl_name, r_config, error_txt, save=True):
     """
     Preparing empty GNE matrix if something fails
     """
@@ -47,10 +47,12 @@ def empty_gne(video_uri, out_loc, fl_name, r_config, error_txt):
     
     df_gne = pd.DataFrame(out_val, columns = cols)
     df_gne['dbm_master_url'] = video_uri
-    
-    logger.info('Saving Output file {} '.format(out_loc))
-    ut.save_output(df_gne, out_loc, fl_name, gne_dir, csv_ext)
-    
+
+    if save: 
+        logger.info('Saving Output file {} '.format(out_loc))
+        ut.save_output(df_gne, out_loc, fl_name, gne_dir, csv_ext)
+    return df_gne
+
 def segment_pitch(dir_path, r_config):
     """
     segmenting pitch freq for each voice segment
@@ -104,7 +106,7 @@ def segment_gne(com_speech_sort, voiced_yes, voiced_no, gne_all_frames, audio_fi
         gne_all_frames[idx] = max_gne
     return gne_all_frames
     
-def calc_gne(video_uri, audio_file, out_loc, fl_name, r_config):
+def calc_gne(video_uri, audio_file, out_loc, fl_name, r_config, save=True):
     """
     Preparing gne matrix
     Args:
@@ -123,15 +125,17 @@ def calc_gne(video_uri, audio_file, out_loc, fl_name, r_config):
         
         df_gne['Frames'] = df_gne.index
         df_gne['dbm_master_url'] = video_uri
-        
-        logger.info('Processing Output file {} '.format(out_loc))
-        ut.save_output(df_gne, out_loc, fl_name, gne_dir, csv_ext)
+
+        if save: 
+            logger.info('Processing Output file {} '.format(out_loc))
+            ut.save_output(df_gne, out_loc, fl_name, gne_dir, csv_ext)
+        return df_gne
         
     else:
         error_txt = 'error: pitch freq not available'
-        empty_gne(video_uri, out_loc, fl_name, r_config, error_txt)
+        return empty_gne(video_uri, out_loc, fl_name, r_config, error_txt, save=save)
 
-def run_gne(video_uri, out_dir, r_config):
+def run_gne(video_uri, out_dir, r_config, save=True):
     """
     Processing all patient's for fetching glottal noise ratio
     ---------------
@@ -153,9 +157,9 @@ def run_gne(video_uri, out_dir, r_config):
                 logger.info('Output file {} size is less than 0.064sec'.format(audio_file))
 
                 error_txt = 'error: length less than 0.064'
-                empty_gne(video_uri, out_loc, fl_name, r_config, error_txt)
-                return
-
-            calc_gne(video_uri, audio_file, out_loc, fl_name, r_config)
+                df = empty_gne(video_uri, out_loc, fl_name, r_config, error_txt, save=save)
+            else:
+                df = calc_gne(video_uri, audio_file, out_loc, fl_name, r_config, save=save)
+            return df
     except Exception as e:
         logger.error('Failed to process audio file')

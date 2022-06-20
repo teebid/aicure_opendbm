@@ -37,7 +37,7 @@ def hnr_ratio(filepath):
     hnr_all_frames = np.where(hnr_all_frames==-200, np.NaN, hnr_all_frames)
     return hnr_all_frames.transpose()
 
-def calc_hnr(video_uri, audio_file, out_loc, fl_name, r_config):
+def calc_hnr(video_uri, audio_file, out_loc, fl_name, r_config, save=True):
     """
     Preparing harmonic noise matrix
     Args:
@@ -51,11 +51,13 @@ def calc_hnr(video_uri, audio_file, out_loc, fl_name, r_config):
     df_hnr['Frames'] = df_hnr.index
     df_hnr['dbm_master_url'] = video_uri
     df_hnr[r_config.err_reason] = 'Pass'# will replace with threshold in future release
+
+    if save: 
+        logger.info('Saving Output file {} '.format(out_loc))
+        ut.save_output(df_hnr, out_loc, fl_name, hnr_dir, csv_ext)
+    return df_hnr
     
-    logger.info('Saving Output file {} '.format(out_loc))
-    ut.save_output(df_hnr, out_loc, fl_name, hnr_dir, csv_ext)
-    
-def empty_hnr(video_uri, out_loc, fl_name, r_config):
+def empty_hnr(video_uri, out_loc, fl_name, r_config, save=True):
     """
     Preparing empty HNR matrix if something fails
     """
@@ -63,11 +65,13 @@ def empty_hnr(video_uri, out_loc, fl_name, r_config):
     out_val = [[np.nan, np.nan, error_txt]]
     df_hnr = pd.DataFrame(out_val, columns = cols)
     df_hnr['dbm_master_url'] = video_uri
-    
-    logger.info('Saving Output file {} '.format(out_loc))
-    ut.save_output(df_hnr, out_loc, fl_name, hnr_dir, csv_ext)
 
-def run_hnr(video_uri, out_dir, r_config):
+    if save: 
+        logger.info('Saving Output file {} '.format(out_loc))
+        ut.save_output(df_hnr, out_loc, fl_name, hnr_dir, csv_ext)
+    return df_hnr
+
+def run_hnr(video_uri, out_dir, r_config, save=True):
     """
     Processing all patient's for fetching harmonic noise ratio
     -------------------
@@ -88,9 +92,10 @@ def run_hnr(video_uri, out_dir, r_config):
             if float(aud_dur) < 0.064:
                 logger.info('Output file {} size is less than 0.064sec'.format(audio_file))
 
-                empty_hnr(video_uri, out_loc, fl_name, r_config)
-                return
+                df = empty_hnr(video_uri, out_loc, fl_name, r_config, save=save)
 
-            calc_hnr(video_uri, audio_file, out_loc, fl_name, r_config)
+            else:
+                df = calc_hnr(video_uri, audio_file, out_loc, fl_name, r_config, save=save)
+            return df
     except Exception as e:
         logger.error('Failed to process audio file')
