@@ -11,6 +11,8 @@ class Model(object):
         self.s_config = config_reader.ConfigReader()
         self.r_config = config_raw_feature.ConfigRawReader()
         self.d_config = config_derive_feature.ConfigDeriveReader()
+        self._df = None
+        self._params = []
 
     def _fit_transform(self, path):
         pass
@@ -37,7 +39,7 @@ class VideoModel(Model):
 class AudioModel(Model) :
     def __init__(self):
         super().__init__()
-
+      
     def prep_func(func, save=False):
 
         def wrapper(self, *args, **kwargs):
@@ -54,7 +56,14 @@ class AudioModel(Model) :
             return df
         return wrapper
 
-    def _fit(self, path):
-        pass
     def _to_dataframe(self):
-        pass
+        if self._df is None:
+            raise Exception("Model has not been fit yet")
+        else:
+            return self._df
+
+    def _mean(self):
+        return self._df[self._params].mean()
+
+    def _std(self):
+        return self._df[self._params].std()    

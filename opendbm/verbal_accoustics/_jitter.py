@@ -6,12 +6,17 @@ import pandas as pd
 class Jitter(AudioModel):
     def __init__(self):
         super().__init__()
+        self._params = ['aco_jitter']
 
     @AudioModel.prep_func        
-    def fit_transform(self, path):
+    def _fit_transform(self, path):
         return run_jitter(path, '.', self.r_config, save=False)
         
-    def fit(self, path):
-        pass
     def to_dataframe(self):
-        return pd.DataFrame()
+        return super()._to_dataframe()
+
+    def mean(self):
+        return super()._mean()
+
+    def std(self):
+        return super()._std()

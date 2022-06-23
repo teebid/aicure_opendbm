@@ -1,0 +1,69 @@
+from opendbm.model import AudioModel
+from ._audio_intensity import AudioIntensity
+from ._pitch_frequency import PitchFrequency
+from ._formant_frequency import FormantFrequency
+from ._harmonic_noise import HarmonicsNoiseRatio
+from ._glottal_noise import GlottalNoiseRatio
+from ._jitter import Jitter 
+from ._shimmer import Shimmer
+from ._pause_characteristics import PauseCharacteristics
+from ._voice_prevalence import VoicePrevalence
+
+
+
+class VerbalAccoustics(AudioModel):
+    def __init__(self):
+        super().__init__()
+        self._auint = AudioIntensity()
+        self._pitchfreq = PitchFrequency()
+        self._forfreq = FormantFrequency()
+        self._hnr = HarmonicsNoiseRatio()
+        self._gne = GlottalNoiseRatio()
+        self._jitter = Jitter()
+        self._shimmer = Shimmer()
+        self._pchar = PauseCharacteristics()
+        self._vopre = VoicePrevalence()
+        self._models = {
+            "audio_intensity": self._auint,
+            "pitch_frequency": self._pitchfreq,
+            "formant_frequency": self._forfreq,
+            "harmonic_noise": self._hnr,
+            "glottal_noise": self._gne,
+            "jitter": self._jitter,
+            "shimmer": self._shimmer,
+            "pause_characteristics": self._pchar,
+            "voice_prevalence": self._vopre
+        }
+        
+    def fit(self, path):
+        for v in self._models.values():
+            v._df = v._fit_transform(path)
+
+    def get_audio_intensity(self):
+        return self._auint
+
+    def get_pitch_frequency(self):
+        return self._pitchfreq
+
+    def get_formant_frequency(self):
+        return self._forfreq
+
+    def get_harmonic_noise(self):
+        return self._hnr
+    
+    def get_glottal_noise(self):
+        return self._gne
+
+    def get_jitter(self):
+        return self._jitter
+
+    def get_shimmer(self):
+        return self._shimmer
+    
+    def get_pause_characteristics(self):
+        return self._pchar
+
+    def get_voice_prevalence(self):
+        return self._vopre
+
+

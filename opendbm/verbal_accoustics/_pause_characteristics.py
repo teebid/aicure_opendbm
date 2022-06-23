@@ -6,12 +6,21 @@ import pandas as pd
 class PauseCharacteristics(AudioModel):
     def __init__(self):
         super().__init__()
+        self._params = ['aco_totaltime', 'aco_speakingtime', 'aco_numpauses',
+                       'aco_pausetime','aco_pausefrac']
 
     @AudioModel.prep_func
-    def fit_transform(self, path):
+    def _fit_transform(self, path):
         return run_pause_segment(path, '.', self.r_config, save=False)
         
     def fit(self, path):
         pass
+
     def to_dataframe(self):
-        return pd.DataFrame()
+        return super()._to_dataframe()
+
+    def mean(self):
+        return super()._mean()
+
+    def std(self):
+        return super()._std()
