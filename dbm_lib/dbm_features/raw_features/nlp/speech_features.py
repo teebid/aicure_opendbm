@@ -22,7 +22,7 @@ speech_dir = 'speech/speech_feature'
 speech_ext = '_nlp.csv'
 transcribe_ext = 'speech/deepspeech/*_transcribe.csv'
 
-def run_speech_feature(video_uri, out_dir, r_config, tran_tog):
+def run_speech_feature(video_uri, out_dir, r_config, tran_tog, save=True):
     """
     Processing all patient's for fetching nlp features
     -------------------
@@ -41,11 +41,13 @@ def run_speech_feature(video_uri, out_dir, r_config, tran_tog):
             transcribe_df = pd.read_csv(transcribe_path[0])
             df_speech= n_util.process_speech(transcribe_df, r_config)
 
-            logger.info('Saving Output file {} '.format(out_loc))
-            ut.save_output(df_speech, out_loc, fl_name, speech_dir, speech_ext)
+            if save:
+                logger.info('Saving Output file {} '.format(out_loc))
+                ut.save_output(df_speech, out_loc, fl_name, speech_dir, speech_ext)
 
             if (tran_tog == None) or (tran_tog != 'on'):
                 shutil.rmtree(os.path.dirname(transcribe_path[0]))
+            return df_speech
             
     except Exception as e:
         logger.error('Failed to process video file')

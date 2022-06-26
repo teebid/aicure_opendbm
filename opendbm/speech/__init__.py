@@ -1,1 +1,1 @@
-from opendbm.speech.transcription import Transcribe
+from opendbm.speech.api import Speech

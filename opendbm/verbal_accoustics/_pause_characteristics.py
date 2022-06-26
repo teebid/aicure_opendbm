@@ -12,15 +12,3 @@ class PauseCharacteristics(AudioModel):
     @AudioModel.prep_func
     def _fit_transform(self, path):
         return run_pause_segment(path, '.', self.r_config, save=False)
-        
-    def fit(self, path):
-        pass
-
-    def to_dataframe(self):
-        return super()._to_dataframe()
-
-    def mean(self):
-        return super()._mean()
-
-    def std(self):
-        return super()._std()

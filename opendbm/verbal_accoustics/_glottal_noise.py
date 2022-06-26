@@ -11,12 +11,3 @@ class GlottalNoiseRatio(AudioModel):
     @AudioModel.prep_func 
     def _fit_transform(self, path):
         return run_gne(path, '.', self.r_config, save=False)
-
-    def to_dataframe(self):
-        return super()._to_dataframe()
-
-    def mean(self):
-        return super()._mean()
-
-    def std(self):
-        return super()._std()

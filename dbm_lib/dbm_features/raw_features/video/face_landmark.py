@@ -117,6 +117,7 @@ def run_face_landmark(video_uri, out_dir, f_cfg):
 
             logger.info('Processing Output file {} '.format(join(out_loc, fl_name)))
             ut.save_output(df_lmk, out_loc, fl_name, face_lmk_dir, csv_ext)
+        return df_lmk
     
     except Exception as e:
         logger.error('Failed to process video file')

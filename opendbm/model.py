@@ -3,8 +3,21 @@ from dbm_lib.dbm_features.raw_features.video import open_face_process as of
 from dbm_lib.config import config_reader, config_raw_feature, config_derive_feature
 from dbm_lib.controller import process_feature as pf
 import os
+from pathlib import Path
+
 
 OPENFACE_PATH = 'pkg/open_dbm/OpenFace/build/bin/FeatureExtraction'
+DEEEPSPEECH_URL = "https://github.com/mozilla/DeepSpeech/releases/download/v0.9.1"
+DEEPSPEECH_MODELS = ["deepspeech-0.9.1-models.pbmm", "deepspeech-0.9.1-models.scorer"]
+OPENFACE_URLS = [
+    "https://onedrive.live.com/download?cid=2E2ADA578BFF6E6E&resid=2E2ADA578BFF6E6E%2153070&authkey=AD6KjtYipphwBPc",
+    "https://onedrive.live.com/download?cid=2E2ADA578BFF6E6E&resid=2E2ADA578BFF6E6E%2153072&authkey=AKqoZtcN0PSIZH4",
+    "https://onedrive.live.com/download?cid=2E2ADA578BFF6E6E&resid=2E2ADA578BFF6E6E%2153079&authkey=ANpDR1n3ckL_0gs",
+    "https://onedrive.live.com/download?cid=2E2ADA578BFF6E6E&resid=2E2ADA578BFF6E6E%2153070&authkey=AD6KjtYipphwBPc"
+]
+OPENDBM_DATA = Path.home()/".opendbm"
+
+
 
 class Model(object):
     def __init__(self):
@@ -56,14 +69,16 @@ class AudioModel(Model) :
             return df
         return wrapper
 
-    def _to_dataframe(self):
+    def to_dataframe(self):
         if self._df is None:
             raise Exception("Model has not been fit yet")
         else:
             return self._df
 
-    def _mean(self):
+    def mean(self):
         return self._df[self._params].mean()
+    
+    def std(self):
+        return self._df[self._params].std()
 
-    def _std(self):
-        return self._df[self._params].std()    
+
