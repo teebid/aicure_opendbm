@@ -27,4 +27,5 @@ lexicalrichness
 vaderSentiment
 textblob
 opencv-python>=4.5.5
+pre-commit
 git+https://github.com/cmusatyalab/openface.git
