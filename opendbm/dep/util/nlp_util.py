@@ -94,7 +94,7 @@ def empty_speech(r_config, master_url, error_txt):
         error_txt: Error message during transcription
         
     Returns:
-            Empty dataframe for speech features with error
+            Empty dataframe for speech features with error .
     """
     
     col = [r_config.nlp_numSentences, r_config.nlp_singPronPerAns, r_config.nlp_singPronPerSen, r_config.nlp_pastTensePerAns,
