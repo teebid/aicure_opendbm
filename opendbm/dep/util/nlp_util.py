@@ -94,7 +94,7 @@ def empty_speech(r_config, master_url, error_txt):
         error_txt: Error message during transcription
         
     Returns:
-            Empty dataframe for speech features with error
+            Empty dataframe for speech features with error .
     """
     
     col = [r_config.nlp_numSentences, r_config.nlp_singPronPerAns, r_config.nlp_singPronPerSen, r_config.nlp_pastTensePerAns,
@@ -124,7 +124,7 @@ def process_speech(transcribe_df,r_config):
             transcribe_df: Transcribed dataframe
             r_config: raw config file object
         Returns:
-            Dataframe for speech features .
+            Dataframe for speech features
     """
     transcribe_df = transcribe_df.replace(np.nan, '', regex=True)
     err_transcribe = transcribe_df[r_config.err_reason].iloc[0]
