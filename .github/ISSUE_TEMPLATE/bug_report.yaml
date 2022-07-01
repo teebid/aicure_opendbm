@@ -1,5 +1,5 @@
-name: Tensorflow Issue Template
-description: Use this template to report any issue
+name: 🐛 OpenDBM Bug Report Template
+description: Use this template to report any bug report
 body:
   - type: dropdown
     id: bug-type
@@ -29,7 +29,7 @@ body:
     id: source
     attributes:
       label: Source
-      description: Tensorflow installed from
+      description: OpenDBM installed from
       options:
         - source (default)
         - binary
