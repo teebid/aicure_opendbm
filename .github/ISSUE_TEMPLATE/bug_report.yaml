@@ -1,5 +1,5 @@
-name: 🐛 OpenDBM Bug Report Template
-description: Use this template to report any bug report
+name: Tensorflow Issue Template
+description: Use this template to report any issue
 body:
   - type: dropdown
     id: bug-type
@@ -176,6 +176,6 @@ body:
     validations:
       required: true
   - type: markdown
-  attributes:
-    value: >
-      Thanks for contributing 🎉!
+    attributes:
+      value: >
+        Thanks for contributing 🎉!!
