@@ -1,4 +1,4 @@
-name: 🐛 OpenDBM Bug Report Template
+name: 🐛 OpenDBM Bug Report
 description: Use this template to report any bug report
 body:
   - type: dropdown
