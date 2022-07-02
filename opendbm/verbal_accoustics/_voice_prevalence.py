@@ -9,6 +9,6 @@ class VoicePrevalence(AudioModel):
         self._params = ['aco_voiceframe', 'aco_totvoiceframe', 'aco_voicepct']
 
     @AudioModel.prep_func
-    def _fit_transform(self, path):
+    def _fit_transform(self, path, **kwargs):
         return run_vfs(path, '.', self.r_config, save=False)
         

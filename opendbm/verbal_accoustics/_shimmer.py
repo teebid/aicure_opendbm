@@ -9,5 +9,5 @@ class Shimmer(AudioModel):
         self._params = ['aco_shimmer']
 
     @AudioModel.prep_func
-    def _fit_transform(self, path):
-        return run_shimmer(path, '.', self.r_config, save=False)
+    def _fit_transform(self, path, **kwargs):
+        return run_shimmer(path, '.', self.r_config, save=False, ff_df=kwargs['ff_df'])

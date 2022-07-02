@@ -10,6 +10,6 @@ class HarmonicsNoiseRatio(AudioModel):
         self._params = ['aco_hnr']
     
     @AudioModel.prep_func 
-    def _fit_transform(self, path):
+    def _fit_transform(self, path, **kwargs):
         return run_hnr(path, '.', self.r_config, save=False)
         

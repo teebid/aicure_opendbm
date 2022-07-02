@@ -27,12 +27,17 @@ class Model(object):
         self._df = None
         self._params = []
 
-    def _fit_transform(self, path):
-        pass
-    def _fit(self, path):
-        pass
-    def _to_dataframe(self):
-        pass
+    def to_dataframe(self):
+        if self._df is None:
+            raise Exception("Model has not been fit yet")
+        else:
+            return self._df
+
+    def mean(self):
+        return self._df[self._params].mean()
+    
+    def std(self):
+        return self._df[self._params].std()
 
 class VideoModel(Model):
     def __init__(self):
@@ -41,13 +46,7 @@ class VideoModel(Model):
         super()._fit_transform(path)
             # of.process_open_face(path, os.path.dirname(video_file), out_path, OPENFACE_PATH, args.dbm_group,video_tracking=False)
         of.process_open_face(path, os.path.dirname(video_file), out_path, OPENFACE_PATH, args.dbm_group,video_tracking=False)
-    
-    def _fit_transform(self):
-        pass
-    def _fit(self, path):
-        pass
-    def _to_dataframe(self):
-        pass
+
 
 class AudioModel(Model) :
     def __init__(self):
@@ -65,20 +64,10 @@ class AudioModel(Model) :
                 df['dbm_master_url'] = path
                 os.remove(tpath)
             else:
-                 df = func(self, path)
+                 df = func(self, path, **kwargs)
             return df
         return wrapper
 
-    def to_dataframe(self):
-        if self._df is None:
-            raise Exception("Model has not been fit yet")
-        else:
-            return self._df
 
-    def mean(self):
-        return self._df[self._params].mean()
-    
-    def std(self):
-        return self._df[self._params].std()
 
 

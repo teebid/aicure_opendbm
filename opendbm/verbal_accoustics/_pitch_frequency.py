@@ -9,5 +9,5 @@ class PitchFrequency(AudioModel):
         self._params = ['aco_ff']
 
     @AudioModel.prep_func
-    def _fit_transform(self, path):
+    def _fit_transform(self, path, **kwargs):
         return run_pitch(path, '.', self.r_config, save=False)

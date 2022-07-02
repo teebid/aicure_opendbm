@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 from opendbm.model import AudioModel
 from ._audio_intensity import AudioIntensity
 from ._pitch_frequency import PitchFrequency
@@ -23,7 +25,7 @@ class VerbalAccoustics(AudioModel):
         self._shimmer = Shimmer()
         self._pchar = PauseCharacteristics()
         self._vopre = VoicePrevalence()
-        self._models = {
+        self._models = OrderedDict({
             "audio_intensity": self._auint,
             "pitch_frequency": self._pitchfreq,
             "formant_frequency": self._forfreq,
@@ -33,11 +35,15 @@ class VerbalAccoustics(AudioModel):
             "shimmer": self._shimmer,
             "pause_characteristics": self._pchar,
             "voice_prevalence": self._vopre
-        }
+        })
         
     def fit(self, path):
-        for v in self._models.values():
-            v._df = v._fit_transform(path)
+        for k,v in self._models.items():
+            if k in ['glottal_noise', 'jitter', 'shimmer']:
+                v._df = v._fit_transform(path, ff_df=self._pitchfreq._df)
+            else:
+                v._df = v._fit_transform(path)
+
 
     def get_audio_intensity(self):
         return self._auint

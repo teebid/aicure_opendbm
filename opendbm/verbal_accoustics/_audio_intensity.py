@@ -8,5 +8,5 @@ class AudioIntensity(AudioModel):
         self._params = ['aco_int']
 
     @AudioModel.prep_func
-    def _fit_transform(self, path):
+    def _fit_transform(self, path, **kwargs):
         return run_intensity(path, '.', self.r_config, save=False)

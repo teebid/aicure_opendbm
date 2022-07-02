@@ -10,5 +10,5 @@ class PauseCharacteristics(AudioModel):
                        'aco_pausetime','aco_pausefrac']
 
     @AudioModel.prep_func
-    def _fit_transform(self, path):
+    def _fit_transform(self, path, **kwargs):
         return run_pause_segment(path, '.', self.r_config, save=False)
