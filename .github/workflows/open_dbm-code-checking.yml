@@ -29,7 +29,7 @@ jobs:
     - name: Run flake8
       run: |
         pip install flake8
-        echo "${{ steps.get_file_changes.outputs.files}}" | tr " " "\n" | grep ".py$" | xargs flake8 --count --show-source --statistics
+        echo "opendbm/dep/util/nlp_util.py" | tr " " "\n" | grep ".py$" | xargs flake8 --count --show-source --statistics
 
   vulnerability_scanning:
     runs-on: ubuntu-latest
