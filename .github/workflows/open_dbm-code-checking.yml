@@ -38,6 +38,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: install_code_checking_dependencies
     steps:
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.9
+        cache: 'pip'
     - name: Run safety
       run: |
         safety check
