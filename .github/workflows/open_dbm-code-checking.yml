@@ -26,6 +26,7 @@ jobs:
       with:
           files: |
             *.py*
+            **/*.py*
     - name: Report list of PYTHON changed files
       run: |
         echo Changed files: ${{ steps.python-changed-files.outputs.all_changed_files }}
