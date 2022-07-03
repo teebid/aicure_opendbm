@@ -124,7 +124,7 @@ def process_speech(transcribe_df,r_config):
             transcribe_df: Transcribed dataframe
             r_config: raw config file object
         Returns:
-            Dataframe for speech features
+            Dataframe for speech features. 
     """
     transcribe_df = transcribe_df.replace(np.nan, '', regex=True)
     err_transcribe = transcribe_df[r_config.err_reason].iloc[0]

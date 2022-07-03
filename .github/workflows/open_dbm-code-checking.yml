@@ -26,9 +26,9 @@ jobs:
       with:
           files: |
             *.py*
-    - name: Report list of changed files
+    - name: Report list of PYTHON changed files
       run: |
-        echo Changed files: ${{ steps.changed-files.outputs.all_changed_files }}
+        echo Changed files: ${{ steps.python-changed-files.outputs.all_changed_files }}
     - name: Set up Python 3.9
       uses: actions/setup-python@v4
       with:
