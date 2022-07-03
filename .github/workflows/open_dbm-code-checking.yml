@@ -15,9 +15,10 @@ jobs:
     - name: Checkout OpenDBM code
       uses: actions/checkout@v3
     - name: Set up Python 3.9
-      uses: actions/setup-python@main
+      uses: actions/setup-python@v4
       with:
         python-version: 3.9
+        cache: 'pip'
     - name: Install code checking dependencies
       run: |
         python -m pip install --upgrade pip
