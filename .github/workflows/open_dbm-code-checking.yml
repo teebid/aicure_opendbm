@@ -14,14 +14,21 @@ jobs:
     steps:
     - name: Checkout OpenDBM code
       uses: actions/checkout@v3
-    - name: Get file changes
-      id: get_file_changes
-      uses: trilom/file-changes-action@v1.2.4
-      with:
-        output: ' '
+    - name: Get changed files
+      id: changed-files
+      uses: tj-actions/changed-files@v23.1
     - name: Report list of changed files
       run: |
-        echo Changed files: ${{ steps.get_file_changes.outputs.files }}
+        echo Changed files: ${{ steps.changed-files.outputs.all_changed_files }}
+    - name: Get PYTHON changed files
+      id: python-changed-files
+      uses: tj-actions/changed-files@v23.1
+      with:
+          files: |
+            *.py*
+    - name: Report list of changed files
+      run: |
+        echo Changed files: ${{ steps.changed-files.outputs.all_changed_files }}
     - name: Set up Python 3.9
       uses: actions/setup-python@v4
       with:
@@ -29,7 +36,9 @@ jobs:
     - name: Run flake8
       run: |
         pip install flake8
-        echo ".github/workflows/open_dbm-code-checking.yml" | tr " " "\n" | grep ".py$" | xargs flake8
+        for file in ${{ steps.python-changed-files.outputs.all_changed_files }}; do
+          flake8 $file --count --show-source --statistics
+        done
 
   vulnerability_scanning:
     runs-on: ubuntu-latest
