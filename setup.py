@@ -5,7 +5,7 @@ with open('requirements.txt') as fp:
 
 setuptools.setup(
     name="open_dbm",
-    version="0.0.1",
+    version="0.0.2",
     author="Vijay Yadav",
     author_email='vijay.yadav@aicure.com',
     description="openDBM",
