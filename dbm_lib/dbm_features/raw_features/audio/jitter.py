@@ -11,7 +11,6 @@ import glob
 import parselmouth
 import librosa
 import numpy as np
-import more_itertools as mit
 from os.path import join
 import logging
 
@@ -50,32 +49,6 @@ def empty_jitter(video_uri, out_loc, fl_name, r_config, error_txt, save=True):
         ut.save_output(df_jitter, out_loc, fl_name, jitter_dir, csv_ext)
     return df_jitter
     
-def segment_pitch(dir_path, r_config):
-    """
-    segmenting pitch freq for each voice segment
-    """
-    com_speech_sort, voiced_yes, voiced_no  = ([], ) * 3
-    for file in os.listdir(dir_path):
-        try:
-            
-            if file.endswith('_pitch.csv'):
-                
-                ff_df = pd.read_csv((dir_path+'/'+file))
-                voice_label = ff_df[r_config.aco_voiceLabel]
-                
-                indices_yes = [i for i, x in enumerate(voice_label) if x == "yes"]
-                voiced_yes = [list(group) for group in mit.consecutive_groups(indices_yes)]
-                
-                indices_no = [i for i, x in enumerate(voice_label) if x == "no"]
-                voiced_no = [list(group) for group in mit.consecutive_groups(indices_no)]
-                
-                com_speech = voiced_yes + voiced_no
-                com_speech_sort = sorted(com_speech, key=lambda x: x[0])
-        except:
-            pass
-        
-    return com_speech_sort, voiced_yes, voiced_no
-
 def segment_jitter(com_speech_sort, voiced_yes, voiced_no, jitter_frames, audio_file):
     """
     calculating jitter for each voice segment
@@ -103,7 +76,7 @@ def segment_jitter(com_speech_sort, voiced_yes, voiced_no, jitter_frames, audio_
         jitter_frames[idx] = jitter
     return jitter_frames
     
-def calc_jitter(video_uri, audio_file, out_loc, fl_name, r_config, save=True):
+def calc_jitter(video_uri, audio_file, out_loc, fl_name, r_config, save=True, ff_df=None):
     """
     Preparing jitter matrix
     Args:
@@ -112,8 +85,12 @@ def calc_jitter(video_uri, audio_file, out_loc, fl_name, r_config, save=True):
         r_config: config.config_raw_feature.pyConfigFeatureNmReader object
     """
     dir_path = os.path.join(out_loc, ff_dir)
-    if os.path.isdir(dir_path):
-        voice_seg = segment_pitch(dir_path, r_config)
+    if os.path.isdir(dir_path) or ff_df is not None:
+
+        if ff_df is not None:
+            voice_seg = ut.process_segment_pitch(ff_df, r_config)
+        else:
+            voice_seg = ut.segment_pitch(dir_path, r_config, ff_df=ff_df)
         
         jitter_frames = [np.NaN] * len(voice_seg[0])
         jitter_segment_frames = segment_jitter(voice_seg[0], voice_seg[1], voice_seg[2], jitter_frames, audio_file)
@@ -132,7 +109,7 @@ def calc_jitter(video_uri, audio_file, out_loc, fl_name, r_config, save=True):
         df = empty_jitter(video_uri, out_loc, fl_name, r_config, error_txt, save=save)
     return df
     
-def run_jitter(video_uri, out_dir, r_config, save=True):
+def run_jitter(video_uri, out_dir, r_config, save=True, ff_df=None):
     """
     Processing all patient's videos for fetching jitter
     -------------------
@@ -156,7 +133,8 @@ def run_jitter(video_uri, out_dir, r_config, save=True):
                 error_txt = 'error: length less than 0.064'
                 df = empty_jitter(video_uri, out_loc, fl_name, r_config, error_txt, save=save)
             else:
-                df = calc_jitter(video_uri, audio_file, out_loc, fl_name, r_config, save=save)
+                df = calc_jitter(video_uri, audio_file, out_loc, fl_name, r_config, save=save,ff_df=ff_df)
             return df
     except Exception as e:
+        logger.error('Error in jitter: {}'.format(e))
         logger.error('Failed to process audio file')

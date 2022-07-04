@@ -53,32 +53,6 @@ def empty_gne(video_uri, out_loc, fl_name, r_config, error_txt, save=True):
         ut.save_output(df_gne, out_loc, fl_name, gne_dir, csv_ext)
     return df_gne
 
-def segment_pitch(dir_path, r_config):
-    """
-    segmenting pitch freq for each voice segment
-    """
-    com_speech_sort, voiced_yes, voiced_no  = ([], ) * 3
-    for file in os.listdir(dir_path):
-        try:
-            
-            if file.endswith('_pitch.csv'):
-                
-                ff_df = pd.read_csv((dir_path+'/'+file))
-                voice_label = ff_df[r_config.aco_voiceLabel]
-                
-                indices_yes = [i for i, x in enumerate(voice_label) if x == "yes"]
-                voiced_yes = [list(group) for group in mit.consecutive_groups(indices_yes)]
-                
-                indices_no = [i for i, x in enumerate(voice_label) if x == "no"]
-                voiced_no = [list(group) for group in mit.consecutive_groups(indices_no)]
-                
-                com_speech = voiced_yes + voiced_no
-                com_speech_sort = sorted(com_speech, key=lambda x: x[0])
-        except:
-            pass
-        
-    return com_speech_sort, voiced_yes, voiced_no
-
 def segment_gne(com_speech_sort, voiced_yes, voiced_no, gne_all_frames, audio_file):
     """
     calculating gne for each voice segment
@@ -106,7 +80,7 @@ def segment_gne(com_speech_sort, voiced_yes, voiced_no, gne_all_frames, audio_fi
         gne_all_frames[idx] = max_gne
     return gne_all_frames
     
-def calc_gne(video_uri, audio_file, out_loc, fl_name, r_config, save=True):
+def calc_gne(video_uri, audio_file, out_loc, fl_name, r_config, save=True, ff_df=None):
     """
     Preparing gne matrix
     Args:
@@ -114,8 +88,11 @@ def calc_gne(video_uri, audio_file, out_loc, fl_name, r_config, save=True):
         out_loc: (str) Output directory for csv's
     """
     dir_path = os.path.join(out_loc, ff_dir)
-    if os.path.isdir(dir_path):
-        voice_seg = segment_pitch(dir_path, r_config)
+    if os.path.isdir(dir_path) or ff_df is not None:
+        if ff_df is not None:
+            voice_seg = ut.process_segment_pitch(ff_df, r_config)
+        else:
+            voice_seg = ut.segment_pitch(dir_path, r_config, ff_df=ff_df)
         
         gne_all_frames = [np.NaN] * len(voice_seg[0])
         gne_segment_frames = segment_gne(voice_seg[0], voice_seg[1], voice_seg[2], gne_all_frames, audio_file)
@@ -135,7 +112,7 @@ def calc_gne(video_uri, audio_file, out_loc, fl_name, r_config, save=True):
         error_txt = 'error: pitch freq not available'
         return empty_gne(video_uri, out_loc, fl_name, r_config, error_txt, save=save)
 
-def run_gne(video_uri, out_dir, r_config, save=True):
+def run_gne(video_uri, out_dir, r_config, save=True, ff_df=None):
     """
     Processing all patient's for fetching glottal noise ratio
     ---------------
@@ -159,7 +136,7 @@ def run_gne(video_uri, out_dir, r_config, save=True):
                 error_txt = 'error: length less than 0.064'
                 df = empty_gne(video_uri, out_loc, fl_name, r_config, error_txt, save=save)
             else:
-                df = calc_gne(video_uri, audio_file, out_loc, fl_name, r_config, save=save)
+                df = calc_gne(video_uri, audio_file, out_loc, fl_name, r_config, save=save, ff_df=ff_df)
             return df
     except Exception as e:
         logger.error('Failed to process audio file')
