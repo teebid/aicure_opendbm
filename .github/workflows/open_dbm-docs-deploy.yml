@@ -16,11 +16,11 @@ jobs:
     - name: Checkout OpenDBM code
       uses: actions/checkout@v3
     - uses: actions/setup-node@v3
-        with:
-          node-version: 16.x
-          cache: yarn
+      with:
+        node-version: 16.x
+        cache: yarn
     - name: Install dependencies
-        run: yarn install --frozen-lockfile
+      run: yarn install --frozen-lockfile
     - name: Build website
       run: yarn build
     # Popular action to deploy to GitHub Pages:
