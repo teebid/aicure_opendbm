@@ -2,7 +2,6 @@ import numpy as np
 from numpy.testing import assert_allclose
 
 
-# @mark.smoke
 # @mark.body
 class AccousticTest:
 
