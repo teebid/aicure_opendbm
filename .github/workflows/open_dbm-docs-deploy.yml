@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: web_docs
+        working-directory: docs
     steps:
     - name: Checkout OpenDBM code
       uses: actions/checkout@v3
@@ -21,7 +21,7 @@ jobs:
       with:
         node-version: 16.x
         cache: npm
-        cache-dependency-path: './web_docs/package-lock.json'
+        cache-dependency-path: './docs/package-lock.json'
     - name: Install dependencies
       run: npm ci
     - name: Build website

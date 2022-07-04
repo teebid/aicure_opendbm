@@ -26,7 +26,7 @@ export default {
       "classic",
       {
         "docs": {
-          "sidebarPath": "/Users/johannes.napitupulu/Projects/TBID/AiCure/teebid_opendbm/web_docs/sidebars.js",
+          "sidebarPath": "/Users/johannes.napitupulu/Projects/TBID/AiCure/teebid_opendbm/docs/sidebars.js",
           "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/"
         },
         "blog": {
@@ -34,7 +34,7 @@ export default {
           "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/"
         },
         "theme": {
-          "customCss": "/Users/johannes.napitupulu/Projects/TBID/AiCure/teebid_opendbm/web_docs/src/css/custom.css"
+          "customCss": "/Users/johannes.napitupulu/Projects/TBID/AiCure/teebid_opendbm/docs/src/css/custom.css"
         }
       }
     ]

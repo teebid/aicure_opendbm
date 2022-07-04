@@ -6,7 +6,7 @@ name: OpenDBM Code Checking
 on:
   push:
     paths-ignore:
-      - 'web_docs/**'
+      - 'docs/**'
       - 'rest_api/**'
       - '.github/workflows/open_dbm-docs-deploy.yml'
       - '.github/workflows/open_dbm-rest-api-deploy.yml'
