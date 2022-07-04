@@ -5,6 +5,10 @@ name: OpenDBM Code Checking
 
 on:
   push:
+    paths-ignore:
+      - 'web_docs/**'
+      - 'rest_api/**'
+      - '.github/workflows/open_dbm-docs-deploy.yml'
   pull_request:
   workflow_dispatch:
 
