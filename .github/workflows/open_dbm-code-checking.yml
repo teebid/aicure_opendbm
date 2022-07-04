@@ -1,0 +1,81 @@
+# This workflow will check OpenDMB linting and format the code if necessary, and also sorted the import text
+# For more information see: https://www.aicure.com/open_dbm#cicd
+
+name: OpenDBM Code Checking
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  linting:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout OpenDBM code
+      uses: actions/checkout@v3
+    - name: Get changed files
+      id: changed-files
+      uses: tj-actions/changed-files@v23.1
+    - name: Report list of changed files
+      run: |
+        echo Changed files: ${{ steps.changed-files.outputs.all_changed_files }}
+    - name: Get PYTHON changed files
+      id: python-changed-files
+      uses: tj-actions/changed-files@v23.1
+      with:
+          files: |
+            *.py*
+            **/*.py*
+    - name: Report list of PYTHON changed files
+      run: |
+        echo Changed PYTHON files: ${{ steps.python-changed-files.outputs.all_changed_files }}
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.9
+    - name: Run flake8
+      run: |
+        pip install flake8
+        for file in ${{ steps.python-changed-files.outputs.all_changed_files }}; do
+          flake8 $file --count --show-source --statistics
+        done
+
+  vulnerability_scanning:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout OpenDBM code
+      uses: actions/checkout@v3
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.9
+    - name: Run safety
+      run: |
+        pip install safety
+        safety check
+
+  unit_tests:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout OpenDBM code
+      uses: actions/checkout@v3
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.9
+    - uses: actions/cache@v3
+      id: cache
+      with:
+        path: ${{ env.pythonLocation }}
+        key: ${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements.txt') }}
+    - name: Install dependencies
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: |
+        pip install pytest
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Run OpenDBM unit tests
+      run: |
+          pytest
+
+  
