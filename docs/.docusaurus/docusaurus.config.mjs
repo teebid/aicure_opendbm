@@ -13,7 +13,6 @@ export default {
   "favicon": "img/favicon.ico",
   "organizationName": "teebid",
   "projectName": "aicure_opendbm",
-  "deploymentBranch": "code_refactoring",
   "i18n": {
     "defaultLocale": "en",
     "locales": [
