@@ -54,7 +54,7 @@ def of_feature(df_of, cfr, f_cfg):
     return df_list 
 
 
-def run_face_expressivity(video_uri, out_dir, f_cfg):
+def run_face_expressivity(video_uri, out_dir, f_cfg, save=True):
     """
     Processing all patient's for fetching facial landmarks
     ---------------
@@ -79,8 +79,10 @@ def run_face_expressivity(video_uri, out_dir, f_cfg):
             exp_final_df = pd.concat(expr_df_list, ignore_index=True)
             exp_final_df['dbm_master_url'] = video_uri
 
-            logger.info('Processing Output file {} '.format(os.path.join(out_loc, fl_name)))
-            ut.save_output(exp_final_df, out_loc, fl_name, face_expr_dir, csv_ext)
+            if save:
+                logger.info('Processing Output file {} '.format(os.path.join(out_loc, fl_name)))
+                ut.save_output(exp_final_df, out_loc, fl_name, face_expr_dir, csv_ext)
+            return exp_final_df
             
     except Exception as e:
         logger.error('Failed to process video file')

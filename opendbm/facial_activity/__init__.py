@@ -1,1 +1,1 @@
-from opendbm.facial_activity.landmark import Landmark
+from opendbm.facial_activity.api import FacialActivity

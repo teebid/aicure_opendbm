@@ -99,7 +99,7 @@ def eye_disp(of_results, col, r_config):
             
     return distance_list, error_list
         
-def calc_eye_mov(video_uri, df_of, out_loc, fl_name, r_config):
+def calc_eye_mov(video_uri, df_of, out_loc, fl_name, r_config, save=True):
     """
     Computing eye motion variables
     Args:
@@ -120,9 +120,11 @@ def calc_eye_mov(video_uri, df_of, out_loc, fl_name, r_config):
     df_disp['dbm_master_url'] = video_uri
     
     df_motion = filter_motion(df_of, df_disp, col_l, col_r, r_config)
-    ut.save_output(df_motion, out_loc, fl_name, eye_pose_dir, eye_pose_ext)
+    if save:
+        ut.save_output(df_motion, out_loc, fl_name, eye_pose_dir, eye_pose_ext)
+    return df_motion
     
-def run_eye_gaze(video_uri, out_dir, r_config):
+def run_eye_gaze(video_uri, out_dir, r_config, save=True):
     """
     Processing all patient's for getting eye movement artifacts 
     --------------------------------
@@ -143,6 +145,8 @@ def run_eye_gaze(video_uri, out_dir, r_config):
             df_of = pd.read_csv(of_csv, error_bad_lines=False)
 
             logger.info('Processing Output file {} '.format(os.path.join(out_loc, fl_name)))
-            calc_eye_mov(video_uri, df_of, out_loc, fl_name, r_config)
+            df_motion = calc_eye_mov(video_uri, df_of, out_loc, fl_name, r_config, save=save)
+            return df_motion
+
     except Exception as e:
         logger.error('Failed to process video file')

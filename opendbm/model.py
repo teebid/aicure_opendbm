@@ -2,6 +2,7 @@ import pandas as pd
 from dbm_lib.dbm_features.raw_features.video import open_face_process as of
 from dbm_lib.config import config_reader, config_raw_feature, config_derive_feature
 from dbm_lib.controller import process_feature as pf
+from dbm_lib.dbm_features.raw_features.util import util as ut
 import os
 from pathlib import Path
 
@@ -16,6 +17,7 @@ OPENFACE_URLS = [
     "https://onedrive.live.com/download?cid=2E2ADA578BFF6E6E&resid=2E2ADA578BFF6E6E%2153070&authkey=AD6KjtYipphwBPc"
 ]
 OPENDBM_DATA = Path.home()/".opendbm"
+DLIB_SHAPE_MODEL = 'pkg/shape_detector/shape_predictor_68_face_landmarks.dat'
 
 
 
@@ -41,11 +43,11 @@ class Model(object):
 
 class VideoModel(Model):
     def __init__(self):
-        pass
-    def _fit_transform(self, path):
-        super()._fit_transform(path)
+        super().__init__()
+
+    def _fit(self, path):
             # of.process_open_face(path, os.path.dirname(video_file), out_path, OPENFACE_PATH, args.dbm_group,video_tracking=False)
-        of.process_open_face(path, os.path.dirname(video_file), out_path, OPENFACE_PATH, args.dbm_group,video_tracking=False)
+        ut.compute_open_face_features(path,'.',OPENFACE_PATH)
 
 
 class AudioModel(Model) :

@@ -133,7 +133,7 @@ def empty_frame(landmarks, r_config, error_reason):
     empty_frame = pd.DataFrame.from_dict(fac_features_dict)
     return empty_frame
 
-def fac_tremor_process(video_uri, out_dir, r_config, model_output=False):
+def fac_tremor_process(video_uri, out_dir, r_config, model_output=False, save=False):
     """
     processing input videos
     
@@ -155,8 +155,9 @@ def fac_tremor_process(video_uri, out_dir, r_config, model_output=False):
 #         if model_output:
 #             result = score(feats, r_config)
 #             feats = pd.concat([feats, result], axis=1)
-            
-        ut.save_output(feats, out_loc, fl_name, ft_dir, csv_ext)
+        if save:
+            ut.save_output(feats, out_loc, fl_name, ft_dir, csv_ext)
+        return feats
 
 
 
