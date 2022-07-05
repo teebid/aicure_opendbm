@@ -23,7 +23,7 @@ class ConfigReader(object):
             service_config = service_config_yml
             
         with open(service_config, 'r') as ymlfile:
-            config = yaml.load(ymlfile)
+            config = yaml.load(ymlfile, Loader=yaml.CLoader)
             self.input_dir = config['cdx_configuration']['input_dir']
             self.output_dir = config['cdx_configuration']['output_dir']
             self.out_derived_dir = config['cdx_configuration']['out_derived_dir']
