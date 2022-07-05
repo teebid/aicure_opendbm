@@ -1,11 +1,7 @@
-import pandas as pd
-from dbm_lib.dbm_features.raw_features.video import open_face_process as of
-from dbm_lib.config import config_reader, config_raw_feature, config_derive_feature
-from dbm_lib.controller import process_feature as pf
-from dbm_lib.dbm_features.raw_features.util import util as ut
-import os
 from pathlib import Path
 
+from dbm_lib.config import config_reader, config_raw_feature, config_derive_feature
+from dbm_lib.dbm_features.raw_features.util import util as ut
 
 OPENFACE_PATH = 'pkg/open_dbm/OpenFace/build/bin/FeatureExtraction'
 DEEEPSPEECH_URL = "https://github.com/mozilla/DeepSpeech/releases/download/v0.9.1"
@@ -58,15 +54,8 @@ class AudioModel(Model) :
 
         def wrapper(self, *args, **kwargs):
             path = args[0]
-            istmp = False
-            if not path.endswith('.wav'):
-                istmp = True
-                tpath = pf.audio_to_wav(path, tmp=True)
-                df = func(self, tpath)
-                df['dbm_master_url'] = path
-                os.remove(tpath)
-            else:
-                 df = func(self, path, **kwargs)
+
+            df = func(self, path, **kwargs)
             return df
         return wrapper
 
