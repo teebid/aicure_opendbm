@@ -12,9 +12,8 @@ OPENFACE_URLS = [
     "https://onedrive.live.com/download?cid=2E2ADA578BFF6E6E&resid=2E2ADA578BFF6E6E%2153079&authkey=ANpDR1n3ckL_0gs",
     "https://onedrive.live.com/download?cid=2E2ADA578BFF6E6E&resid=2E2ADA578BFF6E6E%2153070&authkey=AD6KjtYipphwBPc"
 ]
-OPENDBM_DATA = Path.home()/".opendbm"
+OPENDBM_DATA = Path.home() / ".opendbm"
 DLIB_SHAPE_MODEL = 'pkg/shape_detector/shape_predictor_68_face_landmarks.dat'
-
 
 
 class Model(object):
@@ -33,32 +32,30 @@ class Model(object):
 
     def mean(self):
         return self._df[self._params].mean()
-    
+
     def std(self):
         return self._df[self._params].std()
+
 
 class VideoModel(Model):
     def __init__(self):
         super().__init__()
 
     def _fit(self, path):
-            # of.process_open_face(path, os.path.dirname(video_file), out_path, OPENFACE_PATH, args.dbm_group,video_tracking=False)
-        ut.compute_open_face_features(path,'.',OPENFACE_PATH)
+        # of.process_open_face(path, os.path.dirname(video_file), out_path,
+        # OPENFACE_PATH, args.dbm_group,video_tracking=False)
+        ut.compute_open_face_features(path, '.', OPENFACE_PATH)
 
 
-class AudioModel(Model) :
+class AudioModel(Model):
     def __init__(self):
         super().__init__()
-      
-    def prep_func(func, save=False):
 
+    def prep_func(func):
         def wrapper(self, *args, **kwargs):
             path = args[0]
 
             df = func(self, path, **kwargs)
             return df
+
         return wrapper
-
-
-
-
