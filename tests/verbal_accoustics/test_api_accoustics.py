@@ -2,9 +2,8 @@ import numpy as np
 from numpy.testing import assert_allclose
 
 
-# @mark.smoke
 # @mark.body
-class BodyTest:
+class AccousticTest:
 
     def test_get_audio_intensity(self, processing_verbal_accoustics):
         res = processing_verbal_accoustics.get_audio_intensity()
