@@ -8,8 +8,7 @@ from ._speech_features import SpeechFeature
 from ._transcribe import Transcribe
 
 logging.basicConfig(level=logging.INFO)
-logger=logging.getLogger()
-
+logger = logging.getLogger()
 
 
 class Speech(AudioModel):
@@ -37,7 +36,7 @@ class Speech(AudioModel):
         if not OPENDBM_DATA.exists():
             os.mkdir(OPENDBM_DATA)
         for dm in DEEPSPEECH_MODELS:
-            pt = OPENDBM_DATA/dm
+            pt = OPENDBM_DATA / dm
             if not pt.exists():
                 logger.info(f"{dm} not exists. Automatically downloading to {OPENDBM_DATA}/")
                 download_url(f"{DEEEPSPEECH_URL}/{dm}", pt)
@@ -46,7 +45,6 @@ class Speech(AudioModel):
 
     def get_transcribe(self):
         return self._transcribe
-    
+
     def get_speech_features(self):
         return self._speech_features
-
