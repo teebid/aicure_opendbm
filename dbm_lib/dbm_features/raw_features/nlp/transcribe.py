@@ -21,7 +21,7 @@ formant_dir = 'speech/deepspeech'
 csv_ext = '_transcribe.csv'
 error_txt = 'error: length less than 0.1'
 
-def calc_transcribe(video_uri, audio_file, out_loc, fl_name, r_config, deep_path, aud_dur):
+def calc_transcribe(video_uri, audio_file, out_loc, fl_name, r_config, deep_path, aud_dur, save=True):
     """
     Preparing Formant freq matrix
     Args:
@@ -36,11 +36,13 @@ def calc_transcribe(video_uri, audio_file, out_loc, fl_name, r_config, deep_path
     df_formant[r_config.nlp_totalTime] = aud_dur
     df_formant[r_config.err_reason] = 'Pass'# will replace with threshold in future release
     df_formant['dbm_master_url'] = video_uri
+
+    if save: 
+        logger.info('Saving Output file {} '.format(out_loc))
+        ut.save_output(df_formant, out_loc, fl_name, formant_dir, csv_ext)
+    return df_formant
     
-    logger.info('Saving Output file {} '.format(out_loc))
-    ut.save_output(df_formant, out_loc, fl_name, formant_dir, csv_ext)
-    
-def empty_transcribe(video_uri, out_loc, fl_name, r_config):
+def empty_transcribe(video_uri, out_loc, fl_name, r_config, save=True):
     
     """
     Preparing empty formant frequency matrix if something fails
@@ -49,11 +51,13 @@ def empty_transcribe(video_uri, out_loc, fl_name, r_config):
     out_val = [[np.nan, np.nan, error_txt]]
     df_fm = pd.DataFrame(out_val, columns = cols)
     df_fm['dbm_master_url'] = video_uri
-    
-    logger.info('Saving Output file {} '.format(out_loc))
-    ut.save_output(df_fm, out_loc, fl_name, formant_dir, csv_ext)
 
-def run_transcribe(video_uri, out_dir, r_config, deep_path):
+    if save: 
+        logger.info('Saving Output file {} '.format(out_loc))
+        ut.save_output(df_fm, out_loc, fl_name, formant_dir, csv_ext)
+    return df_fm
+
+def run_transcribe(video_uri, out_dir, r_config, deep_path, save=True):
     
     """
     Processing all patient's for fetching Formant freq
@@ -61,7 +65,8 @@ def run_transcribe(video_uri, out_dir, r_config, deep_path):
     ---------------
     Args:
         video_uri: video path; r_config: raw variable config object
-        out_dir: (str) Output directory for processed output; deep_path: deepspeech build path
+        out_dir: (str) Output directory for processed output; 
+        deep_path: deepspeech build path
     """
     try:
         
@@ -75,10 +80,11 @@ def run_transcribe(video_uri, out_dir, r_config, deep_path):
             if float(aud_dur) < 0.1:
                 logger.info('Output file {} size is less than 0.1 sec'.format(audio_file))
 
-                empty_transcribe(video_uri, out_loc, fl_name, r_config)
-                return
+                df = empty_transcribe(video_uri, out_loc, fl_name, r_config)
+                return df
 
-            calc_transcribe(video_uri, audio_file, out_loc, fl_name, r_config, deep_path, aud_dur)
+            df = calc_transcribe(video_uri, audio_file, out_loc, fl_name, r_config, deep_path, aud_dur)
+            return df
     except Exception as e:
         logger.error('Failed to process audio file')
         

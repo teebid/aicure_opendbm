@@ -83,7 +83,7 @@ def add_disp_3D(df):
     return df
 
 
-def run_face_landmark(video_uri, out_dir, f_cfg):
+def run_face_landmark(video_uri, out_dir, f_cfg, save=True):
     """
     Processing all patient's for fetching facial landmarks
     ---------------
@@ -115,8 +115,10 @@ def run_face_landmark(video_uri, out_dir, f_cfg):
             df_lmk = add_disp_3D(df_lmk)
             df_lmk['dbm_master_url'] = video_uri
 
-            logger.info('Processing Output file {} '.format(join(out_loc, fl_name)))
-            ut.save_output(df_lmk, out_loc, fl_name, face_lmk_dir, csv_ext)
+            if save:
+                logger.info('Processing Output file {} '.format(join(out_loc, fl_name)))
+                ut.save_output(df_lmk, out_loc, fl_name, face_lmk_dir, csv_ext)
+        return df_lmk
     
     except Exception as e:
         logger.error('Failed to process video file')

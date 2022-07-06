@@ -49,7 +49,7 @@ def label_speech(row,fd_freq):
     else:
         return 'no'
 
-def calc_pitch(video_uri, audio_file, out_loc, fl_name, r_config):
+def calc_pitch(video_uri, audio_file, out_loc, fl_name, r_config, save=True):
     
     """
     Preparing pitch frequency matrix
@@ -67,11 +67,13 @@ def calc_pitch(video_uri, audio_file, out_loc, fl_name, r_config):
     
     df_ffreq[r_config.err_reason] = 'Pass'# will replace with threshold in future release
     df_ffreq['dbm_master_url'] = video_uri
+
+    if save:
+        logger.info('Processing Output file {} '.format(out_loc))
+        ut.save_output(df_ffreq, out_loc, fl_name, ff_dir, csv_ext)
+    return df_ffreq
     
-    logger.info('Processing Output file {} '.format(out_loc))
-    ut.save_output(df_ffreq, out_loc, fl_name, ff_dir, csv_ext)
-    
-def empty_pitch(video_uri, out_loc, fl_name, r_config):
+def empty_pitch(video_uri, out_loc, fl_name, r_config, save=True):
     """
     Preparing empty pitch frequency matrix if something fails
     """
@@ -79,11 +81,13 @@ def empty_pitch(video_uri, out_loc, fl_name, r_config):
     df_ffreq = pd.DataFrame([[np.nan, np.nan, 'no', error_txt]], 
                             columns=['Frames', r_config.aco_ff, r_config.aco_voiceLabel, r_config.err_reason])
     df_ffreq['dbm_master_url'] = video_uri
-    
-    logger.info('Saving Output file {} '.format(out_loc))
-    ut.save_output(df_ffreq, out_loc, fl_name, ff_dir, csv_ext)  
 
-def run_pitch(video_uri, out_dir, r_config):
+    if save: 
+        logger.info('Saving Output file {} '.format(out_loc))
+        ut.save_output(df_ffreq, out_loc, fl_name, ff_dir, csv_ext)  
+    return df_ffreq
+
+def run_pitch(video_uri, out_dir, r_config, save=True):
     
     """
     Processing audio for fetching pitch
@@ -105,9 +109,10 @@ def run_pitch(video_uri, out_dir, r_config):
             if float(aud_dur) < 0.064:
                 logger.info('Output file {} size is less than 0.064sec'.format(audio_file))
 
-                empty_pitch(video_uri, out_loc, fl_name, r_config)
-                return
-
-            calc_pitch(video_uri, audio_file, out_loc, fl_name, r_config)
+                df = empty_pitch(video_uri, out_loc, fl_name, r_config, save=save)
+            else:
+                df = calc_pitch(video_uri, audio_file, out_loc, fl_name, r_config, save=save)
+            return df
+            
     except Exception as e:
         logger.error('Failed to process audio file')

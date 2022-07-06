@@ -25,7 +25,7 @@ class ConfigFaceReader(object):
             service_config = service_config_yml
         
         with open(service_config, 'r') as ymlfile:
-            config = yaml.load(ymlfile)
+            config = yaml.load(ymlfile, Loader=yaml.CLoader)
             self.ACTION_UNITS = config['cdx_face_config']['ACTION_UNITS']
             self.NEG_ACTION_UNITS = config['cdx_face_config']['NEG_ACTION_UNITS']
             self.POS_ACTION_UNITS = config['cdx_face_config']['POS_ACTION_UNITS']

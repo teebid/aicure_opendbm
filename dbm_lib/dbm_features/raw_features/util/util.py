@@ -8,6 +8,38 @@ import os
 import glob
 import numpy as np
 import subprocess
+import pandas as pd
+import more_itertools as mit
+
+
+def process_segment_pitch(ff_df, r_config):
+    voice_label = ff_df[r_config.aco_voiceLabel]
+    
+    indices_yes = [i for i, x in enumerate(voice_label) if x == "yes"]
+    voiced_yes = [list(group) for group in mit.consecutive_groups(indices_yes)]
+    
+    indices_no = [i for i, x in enumerate(voice_label) if x == "no"]
+    voiced_no = [list(group) for group in mit.consecutive_groups(indices_no)]
+    
+    com_speech = voiced_yes + voiced_no
+    com_speech_sort = sorted(com_speech, key=lambda x: x[0])
+    return com_speech_sort, voiced_yes, voiced_no
+
+def segment_pitch(dir_path, r_config, ff_df=None):
+    """
+    segmenting pitch freq for each voice segment
+    """
+    com_speech_sort, voiced_yes, voiced_no  = ([], ) * 3
+    
+    for file in os.listdir(dir_path):
+        try:
+            if file.endswith('_pitch.csv') and ff_df is None:
+                ff_df = pd.read_csv((dir_path+'/'+file))
+                com_speech_sort, voiced_yes, voiced_no 
+        except:
+            pass
+        
+    return com_speech_sort, voiced_yes, voiced_no
 
 def filter_path(video_url, out_dir):
     

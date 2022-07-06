@@ -324,7 +324,7 @@ def calc_asym_feature(open_face_csv, f_cfg):
     return df_list 
 
 
-def run_face_asymmetry(video_uri, out_dir, f_cfg):
+def run_face_asymmetry(video_uri, out_dir, f_cfg, save=True):
     """
     Processing all patient's for calculating facial asymmetry
     ---------------
@@ -348,8 +348,10 @@ def run_face_asymmetry(video_uri, out_dir, f_cfg):
             asym_final_df = pd.concat(asym_df_list, ignore_index=True)
             asym_final_df['dbm_master_url'] = video_uri
 
-            logger.info('Processing Output file {} '.format(os.path.join(out_loc, fl_name)))
-            ut.save_output(asym_final_df, out_loc, fl_name, face_asym_dir, csv_ext)
+            if save:
+                logger.info('Processing Output file {} '.format(os.path.join(out_loc, fl_name)))
+                ut.save_output(asym_final_df, out_loc, fl_name, face_asym_dir, csv_ext)
+            return asym_final_df
         
     except Exception as e:
         logger.error('Failed to process video file')

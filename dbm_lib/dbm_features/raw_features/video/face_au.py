@@ -59,7 +59,7 @@ def au_col_nm_map(df):
     return df
 
 
-def run_face_au(video_uri, out_dir, f_cfg):
+def run_face_au(video_uri, out_dir, f_cfg, save=True):
     """
     Processing all patient's for fetching action units
     ---------------
@@ -89,9 +89,10 @@ def run_face_au(video_uri, out_dir, f_cfg):
 
             df_au = au_col_nm_map(df_au)
             df_au['dbm_master_url'] = video_uri
-
-            logger.info('Processing Output file {} '.format(os.path.join(out_loc, fl_name)))
-            ut.save_output(df_au, out_loc, fl_name, face_au_dir, csv_ext)
+            if save:
+                logger.info('Processing Output file {} '.format(os.path.join(out_loc, fl_name)))
+                ut.save_output(df_au, out_loc, fl_name, face_au_dir, csv_ext)
+            return df_au
             
     except Exception as e:
         logger.error('Failed to process video file')

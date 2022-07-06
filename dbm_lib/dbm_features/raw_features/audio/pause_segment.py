@@ -109,7 +109,7 @@ def process_silence(audio_file, r_config):
     df[r_config.err_reason] = 'Pass'# will replace with threshold in future release
     return df
 
-def empty_pause_segment(video_uri, out_loc, fl_name, r_config, error_txt):
+def empty_pause_segment(video_uri, out_loc, fl_name, r_config, error_txt, save=True):
     """
     Preparing empty Pause Segment matrix if something fails
     """
@@ -118,11 +118,13 @@ def empty_pause_segment(video_uri, out_loc, fl_name, r_config, error_txt):
     out_val = [[np.nan, np.nan, np.nan, np.nan, np.nan, error_txt]]
     df_pause = pd.DataFrame(out_val, columns = cols)
     df_pause['dbm_master_url'] = video_uri
-    
-    logger.info('Saving Output file {} '.format(out_loc))
-    ut.save_output(df_pause, out_loc, fl_name, pause_seg_dir, csv_ext)
 
-def run_pause_segment(video_uri, out_dir, r_config):
+    if save: 
+        logger.info('Saving Output file {} '.format(out_loc))
+        ut.save_output(df_pause, out_loc, fl_name, pause_seg_dir, csv_ext)
+    return df_pause
+
+def run_pause_segment(video_uri, out_dir, r_config, save=True):
     """
     Processing all patient's for getting Pause Segment
     ---------------
@@ -159,14 +161,16 @@ def run_pause_segment(video_uri, out_dir, r_config):
             os.remove(mono_wav)#removing mono wav file
 
             if isinstance(df_pause_seg, pd.DataFrame) and len(df_pause_seg)>0:
-                logger.info('Processing Output file {} '.format(out_loc))
-
                 df_pause_seg['dbm_master_url'] = video_uri
-                ut.save_output(df_pause_seg, out_loc, fl_name, pause_seg_dir, csv_ext)
+                if save:
+                    logger.info('Processing Output file {} '.format(out_loc))
+                    ut.save_output(df_pause_seg, out_loc, fl_name, pause_seg_dir, csv_ext, save=save)
+                df = df_pause_seg    
 
             else:
                 error_txt = 'error: webrtcvad returns no segment'
-                empty_pause_segment(video_uri, out_loc, fl_name, r_config, error_txt)
+                df = empty_pause_segment(video_uri, out_loc, fl_name, r_config, error_txt, save=save)
+            return df
                 
     except Exception as e:
         logger.error('Failed to process audio file')

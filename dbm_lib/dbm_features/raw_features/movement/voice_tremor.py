@@ -37,7 +37,7 @@ def tremor_praat(snd_file,r_cfg):
                          r_cfg.mov_amp_trem_index,r_cfg.mov_freq_trem_pindex,r_cfg.mov_amp_trem_pindex]
     return tremor_df
 
-def prepare_vtrem_output(audio_file, out_loc, r_config, fl_name):
+def prepare_vtrem_output(audio_file, out_loc, r_config, fl_name, save=True):
     """
         Preparing voice tremor matrix
         Args:
@@ -47,10 +47,12 @@ def prepare_vtrem_output(audio_file, out_loc, r_config, fl_name):
     df_tremor = tremor_praat(audio_file, r_config)
     df_tremor[r_config.err_reason] = 'Pass'# will replace with threshold in future release
 
-    logger.info('Processing Output file {} '.format(os.path.join(out_loc, fl_name)))
-    ut.save_output(df_tremor, out_loc, fl_name, vt_dir, csv_ext)
+    if save:
+        logger.info('Processing Output file {} '.format(os.path.join(out_loc, fl_name)))
+        ut.save_output(df_tremor, out_loc, fl_name, vt_dir, csv_ext)
+    return df_tremor
 
-def prepare_empty_vt(out_loc, fl_name, r_config, error_txt):
+def prepare_empty_vt(out_loc, fl_name, r_config, error_txt, save=True):
 
     """
     Preparing empty voice tremor matrix
@@ -61,10 +63,12 @@ def prepare_empty_vt(out_loc, fl_name, r_config, error_txt):
     out_val = [[np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, error_txt]]
     df_tremor = pd.DataFrame(out_val, columns = cols)
 
-    logger.info('Saving Output file {} '.format(os.path.join(out_loc, fl_name)))
-    ut.save_output(df_tremor, out_loc, fl_name, vt_dir, csv_ext)
+    if save:
+        logger.info('Saving Output file {} '.format(os.path.join(out_loc, fl_name)))
+        ut.save_output(df_tremor, out_loc, fl_name, vt_dir, csv_ext)
+    return df_tremor
 
-def run_vtremor(video_uri, out_dir, r_config):
+def run_vtremor(video_uri, out_dir, r_config, save=True):
     """
     Processing all patient's for fetching Formant freq
     ---------------
@@ -86,9 +90,11 @@ def run_vtremor(video_uri, out_dir, r_config):
                 logger.info('Output file {} size is less than 0.5sec'.format(audio_file))
                 
                 error_txt = 'error: length less than 0.5 sec'
-                prepare_empty_vt(video_uri, out_loc, fl_name, error_txt)
-                return
-            prepare_vtrem_output(audio_file, out_loc, r_config, fl_name)
+                df_trem = prepare_empty_vt(video_uri, out_loc, fl_name, error_txt)
+            else:
+                df_trem = prepare_vtrem_output(audio_file, out_loc, r_config, fl_name)
+            
+            return df_trem
     except Exception as e:
         logger.error('Failed to compute Voice Tremor {} for {}'.format(e,video_uri))
         prepare_empty_vt(out_loc, fl_name, r_config, e)

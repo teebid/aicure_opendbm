@@ -20,7 +20,8 @@ import os
 logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger()
 
-def audio_to_wav(input_filepath):
+
+def audio_to_wav(input_filepath, tmp=False):
     """ Extracts a video's audio file and saves it to wav
     Args:
         input_filepath: (str)
@@ -29,7 +30,11 @@ def audio_to_wav(input_filepath):
     try:
 
         fname, _ = splitext(input_filepath)
-        output_filepath = fname + '.wav'
+        if tmp:
+            fname = os.path.basename(input_filepath)
+            output_filepath = f"/tmp/{fname}.wav"
+        else:
+            output_filepath = fname + '.wav'
 
         if not isfile(output_filepath):
             call = ['ffmpeg', '-i', input_filepath, '-vn', '-acodec', 'pcm_s16le', '-ar', '44100', output_filepath]
@@ -39,9 +44,13 @@ def audio_to_wav(input_filepath):
             logger.info('wav output saved in {}'.format(output_filepath))
         else:
             logger.info('Output file {} already exists'.format(output_filepath))
+        return output_filepath
 
     except Exception as e:
         logger.error('Failed to extract audio from Video')
+
+
+
 
 def process_acoustic(video_uri, out_dir, dbm_group, r_config):
     """
@@ -150,7 +159,6 @@ def process_nlp(video_uri, out_dir, dbm_group, tran_tog, r_config, deep_path):
     logger.info('Processing nlp variables from data in {}'.format(video_uri))
     transcribe.run_transcribe(video_uri, out_dir, r_config, deep_path)
     speech_features.run_speech_feature(video_uri, out_dir, r_config, tran_tog)
-    
 
 def remove_file(file_path, file_ext = '.wav'):
     """

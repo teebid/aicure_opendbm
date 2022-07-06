@@ -33,7 +33,7 @@ def intensity_score(path):
     intensity = sound_pat.to_intensity(time_step=.001)
     return intensity.values[0]
 
-def calc_intensity(video_uri, audio_file, out_loc, fl_name, r_config):
+def calc_intensity(video_uri, audio_file, out_loc, fl_name, r_config, save=True):
     """
     Preparing Intensity matrix
     Args:
@@ -48,10 +48,12 @@ def calc_intensity(video_uri, audio_file, out_loc, fl_name, r_config):
     df_intensity['dbm_master_url'] = video_uri
     df_intensity[r_config.err_reason] = 'Pass'# will replace with threshold in future release
     
-    logger.info('Saving Output file {} '.format(out_loc))
-    ut.save_output(df_intensity, out_loc, fl_name, intensity_dir, csv_ext)
+    if save:
+        logger.info('Saving Output file {} '.format(out_loc))
+        ut.save_output(df_intensity, out_loc, fl_name, intensity_dir, csv_ext)
+    return df_intensity
     
-def empty_intensity(video_uri, out_loc, fl_name, r_config):
+def empty_intensity(video_uri, out_loc, fl_name, r_config, save=True):
     """
     Preparing empty Intensity matrix if something fails
     """
@@ -60,10 +62,12 @@ def empty_intensity(video_uri, out_loc, fl_name, r_config):
     df_int = pd.DataFrame(out_val, columns = cols)
     df_int['dbm_master_url'] = video_uri
     
-    logger.info('Saving Output file {} '.format(out_loc))
-    ut.save_output(df_int, out_loc, fl_name, intensity_dir, csv_ext)
+    if save:
+        logger.info('Saving Output file {} '.format(out_loc))
+        ut.save_output(df_int, out_loc, fl_name, intensity_dir, csv_ext)
+    return df_int
 
-def run_intensity(video_uri, out_dir, r_config):
+def run_intensity(video_uri, out_dir, r_config, save=True):
     """
     Processing all patient's for fetching Intensity
     -------------------
@@ -84,9 +88,9 @@ def run_intensity(video_uri, out_dir, r_config):
             if float(aud_dur) < 0.064:
                 logger.info('Output file {} size is less than 0.064sec'.format(audio_file))
 
-                empty_intensity(video_uri, out_loc, fl_name, r_config)
-                return
-
-            calc_intensity(video_uri, audio_file, out_loc, fl_name, r_config)
+                df = empty_intensity(video_uri, out_loc, fl_name, r_config, save=save)
+            else:
+                df = calc_intensity(video_uri, audio_file, out_loc, fl_name, r_config, save=save)
+        return df
     except Exception as e:
         logger.error('Failed to process audio file')

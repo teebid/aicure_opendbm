@@ -135,7 +135,7 @@ def blink_dur(blink_df,raw_config):
     blink_df[raw_config.mov_blinkdur] = blink_df[raw_config.mov_blinkdur]/blink_df[raw_config.fps]
     return blink_df
 
-def run_eye_blink(video_uri, out_dir, r_config, facial_landmarks):
+def run_eye_blink(video_uri, out_dir, r_config, facial_landmarks, save=True):
     """
     Processing all patient's for getting eye blink artifacts
     ---------------
@@ -153,7 +153,9 @@ def run_eye_blink(video_uri, out_dir, r_config, facial_landmarks):
 
             logger.info('Processing Output file {} '.format(os.path.join(out_loc, fl_name)))
             df_blink = blink_detection(video_uri, facial_landmarks, r_config)
-            ut.save_output(df_blink, out_loc, fl_name, movement_expr_dir, csv_ext)
+            if save:
+                ut.save_output(df_blink, out_loc, fl_name, movement_expr_dir, csv_ext)
+            return df_blink
             
     except Exception as e:
         logger.error('Failed to process video file')
