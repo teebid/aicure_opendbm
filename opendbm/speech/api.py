@@ -2,8 +2,9 @@ import logging
 import os
 
 from dbm_lib.controller import process_feature as pf
-from opendbm.model import AudioModel, OPENDBM_DATA, DEEEPSPEECH_URL, DEEPSPEECH_MODELS
+from opendbm.model import DEEEPSPEECH_URL, DEEPSPEECH_MODELS, OPENDBM_DATA, AudioModel
 from opendbm.util import download_url
+
 from ._speech_features import SpeechFeature
 from ._transcribe import Transcribe
 
@@ -18,11 +19,15 @@ class Speech(AudioModel):
         self._speech_features = SpeechFeature()
         self._models = {
             "transcribe": self._transcribe,
-            "speech_features": self._speech_features
+            "speech_features": self._speech_features,
         }
 
     def _check_file(self, path):
-        return (pf.audio_to_wav(path, tmp=True), False) if not path.endswith('.wav') else (path, True)
+        return (
+            (pf.audio_to_wav(path, tmp=True), False)
+            if not path.endswith(".wav")
+            else (path, True)
+        )
 
     def fit(self, path):
         self._check_model_exists()
@@ -38,7 +43,9 @@ class Speech(AudioModel):
         for dm in DEEPSPEECH_MODELS:
             pt = OPENDBM_DATA / dm
             if not pt.exists():
-                logger.info(f"{dm} not exists. Automatically downloading to {OPENDBM_DATA}/")
+                logger.info(
+                    f"{dm} not exists. Automatically downloading to {OPENDBM_DATA}/"
+                )
                 download_url(f"{DEEEPSPEECH_URL}/{dm}", pt)
             else:
                 continue
