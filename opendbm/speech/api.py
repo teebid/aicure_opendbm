@@ -22,12 +22,12 @@ class Speech(AudioModel):
             "speech_features": self._speech_features
         }
 
-    def check_file(self, path):
+    def _check_file(self, path):
         return (pf.audio_to_wav(path, tmp=True), False) if not path.endswith('.wav') else (path, True)
 
     def fit(self, path):
         self._check_model_exists()
-        path, is_wav = self.check_file(path)
+        path, is_wav = self._check_file(path)
         for v in self._models.values():
             v._df = v._fit_transform(path)
         if not is_wav:
