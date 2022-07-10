@@ -1,4 +1,4 @@
-from dbm_lib.dbm_features.raw_features.video.face_asymmetry import run_face_expressivity
+from dbm_lib.dbm_features.raw_features.video import run_face_expressivity
 from opendbm.model import VideoModel
 
 
