@@ -12,6 +12,6 @@ path2 = f"{path1[:-4]}.wav"
 @fixture(scope="class")
 def processing_verbal_accoustics():
     m = verbal_accoustics.VerbalAccoustics()
-    m.fit(path1)
+    m.fit(path2)
 
     yield m

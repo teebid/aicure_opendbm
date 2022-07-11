@@ -13,6 +13,6 @@ path2 = f"{path1[:-4]}.wav"
 @fixture(scope="class")
 def processing_speech():
     m = speech.Speech()
-    m.fit(path1)
+    m.fit(path2)
 
     yield m
