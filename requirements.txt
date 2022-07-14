@@ -29,4 +29,5 @@ vaderSentiment
 textblob
 opencv-python>=4.5.5
 pre-commit
+ffmpeg
 git+https://github.com/cmusatyalab/openface.git
