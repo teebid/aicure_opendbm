@@ -71,7 +71,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install pytest coverage
         dir
-        IF EXIST "requirements.txt" then pip install -r requirements.txt
+        if exist requirements.txt pip install -r requirements.txt
     - name: Run Pytest and Coverage
       run: |
         dir /a
