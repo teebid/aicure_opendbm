@@ -4,8 +4,6 @@
 name: OpenDBM Web Documentation Deployment
 
 on:
-  push:
-  pull_request:
   workflow_dispatch:
 
 jobs: 

@@ -1,0 +1,113 @@
+# This workflow will check OpenDMB code quality and run unit tests
+# For more information see: https://www.aicure.com/open_dbm#cicd
+
+name: OpenDBM Code Checking
+
+on:
+  push:
+    branches: [ master ]
+    paths-ignore:
+      - 'docs/**'
+      - 'rest_api/**'
+      - '.github/workflows/open_dbm-docs-deploy.yml'
+      - '.github/workflows/open_dbm-rest-api-deploy.yml'
+  pull_request:
+    branches: [ master ]
+    paths-ignore:
+      - 'docs/**'
+      - 'rest_api/**'
+      - '.github/workflows/open_dbm-docs-deploy.yml'
+      - '.github/workflows/open_dbm-rest-api-deploy.yml'
+  workflow_dispatch:
+
+jobs:
+  unit_tests_linux:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout OpenDBM code
+      uses: actions/checkout@v3
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.6.8
+    - uses: actions/cache@v3
+      id: cache
+      with:
+        path: ${{ env.pythonLocation }}
+        key: ${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements.txt') }}
+    - name: Install dependencies
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest coverage
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name : Install libsndfile and sox(only for linux machine)
+      run: |
+        sudo apt-get install libsndfile1
+        sudo apt-get install sox
+    - name: Run Pytest and Coverage
+      run: |
+        ls -lart
+        coverage run -m pytest
+        coverage report -mi --fail-under=30 --skip-covered
+
+  unit_tests_windows:
+    runs-on: windows-latest
+    steps:
+    - name: Checkout OpenDBM code
+      uses: actions/checkout@v3
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.6.8
+    - uses: actions/cache@v3
+      id: cache
+      with:
+        path: ${{ env.pythonLocation }}
+        key: windows-${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements.txt') }}
+    - name: Install dependencies
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest coverage
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name : Install libsndfile and sox(only for linux machine)
+      run: |
+        sudo apt-get install libsndfile1
+        sudo apt-get install sox
+    - name: Run Pytest and Coverage
+      run: |
+        ls -lart
+        coverage run -m pytest
+        coverage report -mi --fail-under=30 --skip-covered
+
+  unit_tests_macos:
+    runs-on: macos-latest
+    steps:
+    - name: Checkout OpenDBM code
+      uses: actions/checkout@v3
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.6.8
+    - uses: actions/cache@v3
+      id: cache
+      with:
+        path: ${{ env.pythonLocation }}
+        key: macos-${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements.txt') }}
+    - name: Install dependencies
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest coverage
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name : Install libsndfile and sox(only for linux machine)
+      run: |
+        sudo apt-get install libsndfile1
+        sudo apt-get install sox
+    - name: Run Pytest and Coverage
+      run: |
+        ls -lart
+        coverage run -m pytest
+        coverage report -mi --fail-under=30 --skip-covered
+  
