@@ -70,14 +70,10 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install pytest coverage
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name : Install libsndfile and sox(only for linux machine)
-      run: |
-        sudo apt-get install libsndfile1
-        sudo apt-get install sox
+        IF EXIST "requirements.txt" then pip install -r requirements.txt
     - name: Run Pytest and Coverage
       run: |
-        ls -lart
+        dir /a
         coverage run -m pytest
         coverage report -mi --fail-under=30 --skip-covered
 
@@ -102,9 +98,7 @@ jobs:
         pip install pytest coverage
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name : Install libsndfile and sox(only for linux machine)
-      run: |
-        sudo apt-get install libsndfile1
-        sudo apt-get install sox
+      run: brew install sox
     - name: Run Pytest and Coverage
       run: |
         ls -lart
