@@ -93,7 +93,7 @@ jobs:
       if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
       run: |
         set -x
-        total=85
+        total=`coverage report -i | grep TOTAL | awk '{print $4+0}'`
         if (( $(echo "$total <= 50" | bc -l) )) ; then
           COLOR=red
         elif (( $(echo "$total > 80" | bc -l) )); then
