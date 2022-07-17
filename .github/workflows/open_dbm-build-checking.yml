@@ -34,7 +34,8 @@ jobs:
       run: echo "GH_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV
     - name: Checkout OpenDBM code
       uses: actions/checkout@v3
-      token: ${{ env.GH_TOKEN }}
+      with:
+        token: ${{ env.GH_TOKEN }}
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
