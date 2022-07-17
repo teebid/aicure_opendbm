@@ -94,9 +94,9 @@ jobs:
       run: |
         set -x
         total=`coverage report -i | grep TOTAL | awk '{print $4+0}'`
-        if (( $(echo "$total <= 50" | bc -l) )) ; then
+        if (( $(echo "$total < 60" | bc -l) )) ; then
           COLOR=red
-        elif (( $(echo "$total > 80" | bc -l) )); then
+        elif (( $(echo "$total >= 60" | bc -l) )); then
           COLOR=green
         else
           COLOR=orange
@@ -110,6 +110,3 @@ jobs:
         else
           echo "no changes on coverage badge"
         fi
-        git commit -am "Modify coverage percentage in coverage badge"
-        git push
-    
