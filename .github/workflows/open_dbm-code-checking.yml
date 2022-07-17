@@ -104,6 +104,12 @@ jobs:
         curl "https://img.shields.io/badge/code:coverage-$total%25-$COLOR?style=flat" > images/badges/code_coverage.svg
         git config --global user.name 'AiCure ODBM Pipeline'
         git config --global user.email 'system@aicure.com'
+        if [[ `git status --porcelain` ]]; then
+          git commit -am "Modify coverage percentage in coverage badge"
+          git push
+        else
+          echo "no changes on coverage badge"
+        fi
         git commit -am "Modify coverage percentage in coverage badge"
         git push
     
