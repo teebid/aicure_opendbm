@@ -85,16 +85,39 @@ jobs:
         sudo apt-get install libsndfile1
         sudo apt-get install sox
     - name: Run Pytest and Coverage
+      id: odbm_test
       run: |
         ls -lart
         coverage run -m pytest
         coverage report -mi --fail-under=30 --skip-covered
-    - name: Update shield coverage only for branch push master
+    - name: Update shield TEST status only for branch push master
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && always() }}
+      run: |
+        echo "${{ steps.odbm_test.outcome }}"
+        set -x
+        test_status='${{ steps.odbm_test.outcome }}'
+        if [ "$test_status" = "success" ] ; then
+          COLOR=green
+          STATUS=passed
+        else
+          COLOR=red
+          STATUS=failed
+        fi
+        curl "https://img.shields.io/badge/test:status-$STATUS-$COLOR?style=flat" > images/badges/test_status.svg
+        git config --global user.name 'AiCure ODBM Pipeline'
+        git config --global user.email 'system@aicure.com'
+        if [[ `git status --porcelain` ]]; then
+          git commit -am "Modify test status in test badge"
+          git push
+        else
+          echo "no changes on test badge"
+        fi
+    - name: Update shield COVERAGE only for branch push master
       if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
       run: |
         set -x
         total=`coverage report -i | grep TOTAL | awk '{print $4+0}'`
-        if (( $(echo "$total < 60" | bc -l) )) ; then
+        if (( $(echo "$total < 30" | bc -l) )) ; then
           COLOR=red
         elif (( $(echo "$total >= 60" | bc -l) )); then
           COLOR=green
