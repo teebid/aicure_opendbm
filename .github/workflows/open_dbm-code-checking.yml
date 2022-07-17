@@ -89,3 +89,21 @@ jobs:
         ls -lart
         coverage run -m pytest
         coverage report -mi --fail-under=30 --skip-covered
+    - name: Update shield coverage only for branch push master
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+      run: |
+        set -x
+        total=`coverage report -i | grep TOTAL | awk '{print $4+0}'`
+        if (( $(echo "$total <= 50" | bc -l) )) ; then
+          COLOR=red
+        elif (( $(echo "$total > 80" | bc -l) )); then
+          COLOR=green
+        else
+          COLOR=orange
+        fi
+        curl "https://img.shields.io/badge/code:coverage-$total%25-$COLOR?style=flat" > images/badges/code_coverage.svg
+        git config --global user.name 'AiCure ODBM Pipeline'
+        git config --global user.email 'system@aicure.com'
+        git commit -am "Modify coverage percentage in coverage badge"
+        git push
+    

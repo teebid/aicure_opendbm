@@ -93,7 +93,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name : Install libsndfile and sox(only for linux machine)
+    - name : Install sox
       run: brew install sox
     - name: Run Pytest
       run: |
