@@ -16,11 +16,11 @@ OpenDBM
 
 ## Supported OS Platforms
 
-OS                    | Build Status                                                                                                                                                                           | Test Status
------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------
-**Linux**                 | [![Status](https://storage.googleapis.com/tensorflow-kokoro-build-badges/ubuntu-cc.svg)](https://storage.googleapis.com/tensorflow-kokoro-build-badges/ubuntu-cc.html)           | [PyPI](https://pypi.org/project/tf-nightly/)
-**Windows**                 | [![Status](https://storage.googleapis.com/tensorflow-kokoro-build-badges/ubuntu-gpu-py3.svg)](https://storage.googleapis.com/tensorflow-kokoro-build-badges/ubuntu-gpu-py3.html) | [PyPI](https://pypi.org/project/tf-nightly-gpu/)
-**macOS**                 | [![Status](https://storage.googleapis.com/tensorflow-kokoro-build-badges/ubuntu-xla.svg)](https://storage.googleapis.com/tensorflow-kokoro-build-badges/ubuntu-xla.html)         | TBA
+OS                    | Build Status
+----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Linux**                 | [![Build](https://github.com/teebid/aicure_opendbm/blob/master/images/badges/linux_build.svg)](https://github.com/teebid/aicure_opendbm/actions/workflows/open_dbm-build-checking.yml)
+**Windows**                 | [![Build](https://github.com/teebid/aicure_opendbm/blob/master/images/badges/windows_build.svg)](https://github.com/teebid/aicure_opendbm/actions/workflows/open_dbm-build-checking.yml)
+**macOS**                 | [![Build](https://github.com/teebid/aicure_opendbm/blob/master/images/badges/macos_build.svg)](https://github.com/teebid/aicure_opendbm/actions/workflows/open_dbm-build-checking.yml)
 
 
 ## What is it

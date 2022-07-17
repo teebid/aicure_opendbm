@@ -41,13 +41,37 @@ jobs:
         python -m pip install --upgrade pip
         pip install pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        ls not_exist_file
     - name : Install libsndfile and sox(only for linux machine)
       run: |
         sudo apt-get install libsndfile1
         sudo apt-get install sox
     - name: Run Pytest
+      id: odbm_linux_test
       run: |
         pytest
+    - name: Update shield LINUX BUILD status only for branch push master
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && always() }}
+      run: |
+        echo "${{ steps.odbm_linux_test.outcome }}"
+        set -x
+        test_status='${{ steps.odbm_linux_test.outcome }}'
+        if [ "$test_status" = "success" ] ; then
+          COLOR=green
+          STATUS=passed
+        else
+          COLOR=red
+          STATUS=failed
+        fi
+        curl "https://img.shields.io/badge/linux:build-$STATUS-$COLOR?style=flat&logo=linux" > images/badges/linux_status.svg
+        git config --global user.name 'AiCure ODBM Pipeline'
+        git config --global user.email 'system@aicure.com'
+        if [[ `git status --porcelain` ]]; then
+          git commit -am "Modify Linux Build status in badge"
+          git push
+        else
+          echo "no changes on linux build badge"
+        fi
 
   unit_tests_windows:
     runs-on: windows-latest
@@ -70,8 +94,31 @@ jobs:
         pip install pytest
         pip install -r requirements.txt
     - name: Run Pytest
+      id: odbm_windows_test
       run: |
         pytest
+    - name: Update shield WINDOWS BUILD status only for branch push master
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && always() }}
+      run: |
+        echo "${{ steps.odbm_windows_test.outcome }}"
+        set -x
+        test_status='${{ steps.odbm_windows_test.outcome }}'
+        if [ "$test_status" = "success" ] ; then
+          COLOR=green
+          STATUS=passed
+        else
+          COLOR=red
+          STATUS=failed
+        fi
+        curl "https://img.shields.io/badge/windows:build-$STATUS-$COLOR?style=flat&logo=windows" > images/badges/windows_status.svg
+        git config --global user.name 'AiCure ODBM Pipeline'
+        git config --global user.email 'system@aicure.com'
+        if [[ `git status --porcelain` ]]; then
+          git commit -am "Modify Windows Build status in badge"
+          git push
+        else
+          echo "no changes on windows build badge"
+        fi
 
   unit_tests_macos:
     runs-on: macos-latest
@@ -96,25 +143,49 @@ jobs:
     - name : Install sox
       run: brew install sox
     - name: Run Pytest
+      id: odbm_macos_test
       run: |
         pytest
-
-  update_status_badge:
-    runs-on: ubuntu-latest
-    needs: [unit_tests_linux, unit_tests_windows, unit_tests_macos]
-    if: always()
-    # if: github.ref == 'refs/heads/master'
-    steps: 
-    - name: test
-      env:
-        unit_tests_windows_result: ${{ needs.unit_tests_windows.result }}
-        unit_tests_linux_result: ${{ needs.unit_tests_linux.result }}
-        unit_tests_macos_result: ${{ needs.unit_tests_macos.result }}
+    - name: Update shield MACOS BUILD status only for branch push master
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && always() }}
       run: |
-        echo ${{ needs.unit_tests_windows.outputs.job-status }}
-        echo ${{ needs.unit_tests_linux.outputs.job-status }}
-        echo "$unit_tests_windows"
-        echo "$unit_tests_linux"
+        echo "${{ steps.odbm_macos_test.outcome }}"
+        set -x
+        test_status='${{ steps.odbm_macos_test.outcome }}'
+        if [ "$test_status" = "success" ] ; then
+          COLOR=green
+          STATUS=passed
+        else
+          COLOR=red
+          STATUS=failed
+        fi
+        curl "https://img.shields.io/badge/macos:build-$STATUS-$COLOR?style=flat&logo=apple" > images/badges/macos_status.svg
+        git config --global user.name 'AiCure ODBM Pipeline'
+        git config --global user.email 'system@aicure.com'
+        if [[ `git status --porcelain` ]]; then
+          git commit -am "Modify MacOs Build status in badge"
+          git push
+        else
+          echo "no changes on MacOs build badge"
+        fi
+
+  # update_status_badge_master:
+  #   runs-on: ubuntu-latest
+  #   needs: [unit_tests_linux, unit_tests_windows, unit_tests_macos]
+  #   if: |
+  #     always() 
+  #   # if: github.ref == 'refs/heads/master'
+  #   steps: 
+  #   - name: test
+  #     env:
+  #       unit_tests_windows_result: ${{ needs.unit_tests_windows.result }}
+  #       unit_tests_linux_result: ${{ needs.unit_tests_linux.result }}
+  #       unit_tests_macos_result: ${{ needs.unit_tests_macos.result }}
+  #     run: |
+  #       echo ${{ needs.unit_tests_windows.outputs.job-status }}
+  #       echo ${{ needs.unit_tests_linux.outputs.job-status }}
+  #       echo "$unit_tests_windows"
+  #       echo "$unit_tests_linux"
 
   
   
