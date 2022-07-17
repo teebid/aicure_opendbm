@@ -113,8 +113,8 @@ jobs:
     steps: 
     - name: test
       env:
-        unit_tests_windows: ${{ needs.unit_tests_windows.outputs.job-status }}
-        unit_tests_linux: ${{ needs.unit_tests_linux.outputs.job-status }}
+        unit_tests_windows: ${{ toJson(needs.unit_tests_windows) }}
+        unit_tests_linux: ${{ toJson(needs.unit_tests_linux) }}
       run: |
         echo ${{ needs.unit_tests_windows.outputs.job-status }}
         echo ${{ needs.unit_tests_linux.outputs.job-status }}
