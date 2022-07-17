@@ -112,9 +112,14 @@ jobs:
     # if: github.ref == 'refs/heads/master'
     steps: 
     - name: test
+      env:
+        unit_tests_windows: ${{ needs.unit_tests_windows.outputs.job-status }}
+        unit_tests_linux: ${{ needs.unit_tests_linux.outputs.job-status }}
       run: |
-        echo {{ needs.unit_tests_windows.outputs.job-status }}
-        echo {{ needs.unit_tests_linux.outputs.job-status }}
+        echo ${{ needs.unit_tests_windows.outputs.job-status }}
+        echo ${{ needs.unit_tests_linux.outputs.job-status }}
+        echo "$unit_tests_windows"
+        echo "$unit_tests_linux"
 
   
   
