@@ -131,7 +131,12 @@ jobs:
           $COLOR="red"
           $STATUS="failed"
         }
-        Invoke-WebRequest https://img.shields.io/badge/windows:build-$STATUS-$COLOR?style=flat&logo=windows > images/badges/windows_status.svg
+        $Parameters = @{
+            style = 'flat'
+            logo = 'windows'
+        }
+        Invoke-WebRequest -Uri 'https://img.shields.io/badge/windows:build-$STATUS-$COLOR' -Body $Parameters -Method Get > images/badges/windows_status.svg
+        
         git config --global user.name 'AiCure ODBM Pipeline'
         git config --global user.email 'system@aicure.com'
         if (git status --porcelain) {

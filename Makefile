@@ -9,5 +9,6 @@ REPO=aicure_opendbm
 .PHONY: purge
 
 purge:
-    $(CURL) -s https://github.com/$(USER)/$(REPO)/blob/master/README.md > $(README_TMP)
-    $(GREP) -Eo '<img src="[^"]+"' $(README_TMP) | $(GREP) camo | $(GREP) -Eo 'https[^"]+' | xargs -I {} $(CURL) -w "\n" -s -X PURGE {}
+	$(CURL) -s -X PURGE https://github.com/teebid/aicure_opendbm/blob/master/images/badges/linux_status.svg
+	$(CURL) -s -X PURGE https://github.com/teebid/aicure_opendbm/blob/master/images/badges/macos_status.svg
+	$(CURL) -s -X PURGE https://github.com/teebid/aicure_opendbm/blob/master/images/badges/windows_status.svg
