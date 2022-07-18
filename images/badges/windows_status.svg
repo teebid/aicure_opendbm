@@ -1,1 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="20" role="img" aria-label="windows:build: failed"><title>windows:build: failed</title><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="128" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="89" height="20" fill="#555"/><rect x="89" width="39" height="20" fill="#4c1"/><rect width="128" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text aria-hidden="true" x="455" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="790">windows:build</text><text x="455" y="140" transform="scale(.1)" fill="#fff" textLength="790">windows:build</text><text aria-hidden="true" x="1075" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="290">failed</text><text x="1075" y="140" transform="scale(.1)" fill="#fff" textLength="290">failed</text></g></svg>
+
+[32;1mStatusCode        : [0m200
+[32;1mStatusDescription : [0mOK
+[32;1mContent           : [0m<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="167" height="20" role="img" aria-label="windows:build: $STATUS"><title>windows:build: $STATUS</title><linearGr…
+[32;1mRawContent        : [0mHTTP/1.1 200 OK
+[32;1m                    [0mDate: Mon, 18 Jul 2022 18:40:35 GMT
+[32;1m                    [0mTransfer-Encoding: chunked
+[32;1m                    [0mConnection: keep-alive
+[32;1m                    [0mAccess-Control-Allow-Origin: *
+[32;1m                    [0mCache-Control: max-age=86400, s-maxage=86400
+[32;1m                    [0mVia: 2 fly.io
+[32;1m                    [0mf…
+[32;1mHeaders           : [0m{[Date, System.String[]], [Transfer-Encoding, System.String[]], [Connection, System.String[]], [Access-Control-Allow-Origin, System.String[]]…}
+[32;1mImages            : [0m{}
+[32;1mInputFields       : [0m{}
+[32;1mLinks             : [0m{}
+[32;1mRawContentLength  : [0m1581
+[32;1mRelationLink      : [0m{}
+
+
