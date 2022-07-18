@@ -122,11 +122,11 @@ jobs:
         $test_status='${{ steps.odbm_macos_test.outcome }}'
 
         if($test_status -eq "success"){
-          $COLOR=green
-          $STATUS=passed
+          $COLOR="green"
+          $STATUS="passed"
         }else {
-          $COLOR=red
-          $STATUS=failed
+          $COLOR="red"
+          $STATUS="failed"
         }
         curl "https://img.shields.io/badge/macos:build-$STATUS-$COLOR?style=flat&logo=apple" > images/badges/macos_status.svg
         git config --global user.name 'AiCure ODBM Pipeline'
