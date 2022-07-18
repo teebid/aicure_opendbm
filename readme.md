@@ -18,9 +18,9 @@ OpenDBM
 
 OS                    | Build Status
 ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Linux**                 | [![Build](https://github.com/teebid/aicure_opendbm/blob/master/images/badges/linux_build.svg)](https://github.com/teebid/aicure_opendbm/actions/workflows/open_dbm-build-checking.yml)
-**Windows**                 | [![Build](https://github.com/teebid/aicure_opendbm/blob/master/images/badges/windows_build.svg)](https://github.com/teebid/aicure_opendbm/actions/workflows/open_dbm-build-checking.yml)
-**macOS**                 | [![Build](https://github.com/teebid/aicure_opendbm/blob/master/images/badges/macos_build.svg)](https://github.com/teebid/aicure_opendbm/actions/workflows/open_dbm-build-checking.yml)
+**Linux**                 | [![Build](https://github.com/teebid/aicure_opendbm/blob/master/images/badges/linux_status.svg)](https://github.com/teebid/aicure_opendbm/actions/workflows/open_dbm-build-checking.yml)
+**Windows**                 | [![Build](https://github.com/teebid/aicure_opendbm/blob/master/images/badges/windows_status.svg)](https://github.com/teebid/aicure_opendbm/actions/workflows/open_dbm-build-checking.yml)
+**macOS**                 | [![Build](https://github.com/teebid/aicure_opendbm/blob/master/images/badges/macos_status.svg)](https://github.com/teebid/aicure_opendbm/actions/workflows/open_dbm-build-checking.yml)
 
 
 ## What is it
