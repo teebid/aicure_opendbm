@@ -118,26 +118,26 @@ jobs:
     - name: Update shield WINDOWS BUILD status only for branch push master
       if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && always() }}
       run: |
-        echo "${{ steps.odbm_windows_test.outcome }}"
-        set -x
-        test_status='${{ steps.odbm_windows_test.outcome }}'
-        if [ "$test_status" = "success" ] ; then
-          COLOR=green
-          STATUS=passed
-        else
-          COLOR=red
-          STATUS=failed
-        fi
-        curl "https://img.shields.io/badge/windows:build-$STATUS-$COLOR?style=flat&logo=windows" > images/badges/windows_status.svg
+        Write-Host "${{ steps.odbm_macos_test.outcome }}";
+        $test_status='${{ steps.odbm_macos_test.outcome }}'
+
+        if($test_status -eq "success"){
+          $COLOR=green
+          $STATUS=passed
+        }else {
+          $COLOR=red
+          $STATUS=failed
+        }
+        curl "https://img.shields.io/badge/macos:build-$STATUS-$COLOR?style=flat&logo=apple" > images/badges/macos_status.svg
         git config --global user.name 'AiCure ODBM Pipeline'
         git config --global user.email 'system@aicure.com'
-        if [[ `git status --porcelain` ]]; then
-          git add images/badges/windows_status.svg
-          git commit -am "Modify Windows Build status in badge"
+        if (git status --porcelain) {
+          git add images/badges/macos_status.svg
+          git commit -am "Modify MacOs Build status in badge"
           git push
-        else
-          echo "no changes on windows build badge"
-        fi
+        }else {
+          Write-Host "no changes on MacOs build badge"
+        }
 
   unit_tests_macos:
     runs-on: macos-latest
