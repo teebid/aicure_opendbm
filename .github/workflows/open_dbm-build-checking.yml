@@ -79,6 +79,7 @@ jobs:
         git config --global user.name 'AiCure ODBM Pipeline'
         git config --global user.email 'system@aicure.com'
         if [[ `git status --porcelain` ]]; then
+          git pull origin master
           git add images/badges/linux_status.svg
           git commit -am "Modify Linux Build status in badge"
           git push
@@ -134,6 +135,7 @@ jobs:
         git config --global user.name 'AiCure ODBM Pipeline'
         git config --global user.email 'system@aicure.com'
         if (git status --porcelain) {
+          git pull origin master
           git add images/badges/windows_status.svg
           git commit -am "Modify Windows Build status in badge"
           git push
@@ -191,6 +193,7 @@ jobs:
         git config --global user.name 'AiCure ODBM Pipeline'
         git config --global user.email 'system@aicure.com'
         if [[ `git status --porcelain` ]]; then
+          git pull origin master
           git add images/badges/macos_status.svg
           git commit -am "Modify MacOs Build status in badge"
           git push
