@@ -11,6 +11,7 @@ on:
       - 'rest_api/**'
       - '.github/workflows/open_dbm-docs-deploy.yml'
       - '.github/workflows/open_dbm-rest-api-deploy.yml'
+      - 'images/**'
   pull_request:
     branches: [ master ]
     paths-ignore:
@@ -18,6 +19,7 @@ on:
       - 'rest_api/**'
       - '.github/workflows/open_dbm-docs-deploy.yml'
       - '.github/workflows/open_dbm-rest-api-deploy.yml'
+      - 'images/**'
   workflow_dispatch:
 
 env:
@@ -118,8 +120,8 @@ jobs:
     - name: Update shield WINDOWS BUILD status only for branch push master
       if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && always() }}
       run: |
-        Write-Host "${{ steps.odbm_macos_test.outcome }}";
-        $test_status='${{ steps.odbm_macos_test.outcome }}'
+        Write-Host "${{ steps.odbm_windows_test.outcome }}";
+        $test_status='${{ steps.odbm_windows_test.outcome }}'
 
         if($test_status -eq "success"){
           $COLOR="green"
@@ -128,15 +130,15 @@ jobs:
           $COLOR="red"
           $STATUS="failed"
         }
-        curl "https://img.shields.io/badge/macos:build-$STATUS-$COLOR?style=flat&logo=apple" > images/badges/macos_status.svg
+        curl "https://img.shields.io/badge/windows:build-$STATUS-$COLOR?style=flat&logo=windows" > images/badges/windows_status.svg
         git config --global user.name 'AiCure ODBM Pipeline'
         git config --global user.email 'system@aicure.com'
         if (git status --porcelain) {
-          git add images/badges/macos_status.svg
-          git commit -am "Modify MacOs Build status in badge"
+          git add images/badges/windows_status.svg
+          git commit -am "Modify Windows Build status in badge"
           git push
         }else {
-          Write-Host "no changes on MacOs build badge"
+          Write-Host "no changes on Windows build badge"
         }
 
   unit_tests_macos:

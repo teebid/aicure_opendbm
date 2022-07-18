@@ -11,7 +11,15 @@ on:
       - '.github/workflows/open_dbm-docs-deploy.yml'
       - '.github/workflows/open_dbm-rest-api-deploy.yml'
       - '.github/workflows/open_dbm-build-checking.yml'
+      - 'images/**'
   pull_request:
+    paths-ignore:
+      - 'docs/**'
+      - 'rest_api/**'
+      - '.github/workflows/open_dbm-docs-deploy.yml'
+      - '.github/workflows/open_dbm-rest-api-deploy.yml'
+      - '.github/workflows/open_dbm-build-checking.yml'
+      - 'images/**'
   workflow_dispatch:
 
 env:
