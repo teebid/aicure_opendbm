@@ -88,7 +88,9 @@ none required
 ```
 
 ### OpenDBM Installation
-``` $ pip install opendbm ```
+```bash
+$ pip install opendbm 
+```
 
 <div align="right">
 <a href="#table-of-contents">Back to TOC ☝️</a>
