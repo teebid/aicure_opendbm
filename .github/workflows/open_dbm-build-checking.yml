@@ -135,7 +135,8 @@ jobs:
             style = 'flat'
             logo = 'windows'
         }
-        Invoke-WebRequest -Uri 'https://img.shields.io/badge/windows:build-$STATUS-$COLOR' -Body $Parameters -Method Get -PassThru -OutFile images/badges/windows_status.svg
+        Write-Host "$COLOR $STATUS"
+        Invoke-WebRequest -Uri "https://img.shields.io/badge/windows:build-$STATUS-$COLOR" -Body $Parameters -Method Get -PassThru -OutFile images/badges/windows_status.svg
         
         git config --global user.name 'AiCure ODBM Pipeline'
         git config --global user.email 'system@aicure.com'
