@@ -51,16 +51,16 @@ Usually, OpenDBM is used for:
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [Installation](#installation)
+- [⭐️ Installation](#%EF%B8%8F-installation)
   - [Prerequisites](#prerequisites)
     - [Install Dependencies](#install-dependencies)
   - [OpenDBM Installation](#opendbm-installation)
-- [Usage](#usage)
+- [⭐️ Usage](#%EF%B8%8F-usage)
   - [Basic Usage](#basic-usage)
     - [*Try your first OpenDBM program*](#try-your-first-opendbm-program)
-- [More resources](#more-resources)
-- [License](#license)
-- [People](#people)
+- [⭐️ More resources](#%EF%B8%8F-more-resources)
+- [⭐️ License](#%EF%B8%8F-license)
+- [⭐️ People](#%EF%B8%8F-people)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
