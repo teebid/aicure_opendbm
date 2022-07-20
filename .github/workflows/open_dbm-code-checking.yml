@@ -10,8 +10,20 @@ on:
       - 'rest_api/**'
       - '.github/workflows/open_dbm-docs-deploy.yml'
       - '.github/workflows/open_dbm-rest-api-deploy.yml'
+      - '.github/workflows/open_dbm-build-checking.yml'
+      - 'images/**'
   pull_request:
+    paths-ignore:
+      - 'docs/**'
+      - 'rest_api/**'
+      - '.github/workflows/open_dbm-docs-deploy.yml'
+      - '.github/workflows/open_dbm-rest-api-deploy.yml'
+      - '.github/workflows/open_dbm-build-checking.yml'
+      - 'images/**'
   workflow_dispatch:
+
+env:
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
 jobs:
   linting:
@@ -35,7 +47,7 @@ jobs:
     - name: Report list of PYTHON changed files
       run: |
         echo Changed PYTHON files: ${{ steps.python-changed-files.outputs.all_changed_files }}
-    - name: Set up Python 3.9
+    - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: 3.9
@@ -51,7 +63,7 @@ jobs:
     steps:
     - name: Checkout OpenDBM code
       uses: actions/checkout@v3
-    - name: Set up Python 3.9
+    - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: 3.9
@@ -63,9 +75,16 @@ jobs:
   unit_tests:
     runs-on: ubuntu-latest
     steps:
+    - name: 🔍 GH_TOKEN
+      if: env.GH_TOKEN == ''
+      env: 
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: echo "GH_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV
     - name: Checkout OpenDBM code
       uses: actions/checkout@v3
-    - name: Set up Python 3.9
+      with:
+        token: ${{ env.GH_TOKEN }}
+    - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: 3.6.8
@@ -85,7 +104,53 @@ jobs:
         sudo apt-get install libsndfile1
         sudo apt-get install sox
     - name: Run Pytest and Coverage
+      id: odbm_test
       run: |
         ls -lart
         coverage run -m pytest
         coverage report -mi --fail-under=30 --skip-covered
+    - name: Update shield TEST status only for branch push master
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && always() }}
+      run: |
+        echo "${{ steps.odbm_test.outcome }}"
+        set -x
+        test_status='${{ steps.odbm_test.outcome }}'
+        if [ "$test_status" = "success" ] ; then
+          COLOR=green
+          STATUS=passed
+        else
+          COLOR=red
+          STATUS=failed
+        fi
+        curl "https://img.shields.io/badge/test:status-$STATUS-$COLOR?style=flat" > images/badges/test_status.svg
+        git config --global user.name 'AiCure ODBM Pipeline'
+        git config --global user.email 'system@aicure.com'
+        if [[ `git status --porcelain` ]]; then
+          git add images/badges/test_status.svg
+          git commit -am "Modify test status in test badge"
+          git push
+        else
+          echo "no changes on test badge"
+        fi
+    - name: Update shield COVERAGE only for branch push master
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+      run: |
+        set -x
+        total=`coverage report -i | grep TOTAL | awk '{print $4+0}'`
+        if (( $(echo "$total < 30" | bc -l) )) ; then
+          COLOR=red
+        elif (( $(echo "$total >= 60" | bc -l) )); then
+          COLOR=green
+        else
+          COLOR=orange
+        fi
+        curl "https://img.shields.io/badge/code:coverage-$total%25-$COLOR?style=flat" > images/badges/code_coverage.svg
+        git config --global user.name 'AiCure ODBM Pipeline'
+        git config --global user.email 'system@aicure.com'
+        if [[ `git status --porcelain` ]]; then
+          git add images/badges/code_coverage.svg
+          git commit -am "Modify coverage percentage in coverage badge"
+          git push
+        else
+          echo "no changes on coverage badge"
+        fi
