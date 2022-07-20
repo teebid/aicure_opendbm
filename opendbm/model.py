@@ -1,9 +1,11 @@
 import os
+import platform
 import subprocess
+import tempfile
 from pathlib import Path
 
 from dbm_lib.config import config_derive_feature, config_raw_feature, config_reader
-from opendbm.util import docker_command_dec
+from opendbm.util import docker_command_dec, wsllize
 
 OPENFACE_PATH_VIDEO = "pkg/open_dbm/OpenFace/build/bin/FaceLandmarkVid"
 OPENFACE_PATH = "pkg/open_dbm/OpenFace/build/bin/FeatureExtraction"
@@ -16,6 +18,7 @@ OPENFACE_URLS = [
     "https://onedrive.live.com/download?cid=2E2ADA578BFF6E6E&resid=2E2ADA578BFF6E6E%2153070&authkey=AD6KjtYipphwBPc",
 ]
 OPENDBM_DATA = Path.home() / ".opendbm"
+# OPENDBM_DATA = Path("pkg/speech")
 DLIB_SHAPE_MODEL = "pkg/shape_detector/shape_predictor_68_face_landmarks.dat"
 FACIAL_ACTIVITY_ARGS = [
     "-q",
@@ -56,48 +59,80 @@ class VideoModel(Model):
 
     @docker_command_dec
     def _fit(self, path, dbm_group):
-        bn, _ = os.path.splitext(os.path.basename(path))
 
-        docker_call = "docker exec dbm_container /bin/bash -c"
+        docker_temp_dir = "/app/tmp/"
+        wsl_cmd, temp_dir = wsllize((tempfile.gettempdir()))
+        filename = os.path.basename(path)
+        bn, _ = os.path.splitext(filename)
+
         facial_args = " ".join(FACIAL_ACTIVITY_ARGS)
+        docker_call = wsl_cmd + "docker exec dbm_container /bin/bash -c"
         openface_call = [
-            f'{docker_call} "{OPENFACE_PATH} {facial_args} {path} -out_dir /app/tmp/"',
-            f'{docker_call} "{OPENFACE_PATH_VIDEO} {facial_args} {path} -out_dir /app/tmp/"',
+            f'{docker_call} "{OPENFACE_PATH} {facial_args} {path} -out_dir {docker_temp_dir}"',
+            f'{docker_call} "{OPENFACE_PATH_VIDEO} {facial_args} {path} -out_dir {docker_temp_dir}"',
         ]
         out_dir_openface = [
-            f"/tmp/{bn}/{bn}_openface/",
-            f"/tmp/{bn}_landmark_output/{bn}_landmark_output_openface_lmk/",
+            f"{temp_dir}/{bn}/{bn}_openface/",
+            f"{temp_dir}/{bn}_landmark_output/{bn}_landmark_output_openface_lmk/",
         ]
         result_path = [
-            "app/tmp/" + bn + ".csv",
-            "app/tmp/" + bn + "_landmark_output.csv",
+            docker_temp_dir + bn + ".csv",
+            docker_temp_dir + bn + "_landmark_output.csv",
         ]
 
         if dbm_group == "facial":
-            subprocess.check_output(openface_call[0], shell=True)
-            mkdir_cmd = f"mkdir -p {out_dir_openface[0]}"
-            copy_cmd = (
-                f"docker cp dbm_container:/{result_path[0]} {out_dir_openface[0]}"
+            openface_csv = self._processing_video(
+                dbm_group,
+                openface_call[0],
+                out_dir_openface[0],
+                result_path[0],
+                wsl_cmd,
+                temp_dir,
+                bn,
             )
-            copy_result_to_temp = f"{mkdir_cmd} && {copy_cmd}"
-            subprocess.Popen(copy_result_to_temp, shell=True).wait()
 
-            return out_dir_openface[0] + result_path[0][8:], bn
+            return openface_csv, bn
         else:
-            for call, out_dir, result in zip(
-                openface_call, out_dir_openface, result_path
-            ):
-                subprocess.check_output(call, shell=True)
-                mkdir_cmd = f"mkdir -p {out_dir}"
-                copy_cmd = f"docker cp dbm_container:/{result} {out_dir}"
-                copy_result_to_temp = f"{mkdir_cmd} && {copy_cmd}"
-                subprocess.Popen(copy_result_to_temp, shell=True).wait()
 
-            openface_csv, openface_lmk_csv = tuple(
-                out_dir + file[8:]
-                for out_dir, file in zip(out_dir_openface, result_path)
+            openface_csv = self._processing_video(
+                "facial",
+                openface_call[0],
+                out_dir_openface[0],
+                result_path[0],
+                wsl_cmd,
+                temp_dir,
+                bn,
             )
+            openface_lmk_csv = self._processing_video(
+                "movement",
+                openface_call[1],
+                out_dir_openface[1],
+                result_path[1],
+                wsl_cmd,
+                temp_dir,
+                bn,
+            )
+
             return openface_csv, openface_lmk_csv, bn
+
+    def _processing_video(
+        self, dbm_group, call, out_dir, result_path, wsl_cmd, temp_dir, bn
+    ):
+
+        subprocess.check_output(call)
+        mkdir_cmd = wsl_cmd + f"mkdir -p {out_dir}"
+        copy_cmd = wsl_cmd + f"docker cp dbm_container:/{result_path} {out_dir}"
+        subprocess.Popen(mkdir_cmd).wait()
+        subprocess.Popen(copy_cmd).wait()
+
+        if platform.system() == "Windows":
+            path_in_temp = out_dir[len(temp_dir) :]
+            out_dir = tempfile.gettempdir() + path_in_temp
+
+        if dbm_group == "facial":
+            return out_dir + bn + ".csv"
+        else:
+            return out_dir + bn + "_landmark_output.csv"
 
 
 class AudioModel(Model):
