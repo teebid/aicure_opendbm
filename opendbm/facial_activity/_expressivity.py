@@ -1,3 +1,5 @@
+import tempfile
+
 from dbm_lib.dbm_features.raw_features.video import face_emotion_expressivity
 from opendbm.model import VideoModel
 
@@ -83,5 +85,5 @@ class Expressivity(VideoModel):
 
     def _fit_transform(self, path):
         return face_emotion_expressivity.run_face_expressivity(
-            path, "/tmp/", self.r_config, save=False
+            path, f"{tempfile.gettempdir()}/", self.r_config, save=False
         )

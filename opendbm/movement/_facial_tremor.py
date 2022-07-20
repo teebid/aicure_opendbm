@@ -1,3 +1,5 @@
+import tempfile
+
 from dbm_lib.dbm_features.raw_features.movement.facial_tremor import fac_tremor_process
 from opendbm.model import VideoModel
 
@@ -45,4 +47,6 @@ class FacialTremor(VideoModel):
         ]
 
     def _fit_transform(self, path):
-        return fac_tremor_process(path, "/tmp/", self.r_config, save=False)
+        return fac_tremor_process(
+            path, f"{tempfile.gettempdir()}/", self.r_config, save=False
+        )

@@ -1,3 +1,5 @@
+import tempfile
+
 from dbm_lib.dbm_features.raw_features.movement.head_motion import run_head_movement
 from opendbm.model import VideoModel
 
@@ -14,4 +16,4 @@ class HeadMovement(VideoModel):
         ]
 
     def _fit_transform(self, path):
-        return run_head_movement(path, "/tmp/", self.r_config)
+        return run_head_movement(path, f"{tempfile.gettempdir()}/", self.r_config)

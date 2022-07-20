@@ -1,3 +1,5 @@
+import tempfile
+
 from dbm_lib.dbm_features.raw_features.video.face_landmark import run_face_landmark
 from opendbm.model import VideoModel
 
@@ -17,4 +19,6 @@ class Landmark(VideoModel):
         self._params = lcols
 
     def _fit_transform(self, path):
-        return run_face_landmark(path, "/tmp/", self.r_config, save=False)
+        return run_face_landmark(
+            path, f"{tempfile.gettempdir()}/", self.r_config, save=False
+        )

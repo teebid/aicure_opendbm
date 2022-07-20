@@ -1,3 +1,5 @@
+import tempfile
+
 from dbm_lib.dbm_features.raw_features.video.face_asymmetry import run_face_asymmetry
 from opendbm.model import VideoModel
 
@@ -13,4 +15,6 @@ class Asymmetry(VideoModel):
         ]
 
     def _fit_transform(self, path):
-        return run_face_asymmetry(path, "/tmp/", self.r_config, save=False)
+        return run_face_asymmetry(
+            path, f"{tempfile.gettempdir()}/", self.r_config, save=False
+        )

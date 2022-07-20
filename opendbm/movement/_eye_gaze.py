@@ -1,3 +1,5 @@
+import tempfile
+
 from dbm_lib.dbm_features.raw_features.movement.eye_gaze import run_eye_gaze
 from opendbm.model import VideoModel
 
@@ -17,4 +19,6 @@ class EyeGaze(VideoModel):
         ]
 
     def _fit_transform(self, path):
-        return run_eye_gaze(path, "/tmp/", self.r_config, save=False)
+        return run_eye_gaze(
+            path, f"{tempfile.gettempdir()}/", self.r_config, save=False
+        )

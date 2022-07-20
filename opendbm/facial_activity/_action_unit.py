@@ -1,3 +1,5 @@
+import tempfile
+
 from dbm_lib.dbm_features.raw_features.video.face_au import run_face_au
 from opendbm.model import VideoModel
 
@@ -44,4 +46,4 @@ class ActionUnit(VideoModel):
         ]
 
     def _fit_transform(self, path):
-        return run_face_au(path, "/tmp/", self.r_config, save=False)
+        return run_face_au(path, f"{tempfile.gettempdir()}/", self.r_config, save=False)
