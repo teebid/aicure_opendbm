@@ -1,4 +1,5 @@
 import shutil
+import tempfile
 from collections import OrderedDict
 
 from opendbm.model import VideoModel
@@ -33,7 +34,7 @@ class FacialActivity(VideoModel):
         for k, v in self._models.items():
             v._df = v._fit_transform(result_path)
 
-        shutil.rmtree(f"/tmp/{bn}/")
+        shutil.rmtree(f"{tempfile.gettempdir()}/{bn}/")
 
     def get_landmark(self):
         return self._landmark

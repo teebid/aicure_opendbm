@@ -1,5 +1,6 @@
 import os
 import shutil
+import tempfile
 from collections import OrderedDict
 
 from dbm_lib.controller import process_feature as pf
@@ -44,8 +45,8 @@ class Movement(VideoModel):
                 v._df = v._fit_transform(wav_path)
             else:
                 v._df = v._fit_transform(path)
-        shutil.rmtree(f"/tmp/{bn}/")
-        shutil.rmtree(f"/tmp/{bn}_landmark_output/")
+        shutil.rmtree(f"{tempfile.gettempdir()}/{bn}/")
+        shutil.rmtree(f"{tempfile.gettempdir()}/{bn}_landmark_output/")
         os.remove(wav_path)
 
     def get_eye_blink(self):
