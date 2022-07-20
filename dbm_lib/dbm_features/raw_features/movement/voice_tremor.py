@@ -11,7 +11,6 @@ import pandas as pd
 import parselmouth
 from parselmouth.praat import run_file
 
-from dbm_lib.dbm_features.raw_features.movement import DBMLIB_VTREMOR_LIB
 from dbm_lib.dbm_features.raw_features.util import util as ut
 
 logging.basicConfig(level=logging.INFO)
@@ -19,6 +18,11 @@ logger = logging.getLogger()
 
 vt_dir = "movement/voice_tremor"
 csv_ext = "_vtremor.csv"
+
+DBMLIB_PATH = os.path.dirname(__file__)
+DBMLIB_VTREMOR_LIB = os.path.abspath(
+    os.path.join(DBMLIB_PATH, "../../../../resources/libraries/voice_tremor.praat")
+)
 
 
 # Executing praat script using parselmouth function
