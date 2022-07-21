@@ -112,22 +112,7 @@ jobs:
         key: windows-${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements.txt') }}
 
     - name: "Install SoX and add to PATH"
-      run: |
-              set -ex
-              curl -L --output sox-14.4.2-win32.zip --url https://sourceforge.net/projects/sox/files/sox/14.4.2/sox-14.4.2-win32.zip/download
-              "C:/Program Files/7-Zip/7z.exe" x -o`pwd`/bin/ -tzip -aoa sox-14.4.2-win32.zip
-              rm sox-*zip
-      shell: bash
-#              echo "D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2/" >> $GITHUB_PATH
-#              set PATH=%PATH%;D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2/
-    - name: "add sox to PATH"
-      run: |
-              echo $env:Path
-              pwd
-              $env:Path += "D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2/"
-              $env:GITHUB_PATH += "D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2/"
-              set PATH=%PATH%;"D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2/"
-
+      uses: ./.github/actions/win-install-sox
     - name: Setup FFmpeg
       uses: FedericoCarboni/setup-ffmpeg@v1.1.0
     - name: Install dependencies
