@@ -55,7 +55,7 @@ jobs:
         python tes.py
         pip install pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-        ls not_exist_file
+#        ls not_exist_file #####commented because of unknown command and it make the build error
     - name : Install libsndfile and sox(only for linux machine)
       run: |
         sudo apt-get install libsndfile1
@@ -117,7 +117,7 @@ jobs:
               curl -L --output sox-14.4.2-win32.zip --url https://sourceforge.net/projects/sox/files/sox/14.4.2/sox-14.4.2-win32.zip/download
               "C:/Program Files/7-Zip/7z.exe" x -o`pwd`/bin/ -tzip -aoa sox-14.4.2-win32.zip
               rm sox-*zip
-              echo "`pwd`/bin/sox-14.4.2/" >> $GITHUB_PATH
+              echo "`pwd`/bin/sox-14.4.2/" >> $GITHUB_ENV
       shell: bash
     - name: Setup FFmpeg
       uses: FedericoCarboni/setup-ffmpeg@v1.1.0
