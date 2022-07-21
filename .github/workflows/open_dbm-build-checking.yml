@@ -99,6 +99,7 @@ jobs:
       uses: actions/checkout@v3
       with:
         token: ${{ env.GH_TOKEN }}
+
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
@@ -119,13 +120,14 @@ jobs:
       run: |
               echo $env:Path
               echo $GITHUB_PATH
-              $env:Path += "D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2/"
-              $GITHUB_PATH += "D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2/"
-              $env:GITHUB_PATH += "D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2/"
-              set PATH=%PATH%;"D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2/"
-              cp D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2\sox.exe D:\a\aicure_opendbm\aicure_opendbm
-              D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2\sox.exe --help
+              $env:Path += "D:/a/aicure_opendbm/aicure_opendbm/bin/sox-14.4.2/"
+              $GITHUB_PATH += "D:/a/aicure_opendbm/aicure_opendbm/bin/sox-14.4.2/"
+              $env:GITHUB_PATH += "D:/a/aicure_opendbm/aicure_opendbm/bin/sox-14.4.2/"
+              set PATH=%PATH%;"D:/a/aicure_opendbm/aicure_opendbm/bin/sox-14.4.2/"
+              cp D:/a/aicure_opendbm/aicure_opendbm/bin/sox-14.4.2/sox.exe D:/a/aicure_opendbm/aicure_opendbm
+              D:/a/aicure_opendbm/aicure_opendbm/bin/sox-14.4.2/sox.exe --help
               sox --help
+      
     - name: Install dependencies
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
