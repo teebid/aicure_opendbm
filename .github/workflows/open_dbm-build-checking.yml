@@ -116,11 +116,16 @@ jobs:
       uses: ./.github/actions/win-install-sox
     - name: Setup FFmpeg
       uses: FedericoCarboni/setup-ffmpeg@v1.1.0
+    - name: add path to PATH environment variable
+      uses: myci-actions/export-env-var-powershell@1
+      with:
+        name: PATH
+        value: $env:PATH;D:/a/aicure_opendbm/aicure_opendbm/bin/sox-14.4.2/
     - name: "add sox to PATH"
       run: |
-              echo $env:Path
+              echo $env:PATH
               echo $GITHUB_PATH
-              $env:Path += "D:/a/aicure_opendbm/aicure_opendbm/bin/sox-14.4.2/"
+              $env:PATH += "D:/a/aicure_opendbm/aicure_opendbm/bin/sox-14.4.2/"
               $GITHUB_PATH += "D:/a/aicure_opendbm/aicure_opendbm/bin/sox-14.4.2/"
               $env:$GITHUB_PATH += "D:/a/aicure_opendbm/aicure_opendbm/bin/sox-14.4.2/"
               set PATH=%PATH%;"D:/a/aicure_opendbm/aicure_opendbm/bin/sox-14.4.2/"
