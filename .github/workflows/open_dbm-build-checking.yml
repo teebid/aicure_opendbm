@@ -120,7 +120,7 @@ jobs:
       uses: myci-actions/export-env-var-powershell@1
       with:
         name: PATH
-        value: $env:PATH;"$SOX_PATH"
+        value: $env:PATH;"$GITHUB_PATH"
     - name: "add sox to PATH"
       run: |
               sox --help
