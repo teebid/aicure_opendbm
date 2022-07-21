@@ -112,11 +112,9 @@ jobs:
     - name: Switch git-bash shell to MSYS2 shell by adding MSYS2 path to PATH front
       run: echo "$MSYS2_SHELL_PATH" >> $GITHUB_PATH
     - name: Install SoX and add to Path
-    - uses: ./.github/actions/win-install-sox
+      uses: ./.github/actions/win-install-sox
     - name: Setup FFmpeg
       uses: FedericoCarboni/setup-ffmpeg@v1.1.0
-
-
     - name: "add sox to PATH"
       run: |
               echo $env:Path
@@ -130,8 +128,6 @@ jobs:
               cp D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2\sox.exe C:\Users\runneradmin\AppData\Local\Microsoft\WindowsApps;
               cp D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2\sox.exe C:\Users\runneradmin\AppData\Roaming\Python\Python37\Scripts
               sox --help
-
-
     - name: Install dependencies
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
