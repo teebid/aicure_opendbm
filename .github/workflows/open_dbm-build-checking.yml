@@ -111,27 +111,17 @@ jobs:
         path: ${{ env.pythonLocation }}
         key: windows-${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements.txt') }}
 
-    - name: "Install SoX and add to PATH"
-      run: |
-              set -ex
-              curl -L --output sox-14.4.2-win32.zip --url https://sourceforge.net/projects/sox/files/sox/14.4.2/sox-14.4.2-win32.zip/download
-              "C:/Program Files/7-Zip/7z.exe" x -o`pwd`/bin/ -tzip -aoa sox-14.4.2-win32.zip
-              rm sox-*zip
-      shell: bash
-#              echo "D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2/" >> $GITHUB_PATH
-#              set PATH=%PATH%;D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2/
-    - name: "add sox to PATH"
-      run: |
-              echo $env:Path
-              echo $GITHUB_PATH
-              pwd
-              $env:Path += "D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2/"
-              $env:GITHUB_PATH += "D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2/"
-              set PATH=%PATH%;"D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2/"
-              cp D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2\sox.exe D:\a\aicure_opendbm\aicure_opendbm
-              cp D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2\sox.exe C:\Users\runneradmin\AppData\Local\Microsoft\WindowsApps;
-              cp D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2\sox.exe C:\Users\runneradmin\AppData\Roaming\Python\Python37\Scripts
-              sox --help
+    - name: Switch git-bash shell to MSYS2 shell by adding MSYS2 path to PATH front
+      run: echo "$MSYS2_SHELL_PATH" >> $GITHUB_PATH
+    - uses: ./.github/actions/win-install-sox
+#    - name: "Install SoX and add to PATH"
+#      run: |
+#              set -ex
+#              curl -L --output sox-14.4.2-win32.zip --url https://sourceforge.net/projects/sox/files/sox/14.4.2/sox-14.4.2-win32.zip/download
+#              "C:/Program Files/7-Zip/7z.exe" x -o`pwd`/bin/ -tzip -aoa sox-14.4.2-win32.zip
+#              rm sox-*zip
+#      shell: bash
+
 
     - name: Setup FFmpeg
       uses: FedericoCarboni/setup-ffmpeg@v1.1.0
