@@ -7,7 +7,6 @@ moviepy
 scikit-image
 sk-video
 watchtower
-opencv-python
 webrtcvad
 imutils
 coloredlogs
