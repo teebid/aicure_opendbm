@@ -119,7 +119,6 @@ jobs:
       run: |
               echo $env:Path
               echo $GITHUB_PATH
-              pwd
               $env:Path += "D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2/"
               $GITHUB_PATH += "D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2/"
               $env:GITHUB_PATH += "D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2/"
