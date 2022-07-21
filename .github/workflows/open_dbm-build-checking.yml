@@ -122,7 +122,9 @@ jobs:
 #              set PATH=%PATH%;D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2/
     - name: "add sox to PATH"
       run: |
+              echo ${HOME}
               echo "D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2/" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+              set PATH=%PATH%;D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2/
               sox --help
     - name: Setup FFmpeg
       uses: FedericoCarboni/setup-ffmpeg@v1.1.0
