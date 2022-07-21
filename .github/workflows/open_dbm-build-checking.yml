@@ -128,13 +128,15 @@ jobs:
               $env:GITHUB_PATH += "D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2/"
               set PATH=%PATH%;"D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2/"
               cp D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2\sox.exe D:\a\aicure_opendbm\aicure_opendbm
+              cp D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2\sox.exe C:\Program Files\PowerShell\7
+              sox --help
 
     - name: Setup FFmpeg
       uses: FedericoCarboni/setup-ffmpeg@v1.1.0
     - name: Install dependencies
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
-        ffmpeg 
+        
         python -m pip install --upgrade pip
         pip install pip==20.2.3
         python tes.py
