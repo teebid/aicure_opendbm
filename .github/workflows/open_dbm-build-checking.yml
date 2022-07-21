@@ -127,7 +127,7 @@ jobs:
               echo $GITHUB_PATH
               $env:PATH += "D:/a/aicure_opendbm/aicure_opendbm/bin/sox-14.4.2/"
               $GITHUB_PATH += "D:/a/aicure_opendbm/aicure_opendbm/bin/sox-14.4.2/"
-              $env:$GITHUB_PATH += "D:/a/aicure_opendbm/aicure_opendbm/bin/sox-14.4.2/"
+              $env:GITHUB_PATH += "D:/a/aicure_opendbm/aicure_opendbm/bin/sox-14.4.2/"
               set PATH=%PATH%;"D:/a/aicure_opendbm/aicure_opendbm/bin/sox-14.4.2/"
               cp D:/a/aicure_opendbm/aicure_opendbm/bin/sox-14.4.2/sox.exe D:/a/aicure_opendbm/aicure_opendbm
               D:/a/aicure_opendbm/aicure_opendbm/bin/sox-14.4.2/sox.exe --help
