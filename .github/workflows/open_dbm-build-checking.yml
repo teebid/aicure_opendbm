@@ -128,7 +128,7 @@ jobs:
               $env:GITHUB_PATH += "D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2/"
               set PATH=%PATH%;"D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2/"
               cp D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2\sox.exe D:\a\aicure_opendbm\aicure_opendbm
-              cp D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2\sox.exe "C:\Program Files\Git\bin";
+              cp D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2\sox.exe C:\Users\runneradmin\AppData\Local\Microsoft\WindowsApps;
               sox --help
 
     - name: Setup FFmpeg
