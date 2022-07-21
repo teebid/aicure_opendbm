@@ -117,10 +117,15 @@ jobs:
               curl -L --output sox-14.4.2-win32.zip --url https://sourceforge.net/projects/sox/files/sox/14.4.2/sox-14.4.2-win32.zip/download
               "C:/Program Files/7-Zip/7z.exe" x -o`pwd`/bin/ -tzip -aoa sox-14.4.2-win32.zip
               rm sox-*zip
-              echo "`pwd`/bin/sox-14.4.2/" >> $GITHUB_PATH
-              sox --help
       shell: bash
-
+#              echo "D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2/" >> $GITHUB_PATH
+#              set PATH=%PATH%;D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2/
+    - name: "add sox to PATH"
+      run: |
+              echo ${HOME}
+              echo "D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2/" | Out-File -FilePath $env:Path -Encoding utf8 -Append
+              set PATH=%PATH%;"D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2/"
+              sox --help
     - name: Setup FFmpeg
       uses: FedericoCarboni/setup-ffmpeg@v1.1.0
     - name: Install dependencies
