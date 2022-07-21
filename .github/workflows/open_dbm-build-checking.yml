@@ -109,13 +109,11 @@ jobs:
         path: ${{ env.pythonLocation }}
         key: windows-${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements.txt') }}
 
-    - name: "Download SoX"
-      run: Invoke-Webrequest -Uri https://sourceforge.net/projects/sox/files/sox/14.4.2/sox-14.4.2-win32.zip/download -OutFile sox-14.4.2-win32.zip
-
     - name: "Install SoX and add to PATH"
       run: |
               set -ex
               "C:/Program Files/7-Zip/7z.exe" x -o`pwd`/bin/ -tzip -aoa sox-14.4.2-win32.zip
+              curl -L --output sox-14.4.2-win32.zip --url https://sourceforge.net/projects/sox/files/sox/14.4.2/sox-14.4.2-win32.zip/download
               rm sox-*zip
               echo "`pwd`/bin/sox-14.4.2/" >> $GITHUB_PATH
       shell: bash
