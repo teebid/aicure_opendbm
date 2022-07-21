@@ -11,6 +11,5 @@ runs:
         rm sox-*zip
         echo "`pwd`/bin/sox-14.4.2/" >> $GITHUB_PATH
         cp "D:/a/aicure_opendbm/aicure_opendbm/bin/sox-14.4.2/sox.exe" "C:/Users/runneradmin/AppData/Local/Microsoft/WindowsApps"
-        cp "D:/a/aicure_opendbm/aicure_opendbm/bin/sox-14.4.2/sox.exe" "C:/Users/runneradmin/AppData/Roaming/Python/Python37/Scripts"
 
       shell: bash
