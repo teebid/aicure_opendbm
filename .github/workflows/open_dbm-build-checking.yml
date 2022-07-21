@@ -120,7 +120,7 @@ jobs:
       uses: myci-actions/export-env-var-powershell@1
       with:
         name: PATH
-        value: $env:PATH;D:/a/aicure_opendbm/aicure_opendbm/bin/sox-14.4.2/
+        value: $env:PATH;"$SOX_PATH"
     - name: "add sox to PATH"
       run: |
               sox --help
