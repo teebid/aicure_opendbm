@@ -51,8 +51,6 @@ jobs:
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
         python -m pip install --upgrade pip
-        pip install pip==20.2.3
-        python tes.py
         pip install pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 #        ls not_exist_file #####commented because of unknown command and it make the build error
@@ -113,25 +111,31 @@ jobs:
 
     - name: Switch git-bash shell to MSYS2 shell by adding MSYS2 path to PATH front
       run: echo "$MSYS2_SHELL_PATH" >> $GITHUB_PATH
+    - name: Install SoX and add to Path
     - uses: ./.github/actions/win-install-sox
-#    - name: "Install SoX and add to PATH"
-#      run: |
-#              set -ex
-#              curl -L --output sox-14.4.2-win32.zip --url https://sourceforge.net/projects/sox/files/sox/14.4.2/sox-14.4.2-win32.zip/download
-#              "C:/Program Files/7-Zip/7z.exe" x -o`pwd`/bin/ -tzip -aoa sox-14.4.2-win32.zip
-#              rm sox-*zip
-#      shell: bash
-
-
     - name: Setup FFmpeg
       uses: FedericoCarboni/setup-ffmpeg@v1.1.0
+
+
+    - name: "add sox to PATH"
+      run: |
+              echo $env:Path
+              echo $GITHUB_PATH
+              pwd
+              $env:Path += "D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2/"
+              $GITHUB_PATH += "D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2/"
+              $env:GITHUB_PATH += "D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2/"
+              set PATH=%PATH%;"D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2/"
+              cp D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2\sox.exe D:\a\aicure_opendbm\aicure_opendbm
+              cp D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2\sox.exe C:\Users\runneradmin\AppData\Local\Microsoft\WindowsApps;
+              cp D:\a\aicure_opendbm\aicure_opendbm\bin\sox-14.4.2\sox.exe C:\Users\runneradmin\AppData\Roaming\Python\Python37\Scripts
+              sox --help
+
 
     - name: Install dependencies
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
-        sox --help
         python -m pip install --upgrade pip
-        python tes.py
         pip install pytest
         pip install -r requirements.txt
       shell: bash
@@ -196,8 +200,6 @@ jobs:
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
         python -m pip install --upgrade pip
-        pip install pip==20.2.3
-        python tes.py
         pip install pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name : Install sox
