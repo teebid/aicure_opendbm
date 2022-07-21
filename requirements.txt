@@ -1,6 +1,6 @@
 Cython
 llvmlite
-numpy
+numpy==1.17.0
 pandas==1.1.5
 praat-parselmouth
 moviepy
@@ -30,8 +30,8 @@ opencv-python>=4.5.5
 pre-commit
 ffmpeg
 git+https://github.com/cmusatyalab/openface.git
-dlib>=19.13.0; sys.platform not in "win32win64"
-https://github.com/sachadee/Dlib/blob/main/dlib-19.22.99-cp37-cp37m-win_amd64.whl?raw=true; sys.platform in "win32win64" and python_version == "3.7"
-https://github.com/sachadee/Dlib/blob/main/dlib-19.22.99-cp38-cp38-win_amd64.whl?raw=true; sys.platform in "win32win64" and python_version == "3.8"
-https://github.com/sachadee/Dlib/blob/main/dlib-19.22.99-cp39-cp39-win_amd64.whl?raw=true; sys.platform in "win32win64" and python_version == "3.9"
+dlib>=19.13.0; "win" not in sys.platform
+https://github.com/sachadee/Dlib/blob/main/dlib-19.22.99-cp37-cp37m-win_amd64.whl?raw=true; "win" in sys.platform and python_version == "3.7"
+https://github.com/sachadee/Dlib/blob/main/dlib-19.22.99-cp38-cp38-win_amd64.whl?raw=true; "win" in sys.platform and python_version == "3.8"
+https://github.com/sachadee/Dlib/blob/main/dlib-19.22.99-cp39-cp39-win_amd64.whl?raw=true; "win" in sys.platform and python_version == "3.9"
 matplotlib
