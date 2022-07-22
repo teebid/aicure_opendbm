@@ -1,8 +1,8 @@
 from pytest import fixture
 
 test_path = "tests/test_data/"
-path_mp4 = test_path + "opendbmfacialtest_v1.mp4"
-path_wav = test_path + "opendbmfacialtest_v1.wav"
+path_mp4 = test_path + "facial_speech_verbal_video_test.mp4"
+path_wav = test_path + "facial_speech_verbal_audio_test.wav"
 
 
 @fixture(scope="class")
