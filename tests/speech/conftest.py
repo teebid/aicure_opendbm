@@ -1,18 +1,19 @@
-import importlib
-import sys
-
 from pytest import fixture
 
-# from opendbm.speech import Speech
-sys.path.append("")
-speech = importlib.import_module("opendbm.speech")
-path1 = "tests/test_data/opendbmfacialtest_v1.mp4"
-path2 = f"{path1[:-4]}.wav"
+test_path = "tests/test_data/"
+path_mp4 = test_path + "opendbmfacialtest_v1.mp4"
+path_wav = test_path + "opendbmfacialtest_v1.wav"
 
 
 @fixture(scope="class")
-def processing_speech():
-    m = speech.Speech()
-    m.fit(path2)
+def processing_speech_mp4(get_model):
+    m = get_model.speech
+    m.fit(path_mp4)
+    yield m
 
+
+@fixture(scope="class")
+def processing_speech_wav(get_model):
+    m = get_model.speech
+    m.fit(path_wav)
     yield m
