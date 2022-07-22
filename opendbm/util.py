@@ -60,16 +60,30 @@ def docker_command_dec(fn):
     def inner(*args, **kwargs):
         # args[1] is path argument
         wsl_cmd, path = wsllize(args[1])
-
         create_docker = wsl_cmd + "docker create -ti --name dbm_container dbm bash"
         copy_file_to_docker = wsl_cmd + f"docker cp {path} dbm_container:/app/"
         start_container = wsl_cmd + "docker start dbm_container"
         terminate_container = wsl_cmd + "docker stop dbm_container"
         remove_container = wsl_cmd + "docker rm dbm_container"
 
-        subprocess.Popen(create_docker).wait()
-        subprocess.Popen(copy_file_to_docker).wait()
-        subprocess.Popen(start_container).wait()
+        subprocess.Popen(
+            create_docker,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            stdin=subprocess.PIPE,
+        ).wait()
+        subprocess.Popen(
+            copy_file_to_docker,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            stdin=subprocess.PIPE,
+        ).wait()
+        subprocess.Popen(
+            start_container,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            stdin=subprocess.PIPE,
+        ).wait()
 
         try:
 
@@ -84,7 +98,17 @@ def docker_command_dec(fn):
 
         finally:
             # pass
-            subprocess.Popen(terminate_container).wait()
-            subprocess.Popen(remove_container).wait()
+            subprocess.Popen(
+                terminate_container,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
+                stdin=subprocess.PIPE,
+            ).wait()
+            subprocess.Popen(
+                remove_container,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
+                stdin=subprocess.PIPE,
+            ).wait()
 
     return inner
