@@ -102,6 +102,7 @@ jobs:
       run: |
         sudo apt-get install libsndfile1
         sudo apt-get install sox
+        sudo apt-get install ffmpeg
     - name: Run Pytest and Coverage
       id: odbm_test
       run: |
