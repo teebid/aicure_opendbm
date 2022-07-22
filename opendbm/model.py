@@ -119,11 +119,26 @@ class VideoModel(Model):
         self, dbm_group, call, out_dir, result_path, wsl_cmd, temp_dir, bn
     ):
 
-        subprocess.check_output(call)
+        subprocess.Popen(
+            call,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            stdin=subprocess.PIPE,
+        ).wait()
         mkdir_cmd = wsl_cmd + f"mkdir -p {out_dir}"
         copy_cmd = wsl_cmd + f"docker cp dbm_container:/{result_path} {out_dir}"
-        subprocess.Popen(mkdir_cmd).wait()
-        subprocess.Popen(copy_cmd).wait()
+        subprocess.Popen(
+            mkdir_cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            stdin=subprocess.PIPE,
+        ).wait()
+        subprocess.Popen(
+            copy_cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            stdin=subprocess.PIPE,
+        ).wait()
 
         if platform.system() == "Windows":
             path_in_temp = out_dir[len(temp_dir) :]

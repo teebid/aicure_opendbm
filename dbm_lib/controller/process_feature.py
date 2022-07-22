@@ -46,7 +46,13 @@ def audio_to_wav(input_filepath, tmp=False):
             ]
 
             logger.info("Converting audio from {} to wav".format(input_filepath))
-            subprocess.check_output(call)
+            subprocess.Popen(
+                call,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
+                stdin=subprocess.PIPE,
+            ).wait()
+            # subprocess.check_output(call)
             logger.info("wav output saved in {}".format(output_filepath))
         else:
             logger.info("Output file {} already exists".format(output_filepath))
