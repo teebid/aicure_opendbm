@@ -97,7 +97,6 @@ jobs:
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
         python -m pip install --upgrade pip
-        pip install pytest coverage
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name : Install libsndfile and sox(only for linux machine)
       run: |
@@ -107,6 +106,7 @@ jobs:
       id: odbm_test
       run: |
         ls -lart
+        pip install pytest coverage
         coverage run -m pytest
         coverage report -mi --fail-under=30 --skip-covered
     - name: Update shield TEST status only for branch push master
