@@ -47,6 +47,15 @@ jobs:
       with:
         path: ${{ env.pythonLocation }}
         key: ${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements.txt') }}
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: Pull OpenFace Image
+      run: |
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/dbm-test2:latest
+            docker image tag ${{ secrets.DOCKERHUB_USERNAME }}/dbm-test2:latest dbm
     - name: Setup FFmpeg
       uses: FedericoCarboni/setup-ffmpeg@v1.1.0
     - name: Install dependencies
@@ -111,7 +120,15 @@ jobs:
       with:
         path: ${{ env.pythonLocation }}
         key: windows-${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements.txt') }}
-
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: Pull OpenFace Image
+      run: |
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/dbm-test2:latest
+            docker image tag ${{ secrets.DOCKERHUB_USERNAME }}/dbm-test2:latest dbm
     - name: Switch git-bash shell to MSYS2 shell by adding MSYS2 path to PATH front
       run: echo "$MSYS2_SHELL_PATH" >> $GITHUB_PATH
     - name: Install SoX and add to Path
@@ -187,6 +204,15 @@ jobs:
       with:
         path: ${{ env.pythonLocation }}
         key: macos-${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements.txt') }}
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: Pull OpenFace Image
+      run: |
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/dbm-test2:latest
+            docker image tag ${{ secrets.DOCKERHUB_USERNAME }}/dbm-test2:latest dbm
     - name: Setup FFmpeg
       uses: FedericoCarboni/setup-ffmpeg@v1.1.0
     - name: Install dependencies
