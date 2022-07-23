@@ -348,14 +348,16 @@ module.exports = {
       metadata: [
         {
           property: 'og:image',
-          content: 'https://reactnative.dev/img/logo-og.png',
+          content:
+            'https://raw.githubusercontent.com/teebid/aicure_opendbm/master/docs/website/static/img/header_logo.png',
         },
         {name: 'twitter:card', content: 'summary_large_image'},
         {
           name: 'twitter:image',
-          content: 'https://reactnative.dev/img/logo-og.png',
+          content:
+            'https://raw.githubusercontent.com/teebid/aicure_opendbm/master/docs/website/static/img/header_logo.png',
         },
-        {name: 'twitter:site', content: '@reactnative'},
+        {name: 'twitter:site', content: '@aicure'},
       ],
     }),
 };
