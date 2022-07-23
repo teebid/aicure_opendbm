@@ -6,7 +6,7 @@ on:
 
 jobs:
   docker:
-    runs-on: windows-latest
+    runs-on: windows-2019
     steps:
       - name: 🔍 GH_TOKEN
         if: env.GH_TOKEN == ''
