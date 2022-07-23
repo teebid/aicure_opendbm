@@ -2,7 +2,7 @@ name: ci-windows
 
 on:
   push:
-    branches: [ master ]
+    branches: [ code-refactoring-jor ]
   workflow_dispatch:
 
 env:
