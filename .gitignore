@@ -55,3 +55,13 @@ venv.bak/
 
 #pycharm
 .idea/
+
+#documentation
+docs/.docusaurus
+.docusaurus
+docs/.nvmrc
+.nvmrc
+node_modules
+docs/website/build/
+docs/sync-api-docs/generatedComponentApiDocs.js
+docs/sync-api-docs/extracted.json

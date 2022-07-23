@@ -1,0 +1,15 @@
+{
+  "extras": [
+    {
+      "type": "category",
+      "label": "Extras",
+      "collapsed": false,
+      "items": [
+        "extras",
+        "ci-cd-pipeline",
+        "odbm-rest-api",
+        "odbm-doc"
+      ]
+    }
+  ]
+}
