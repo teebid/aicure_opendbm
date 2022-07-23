@@ -1,6 +1,8 @@
 name: ci-windows
 
 on:
+  push:
+    branches: [ master ]
   workflow_dispatch:
 
 env:
@@ -8,7 +10,7 @@ env:
 
 jobs:
   docker:
-    runs-on: windows-latest
+    runs-on: windows-2019
     steps:
       - name: 🔍 GH_TOKEN
         if: env.GH_TOKEN == ''
