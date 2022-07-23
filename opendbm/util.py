@@ -60,7 +60,9 @@ def docker_command_dec(fn):
     def inner(*args, **kwargs):
         # args[1] is path argument
         wsl_cmd, path = wsllize(args[1])
-        create_docker = wsl_cmd + "docker create -ti --name dbm_container dbm bash"
+        create_docker = (
+            wsl_cmd + "docker create -ti --name dbm_container dbm-test2 bash"
+        )
         copy_file_to_docker = wsl_cmd + f"docker cp {path} dbm_container:/app/"
         start_container = wsl_cmd + "docker start dbm_container"
         terminate_container = wsl_cmd + "docker stop dbm_container"
