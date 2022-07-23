@@ -28,6 +28,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: setup docker
         uses: docker-practice/actions-setup-docker@master
+      - name: check docker
         run: |
               set -x
               
