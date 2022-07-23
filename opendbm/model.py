@@ -67,7 +67,7 @@ class VideoModel(Model):
 
         facial_args = " ".join(FACIAL_ACTIVITY_ARGS)
         docker_call = wsl_cmd + ["docker", "exec", "dbm_container", "/bin/bash", "-c"]
-        print("path", path)
+
         # docker_call = wsl_cmd + "docker exec dbm_container /bin/bash -c"
         openface_call = [
             docker_call
@@ -77,7 +77,7 @@ class VideoModel(Model):
             # f'{docker_call} "{OPENFACE_PATH} {facial_args} {path} -out_dir {docker_temp_dir}"',
             # f'{docker_call} "{OPENFACE_PATH_VIDEO} {facial_args} {path} -out_dir {docker_temp_dir}"',
         ]
-        print("openface_call", openface_call)
+
         out_dir_openface = [
             f"{temp_dir}/{bn}/{bn}_openface/",
             f"{temp_dir}/{bn}_landmark_output/{bn}_landmark_output_openface_lmk/",
@@ -125,7 +125,7 @@ class VideoModel(Model):
     def _processing_video(
         self, dbm_group, call, out_dir, result_path, wsl_cmd, temp_dir, bn
     ):
-        print("out_dir", out_dir)
+
         subprocess.Popen(
             call,
             stdout=subprocess.PIPE,

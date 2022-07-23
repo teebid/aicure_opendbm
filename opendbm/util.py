@@ -72,7 +72,7 @@ def docker_command_dec(fn):
             "bash",
         ]
         # create_docker = wsl_cmd + "docker create -ti --name dbm_container dbm bash"
-        print("windows path", path)
+
         copy_file_to_docker = wsl_cmd + ["docker", "cp", path, "dbm_container:/app/"]
         # copy_file_to_docker = wsl_cmd + f"docker cp {path} dbm_container:/app/"
         start_container = wsl_cmd + ["docker", "start", "dbm_container"]

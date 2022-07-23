@@ -26,6 +26,14 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: setup docker
+        uses: docker-practice/actions-setup-docker@master
+        run: |
+              set -x
+              
+              docker version
+              
+              docker run --rm hello-world
       - name: Docker build & push
         run: |
           docker build --tag dbm .
