@@ -66,11 +66,18 @@ class VideoModel(Model):
         bn, _ = os.path.splitext(filename)
 
         facial_args = " ".join(FACIAL_ACTIVITY_ARGS)
-        docker_call = wsl_cmd + "docker exec dbm_container /bin/bash -c"
+        docker_call = wsl_cmd + ["docker", "exec", "dbm_container", "/bin/bash", "-c"]
+        print("path", path)
+        # docker_call = wsl_cmd + "docker exec dbm_container /bin/bash -c"
         openface_call = [
-            f'{docker_call} "{OPENFACE_PATH} {facial_args} {path} -out_dir {docker_temp_dir}"',
-            f'{docker_call} "{OPENFACE_PATH_VIDEO} {facial_args} {path} -out_dir {docker_temp_dir}"',
+            docker_call
+            + [f"{OPENFACE_PATH} {facial_args} {path} -out_dir {docker_temp_dir}"],
+            docker_call
+            + [f"{OPENFACE_PATH_VIDEO} {facial_args} {path} -out_dir {docker_temp_dir}"]
+            # f'{docker_call} "{OPENFACE_PATH} {facial_args} {path} -out_dir {docker_temp_dir}"',
+            # f'{docker_call} "{OPENFACE_PATH_VIDEO} {facial_args} {path} -out_dir {docker_temp_dir}"',
         ]
+        print("openface_call", openface_call)
         out_dir_openface = [
             f"{temp_dir}/{bn}/{bn}_openface/",
             f"{temp_dir}/{bn}_landmark_output/{bn}_landmark_output_openface_lmk/",
@@ -118,15 +125,17 @@ class VideoModel(Model):
     def _processing_video(
         self, dbm_group, call, out_dir, result_path, wsl_cmd, temp_dir, bn
     ):
-
+        print("out_dir", out_dir)
         subprocess.Popen(
             call,
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             stdin=subprocess.PIPE,
         ).wait()
-        mkdir_cmd = wsl_cmd + f"mkdir -p {out_dir}"
-        copy_cmd = wsl_cmd + f"docker cp dbm_container:/{result_path} {out_dir}"
+        mkdir_cmd = wsl_cmd + ["mkdir", "-p", out_dir]
+        # mkdir_cmd = wsl_cmd + f"mkdir -p {out_dir}"
+
+        copy_cmd = wsl_cmd + ["docker", "cp", f"dbm_container:/{result_path}", out_dir]
         subprocess.Popen(
             mkdir_cmd,
             stdout=subprocess.PIPE,
@@ -142,7 +151,7 @@ class VideoModel(Model):
 
         if platform.system() == "Windows":
             path_in_temp = out_dir[len(temp_dir) :]
-            out_dir = tempfile.gettempdir() + path_in_temp
+            out_dir = (tempfile.gettempdir()) + path_in_temp
 
         if dbm_group == "facial":
             return out_dir + bn + ".csv"

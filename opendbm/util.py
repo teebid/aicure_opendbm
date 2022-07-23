@@ -45,13 +45,14 @@ def download_url(url, local_path):
 
 def wsllize(path):
     if platform.system() == "Windows":
-        wsl_cmd = "wsl "
-        path = subprocess.check_output(f"wsl wslpath '{path}'").decode("utf-8")
+        wsl_cmd = ["wsl"]
+        path = subprocess.check_output(["wsl", "wslpath", repr(path)]).decode("utf-8")
+        # path = subprocess.check_output(f"wsl wslpath '{path}'").decode("utf-8")
         if path.endswith("\n"):
             path = path[:-1]
         return wsl_cmd, path
     else:
-        return "", path
+        return [], path
 
 
 def docker_command_dec(fn):
@@ -59,12 +60,26 @@ def docker_command_dec(fn):
 
     def inner(*args, **kwargs):
         # args[1] is path argument
-        wsl_cmd, path = wsllize(args[1])
-        create_docker = wsl_cmd + "docker create -ti --name dbm_container dbm bash"
-        copy_file_to_docker = wsl_cmd + f"docker cp {path} dbm_container:/app/"
-        start_container = wsl_cmd + "docker start dbm_container"
-        terminate_container = wsl_cmd + "docker stop dbm_container"
-        remove_container = wsl_cmd + "docker rm dbm_container"
+        wsl_cmd, path = wsllize((args[1]))
+
+        create_docker = wsl_cmd + [
+            "docker",
+            "create",
+            "-ti",
+            "--name",
+            "dbm_container",
+            "dbm",
+            "bash",
+        ]
+        # create_docker = wsl_cmd + "docker create -ti --name dbm_container dbm bash"
+        print("windows path", path)
+        copy_file_to_docker = wsl_cmd + ["docker", "cp", path, "dbm_container:/app/"]
+        # copy_file_to_docker = wsl_cmd + f"docker cp {path} dbm_container:/app/"
+        start_container = wsl_cmd + ["docker", "start", "dbm_container"]
+        # start_container = wsl_cmd + "docker start dbm_container"
+        terminate_container = wsl_cmd + ["docker", "stop", "dbm_container"]
+        # terminate_container = wsl_cmd + "docker stop dbm_container"
+        remove_container = wsl_cmd + ["docker", "rm", "dbm_container"]
 
         subprocess.Popen(
             create_docker,
