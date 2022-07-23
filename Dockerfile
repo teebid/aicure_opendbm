@@ -1,7 +1,7 @@
-FROM python:3.6
+FROM python:3.7
 FROM ubuntu:18.04
 
-MAINTAINER fnndsc "vijay.yadav@aicure.com"
+MAINTAINER jordihasianta "tukangmekanik102@gmail.com"
 
 RUN apt-get update && apt-get install -y python3-pip \
                    && apt-get install -y wget \
@@ -30,17 +30,6 @@ RUN dpkg --configure -a
 RUN su -c ./install.sh
 RUN echo "Done OpenFace!"
 
-RUN echo "Cloning DeepSpeech..."
-WORKDIR /app/pkg
-RUN git clone https://github.com/mozilla/DeepSpeech.git
-
-WORKDIR /app/pkg/DeepSpeech
-RUN wget https://github.com/mozilla/DeepSpeech/releases/download/v0.9.1/deepspeech-0.9.1-models.pbmm
-RUN wget https://github.com/mozilla/DeepSpeech/releases/download/v0.9.1/deepspeech-0.9.1-models.scorer
-
 WORKDIR /app
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
-RUN echo "Requirement txt done!"
 
 CMD [ "python", "./process_data.py" ]
