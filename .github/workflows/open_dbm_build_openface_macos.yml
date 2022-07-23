@@ -1,4 +1,4 @@
-name: ci-windows
+name: ci-mac
 
 on:
   workflow_dispatch:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   docker:
-    runs-on: windows-latest
+    runs-on: macos-latest
     steps:
       -
         name: Checkout

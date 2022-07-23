@@ -1,4 +1,4 @@
-name: ci
+name: ci-ubuntu
 
 on:
   workflow_dispatch:
@@ -29,4 +29,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: jordihasianta/dbm-test2:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/dbm-test2:latest
