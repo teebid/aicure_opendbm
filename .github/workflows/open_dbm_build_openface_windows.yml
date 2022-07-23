@@ -3,6 +3,8 @@ name: ci-windows
 on:
   workflow_dispatch:
 
+env:
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
 jobs:
   docker:
