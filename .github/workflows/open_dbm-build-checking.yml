@@ -9,16 +9,14 @@ on:
     paths-ignore:
       - 'docs/**'
       - 'rest_api/**'
-      - '.github/workflows/open_dbm-docs-deploy.yml'
-      - '.github/workflows/open_dbm-rest-api-deploy.yml'
+      - '.github/workflows/**'
       - 'images/**'
   pull_request:
     branches: [ master ]
     paths-ignore:
       - 'docs/**'
       - 'rest_api/**'
-      - '.github/workflows/open_dbm-docs-deploy.yml'
-      - '.github/workflows/open_dbm-rest-api-deploy.yml'
+      - '.github/workflows/**'
       - 'images/**'
   workflow_dispatch:
 
