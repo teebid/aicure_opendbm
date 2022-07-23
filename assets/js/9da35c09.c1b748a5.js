@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkodbm_web_docs=self.webpackChunkodbm_web_docs||[]).push([[8488],{5593:function(s){s.exports=JSON.parse('{"label":"docusaurus","permalink":"/aicure_opendbm/blog/tags/docusaurus","allTagsPath":"/aicure_opendbm/blog/tags","count":4}')}}]);

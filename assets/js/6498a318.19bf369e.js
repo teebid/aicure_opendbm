@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkopendbm_website=self.webpackChunkopendbm_website||[]).push([[9648],{8616:function(e){e.exports=JSON.parse('{"label":"announcement","permalink":"/aicure_opendbm/blog/tags/announcement","allTagsPath":"/aicure_opendbm/blog/tags","count":2}')}}]);
