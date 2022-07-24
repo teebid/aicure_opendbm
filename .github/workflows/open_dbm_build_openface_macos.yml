@@ -39,5 +39,5 @@ jobs:
       - name: Docker build & push
         run: |
           docker build --tag dbm .
-          docker tag dbm:latest ${{ secrets.DOCKERHUB_USERNAME }}/dbm-test:latest
+          docker tag dbm:latest ${{ secrets.DOCKERHUB_USERNAME }}/dbm-mac-test:latest
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/dbm-mac-test:latest
