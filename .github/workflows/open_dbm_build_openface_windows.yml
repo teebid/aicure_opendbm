@@ -1,8 +1,8 @@
 name: ci-windows
 
 on:
-  push:
-    branches: [ code-refactoring-jor ]
+#  push:
+#    branches: [ code-refactoring-jor ]
   workflow_dispatch:
 
 env:
@@ -39,11 +39,11 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Pull OpenFace Image
-        run: |
-          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/dbm-windows-test:latest
-          docker image tag ${{ secrets.DOCKERHUB_USERNAME }}/dbm-windows-test:latest dbm
-          docker images
+#      - name: Pull OpenFace Image
+#        run: |
+#          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/dbm-windows-test:latest
+#          docker image tag ${{ secrets.DOCKERHUB_USERNAME }}/dbm-windows-test:latest dbm
+#          docker images
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -68,7 +68,7 @@ jobs:
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
-          where python
+          
           python -m pip install --upgrade pip
           pip install pytest
           pip install -r requirements.txt
