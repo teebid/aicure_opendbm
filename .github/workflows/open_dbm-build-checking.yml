@@ -4,8 +4,8 @@
 name: OpenDBM Build Checking
 
 on:
-  push:
-    branches: [ code-refactoring-jor ]
+#  push:
+#    branches: [ code-refactoring-jor ]
 #    paths-ignore:
 #      - 'docs/**'
 #      - 'rest_api/**'
