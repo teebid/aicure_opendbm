@@ -8,6 +8,7 @@ on:
     branches: [ master ]
     paths:
       - 'dbm_lib/**'
+      - '.github/workflows/open_dbm-code-checking.yml'
       - 'opendbm/**'
       - 'tests/**'
       - 'pkg/**'
