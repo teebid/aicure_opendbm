@@ -10,7 +10,7 @@ env:
 
 jobs:
   docker:
-    runs-on: self-hosted
+    runs-on: windows-latest
     steps:
       - name: 🔍 GH_TOKEN
         if: env.GH_TOKEN == ''
@@ -53,10 +53,10 @@ jobs:
         with:
           path: ${{ env.pythonLocation }}
           key: windows-${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements.txt') }}
-#      - name: Switch git-bash shell to MSYS2 shell by adding MSYS2 path to PATH front
-#        run: echo "$MSYS2_SHELL_PATH" >> $GITHUB_PATH
-#      - name: Install SoX and add to Path
-#        uses: ./.github/actions/win-install-sox
+      - name: Switch git-bash shell to MSYS2 shell by adding MSYS2 path to PATH front
+        run: echo "$MSYS2_SHELL_PATH" >> $GITHUB_PATH
+      - name: Install SoX and add to Path
+        uses: ./.github/actions/win-install-sox
       - name: Setup FFmpeg
         uses: FedericoCarboni/setup-ffmpeg@v1.1.0
       - name: add sox to PATH
