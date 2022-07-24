@@ -130,8 +130,8 @@ jobs:
     - name: Pull OpenFace Image
       run: |
             wsl --list
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/dbm-windows-test:latest
-            docker image tag ${{ secrets.DOCKERHUB_USERNAME }}/dbm-windows-test:latest dbm
+            wsl docker pull ${{ secrets.DOCKERHUB_USERNAME }}/dbm-windows-test:latest
+            wsl docker image tag ${{ secrets.DOCKERHUB_USERNAME }}/dbm-windows-test:latest dbm
     - name: Switch git-bash shell to MSYS2 shell by adding MSYS2 path to PATH front
       run: echo "$MSYS2_SHELL_PATH" >> $GITHUB_PATH
     - name: Install SoX and add to Path
