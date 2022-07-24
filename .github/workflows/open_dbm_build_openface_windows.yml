@@ -76,7 +76,9 @@ jobs:
         id: odbm_windows_test
         run: |
           pytest
-        shell: bash
+          
+
+#        shell: bash
 
 #      - name: check docker command with wsl
 #        run: |
