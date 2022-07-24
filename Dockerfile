@@ -1,3 +1,4 @@
+LABEL org.opencontainers.image.source=https://github.com/teebid/aicure_opendbm
 FROM python:3.7
 FROM ubuntu:18.04
 
@@ -21,23 +22,13 @@ COPY . /app
 
 #cloning openface
 WORKDIR /app/pkg
-RUN git clone -b openface --single-branch https://github.com/teebid/aicure_opendbm.git
-
-
+RUN git clone https://github.com/AiCure/open_dbm.git -b openface
 
 RUN echo "Installing OpenFace..."
-RUN ["mv", "/app/pkg/aicure_opendbm", "/app/pkg/open_dbm"]
 WORKDIR /app/pkg/open_dbm/OpenFace
 RUN bash ./download_models.sh
 RUN dpkg --configure -a
-RUN ["chmod", "+x", "./install1.sh"]
-RUN su -c ./install1.sh
-RUN ["chmod", "+x", "./install2.sh"]
-RUN su -c ./install2.sh
-RUN ["chmod", "+x", "./install3.sh"]
-RUN su -c ./install3.sh
-RUN ["chmod", "+x", "./install4.sh"]
-RUN su -c ./install4.sh
+RUN su -c ./install.sh
 RUN echo "Done OpenFace!"
 
 WORKDIR /app
