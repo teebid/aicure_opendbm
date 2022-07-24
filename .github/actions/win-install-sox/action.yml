@@ -8,7 +8,6 @@ runs:
       run: |
        
         curl -L --output sox-14.4.2-win32.zip --url https://sourceforge.net/projects/sox/files/sox/14.4.2/sox-14.4.2-win32.zip/download
-        mkdir `pwd`/bin/
         7z x -o`pwd`/bin/ -tzip -aoa sox-14.4.2-win32.zip
         echo `pwd`
         rm sox-*zip
