@@ -10,7 +10,7 @@ env:
 
 jobs:
   docker:
-    runs-on: windows-latest
+    runs-on: self-hosted
     steps:
       - name: 🔍 GH_TOKEN
         if: env.GH_TOKEN == ''
