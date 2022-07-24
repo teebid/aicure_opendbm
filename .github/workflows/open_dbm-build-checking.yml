@@ -4,20 +4,23 @@
 name: OpenDBM Build Checking
 
 on:
-#  push:
-#    branches: [ code-refactoring-jor ]
-#    paths-ignore:
-#      - 'docs/**'
-#      - 'rest_api/**'
-#      - '.github/workflows/**'
-#      - 'images/**'
+  push:
+    branches: [ master ]
+    paths:
+      - 'dbm_lib/**'
+      - 'opendbm/**'
+      - 'tests/**'
+      - 'pkg/**'
+      - 'resources/**'
+
   pull_request:
     branches: [ master ]
-    paths-ignore:
-      - 'docs/**'
-      - 'rest_api/**'
-      - '.github/workflows/**'
-      - 'images/**'
+    paths:
+      - 'dbm_lib/**'
+      - 'opendbm/**'
+      - 'tests/**'
+      - 'pkg/**'
+      - 'resources/**'
   workflow_dispatch:
 
 env:
