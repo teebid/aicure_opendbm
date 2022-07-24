@@ -10,4 +10,4 @@ runs:
         "C:/Program Files/7-Zip/7z.exe" x -o`pwd`/bin/ -tzip -aoa sox-14.4.2-win32.zip
         rm sox-*zip
 
-      shell: bash
+      shell: wsl
