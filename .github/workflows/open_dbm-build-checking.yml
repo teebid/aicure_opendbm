@@ -52,6 +52,7 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Pull OpenFace Image
       run: |
+            wsl --list
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/dbm-test2:latest
             docker image tag ${{ secrets.DOCKERHUB_USERNAME }}/dbm-test2:latest dbm
     - name: Setup FFmpeg

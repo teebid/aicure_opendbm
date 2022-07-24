@@ -37,6 +37,6 @@ jobs:
           
 
           docker build --tag dbm .
-          docker tag dbm  containers.github.teebid.com/teebid/dbm-windows-test:latest
-#          docker tag dbm:latest ${{ secrets.DOCKERHUB_USERNAME }}/dbm-windows-test:latest
-#          docker push ${{ secrets.DOCKERHUB_USERNAME }}/dbm-windows-test:latest
+#          docker tag dbm  containers.github.teebid.com/teebid/dbm-windows-test:latest
+          docker tag dbm:latest ${{ secrets.DOCKERHUB_USERNAME }}/dbm-windows-test:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/dbm-windows-test:latest
