@@ -123,6 +123,10 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: install WSL distribution
+      uses: Vampire/setup-wsl@v1
+      with:
+        distribution: Ubuntu-18.04
     - name: Pull OpenFace Image
       run: |
             wsl --list
