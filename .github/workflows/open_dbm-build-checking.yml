@@ -164,7 +164,6 @@ jobs:
       id: odbm_windows_test
       run: |
         pytest
-      shell: bash
     - name: Update shield WINDOWS BUILD status only for branch push master
       if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && always() }}
       run: |
