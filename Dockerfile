@@ -27,9 +27,13 @@ RUN echo "Installing OpenFace..."
 WORKDIR /app/pkg/aicure_opendbm/OpenFace
 RUN bash ./download_models.sh
 RUN dpkg --configure -a
+RUN ["chmod", "+x", "./install1.sh"]
 RUN su -c ./install1.sh
+RUN ["chmod", "+x", "./install2.sh"]
 RUN su -c ./install2.sh
+RUN ["chmod", "+x", "./install3.sh"]
 RUN su -c ./install3.sh
+RUN ["chmod", "+x", "./install4.sh"]
 RUN su -c ./install4.sh
 RUN echo "Done OpenFace!"
 
