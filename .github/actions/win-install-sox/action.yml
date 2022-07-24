@@ -7,7 +7,10 @@ runs:
     - run: |
         set -ex
         curl -L --output sox-14.4.2-win32.zip --url https://sourceforge.net/projects/sox/files/sox/14.4.2/sox-14.4.2-win32.zip/download
-        "C:/Program Files/7-Zip/7z.exe" x -o`pwd`/bin/ -tzip -aoa sox-14.4.2-win32.zip
+        7z x -o`pwd`/bin/ -tzip -aoa sox-14.4.2-win32.zip
+        echo `pwd`
         rm sox-*zip
 
       shell: bash
+
+      "C:/Program Files/7-Zip/7z.exe"
