@@ -32,6 +32,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Docker build & push
         run: |
+          Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
           docker build --tag dbm .
           docker tag dbm:latest ${{ secrets.DOCKERHUB_USERNAME }}/dbm-windows-test:latest
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/dbm-windows-test:latest
