@@ -68,7 +68,7 @@ def docker_command_dec(fn):
             "-ti",
             "--name",
             "dbm_container",
-            "dbm-windows-test",
+            "dbm",
             "bash",
         ]
         # create_docker = wsl_cmd + "docker create -ti --name dbm_container dbm bash"
