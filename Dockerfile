@@ -21,7 +21,9 @@ COPY . /app
 
 #cloning openface
 WORKDIR /app/pkg
-RUN git clone https://github.com/teebid/aicure_opendbm.git -b openface
+RUN git clone -b openface --single-branch https://github.com/teebid/aicure_opendbm.git
+
+
 
 RUN echo "Installing OpenFace..."
 RUN ["mv", "/app/pkg/aicure_opendbm", "/app/pkg/open_dbm"]
