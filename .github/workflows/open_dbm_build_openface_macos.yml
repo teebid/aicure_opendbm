@@ -1,8 +1,8 @@
 name: ci-mac
 
 on:
-  push:
-    branches: [ master ]
+#  push:
+#    branches: [ code-refactoring-jor ]
   workflow_dispatch:
 
 env:
