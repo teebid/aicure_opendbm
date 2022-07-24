@@ -24,7 +24,8 @@ WORKDIR /app/pkg
 RUN git clone https://github.com/teebid/aicure_opendbm.git -b openface
 
 RUN echo "Installing OpenFace..."
-WORKDIR /app/pkg/aicure_opendbm/OpenFace
+RUN ["mv", "/app/pkg/aicure_opendbm", "/app/pkg/open_dbm"]
+WORKDIR /app/pkg/open_dbm/OpenFace
 RUN bash ./download_models.sh
 RUN dpkg --configure -a
 RUN ["chmod", "+x", "./install1.sh"]
