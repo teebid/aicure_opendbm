@@ -21,13 +21,16 @@ COPY . /app
 
 #cloning openface
 WORKDIR /app/pkg
-RUN git clone https://github.com/AiCure/open_dbm.git -b openface
+RUN git clone https://github.com/teebid/aicure_opendbm.git -b openface
 
 RUN echo "Installing OpenFace..."
-WORKDIR /app/pkg/open_dbm/OpenFace
+WORKDIR /app/pkg/aicure_opendbm/OpenFace
 RUN bash ./download_models.sh
 RUN dpkg --configure -a
-RUN su -c ./install.sh
+RUN su -c ./install1.sh
+RUN su -c ./install2.sh
+RUN su -c ./install3.sh
+RUN su -c ./install4.sh
 RUN echo "Done OpenFace!"
 
 WORKDIR /app
