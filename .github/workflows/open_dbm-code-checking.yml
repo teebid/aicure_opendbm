@@ -9,6 +9,7 @@ on:
     paths:
       - 'dbm_lib/**'
       - '.github/workflows/open_dbm-code-checking.yml'
+      - '.github/workflows/open_dbm-build-checking.yml'
       - 'opendbm/**'
       - 'tests/**'
       - 'pkg/**'
