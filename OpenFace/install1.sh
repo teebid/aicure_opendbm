@@ -26,6 +26,25 @@ apt-get -y update || true
 apt-get -y install build-essential
 apt-get -y install gcc-8 g++-8
 
+# Ubuntu 16.04 does not have newest CMake so need to build it manually
+if [[ `lsb_release -rs` != "18.04" ]]; then
+  apt-get --purge remove cmake-qt-gui -y
+  apt-get --purge remove cmake -y
+  mkdir -p cmake_tmp
+  cd cmake_tmp
+  wget https://cmake.org/files/v3.10/cmake-3.10.1.tar.gz
+  tar -xzvf cmake-3.10.1.tar.gz
+  cd cmake-3.10.1/
+  ./bootstrap
+  make -j4
+  make install
+  cd ../..
+  rm -r cmake_tmp
+else
+  apt-get -y install cmake
+fi
+
+
 apt-get -y install zip
 apt-get -y install libopenblas-dev liblapack-dev
 apt-get -y install libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev
