@@ -36,20 +36,18 @@ def run_speech_feature(video_uri, out_dir, r_config, tran_tog, save=True):
 
     transcribe_path = glob.glob(join(out_loc, transcribe_ext))
 
-    if len(transcribe_path) > 0:
+    transcribe_df = pd.read_csv(transcribe_path[0])
+    df_speech = n_util.process_speech(transcribe_df, r_config)
 
-        transcribe_df = pd.read_csv(transcribe_path[0])
-        df_speech = n_util.process_speech(transcribe_df, r_config)
+    if save:
+        logger.info("Saving Output file {} ".format(out_loc))
+        ut.save_output(df_speech, out_loc, fl_name, speech_dir, speech_ext)
 
-        if save:
-            logger.info("Saving Output file {} ".format(out_loc))
-            ut.save_output(df_speech, out_loc, fl_name, speech_dir, speech_ext)
+    if (tran_tog is None) or (tran_tog != "on"):
 
-        if (tran_tog is None) or (tran_tog != "on"):
+        if fl_name.endswith("mp4"):
+            shutil.rmtree(out_dir + fl_name)
+        else:
+            shutil.rmtree(out_dir + fl_name.strip(".mp4"))
 
-            if fl_name.endswith("mp4"):
-                shutil.rmtree(out_dir + fl_name)
-            else:
-                shutil.rmtree(out_dir + fl_name.strip(".mp4"))
-
-        return df_speech
+    return df_speech
