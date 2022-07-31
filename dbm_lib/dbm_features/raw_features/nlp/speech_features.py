@@ -4,23 +4,23 @@ project_name: DBM
 created: 2020-13-11
 """
 
-import os
-import numpy as np
-import pandas as pd
 import glob
-from os.path import join
 import logging
 import shutil
+from os.path import join
 
-from dbm_lib.dbm_features.raw_features.util import util as ut
+import pandas as pd
+
 from dbm_lib.dbm_features.raw_features.util import nlp_util as n_util
+from dbm_lib.dbm_features.raw_features.util import util as ut
 
 logging.basicConfig(level=logging.INFO)
-logger=logging.getLogger()
+logger = logging.getLogger()
 
-speech_dir = 'speech/speech_feature'
-speech_ext = '_nlp.csv'
-transcribe_ext = 'speech/deepspeech/*_transcribe.csv'
+speech_dir = "speech/speech_feature"
+speech_ext = "_nlp.csv"
+transcribe_ext = "speech/deepspeech/*_transcribe.csv"
+
 
 def run_speech_feature(video_uri, out_dir, r_config, tran_tog, save=True):
     """
@@ -31,23 +31,25 @@ def run_speech_feature(video_uri, out_dir, r_config, tran_tog, save=True):
         video_uri: video path; r_config: raw variable config object
         out_dir: (str) Output directory for processed output
     """
-    try:
-        
-        input_loc, out_loc, fl_name = ut.filter_path(video_uri, out_dir)
 
-        transcribe_path = glob.glob(join(out_loc, transcribe_ext))
-        if len(transcribe_path)>0:
+    input_loc, out_loc, fl_name = ut.filter_path(video_uri, out_dir)
 
-            transcribe_df = pd.read_csv(transcribe_path[0])
-            df_speech= n_util.process_speech(transcribe_df, r_config)
+    transcribe_path = glob.glob(join(out_loc, transcribe_ext))
 
-            if save:
-                logger.info('Saving Output file {} '.format(out_loc))
-                ut.save_output(df_speech, out_loc, fl_name, speech_dir, speech_ext)
+    if len(transcribe_path) > 0:
 
-            if (tran_tog == None) or (tran_tog != 'on'):
-                shutil.rmtree(os.path.dirname(transcribe_path[0]))
-            return df_speech
-            
-    except Exception as e:
-        logger.error('Failed to process video file')
+        transcribe_df = pd.read_csv(transcribe_path[0])
+        df_speech = n_util.process_speech(transcribe_df, r_config)
+
+        if save:
+            logger.info("Saving Output file {} ".format(out_loc))
+            ut.save_output(df_speech, out_loc, fl_name, speech_dir, speech_ext)
+
+        if (tran_tog is None) or (tran_tog != "on"):
+
+            if fl_name.endswith("mp4"):
+                shutil.rmtree(out_dir + fl_name)
+            else:
+                shutil.rmtree(out_dir + fl_name.strip(".mp4"))
+
+        return df_speech
