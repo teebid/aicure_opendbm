@@ -76,34 +76,20 @@ def run_transcribe(video_uri, out_dir, r_config, deep_path, save=True):
         out_dir: (str) Output directory for processed output;
         deep_path: deepspeech build path
     """
-    try:
 
-        input_loc, out_loc, fl_name = ut.filter_path(video_uri, out_dir)
-        aud_filter = glob.glob(join(input_loc, fl_name + ".wav"))
-        if len(aud_filter) > 0:
+    input_loc, out_loc, fl_name = ut.filter_path(video_uri, out_dir)
+    aud_filter = glob.glob(join(input_loc, fl_name + ".wav"))
+    if len(aud_filter) > 0:
 
-            audio_file = aud_filter[0]
-            aud_dur = librosa.get_duration(filename=audio_file)
+        audio_file = aud_filter[0]
+        aud_dur = librosa.get_duration(filename=audio_file)
+        if float(aud_dur) < 0.1:
+            logger.info("Output file {} size is less than 0.1 sec".format(audio_file))
 
-            if float(aud_dur) < 0.1:
-                logger.info(
-                    "Output file {} size is less than 0.1 sec".format(audio_file)
-                )
-
-                df = empty_transcribe(video_uri, out_loc, fl_name, r_config, save)
-                return df
-
-            df = calc_transcribe(
-                video_uri,
-                audio_file,
-                out_loc,
-                fl_name,
-                r_config,
-                deep_path,
-                aud_dur,
-                save,
-            )
+            df = empty_transcribe(video_uri, out_loc, fl_name, r_config)
             return df
-    except Exception as e:
-        e
-        logger.error("Failed to process audio file")
+
+        df = calc_transcribe(
+            video_uri, audio_file, out_loc, fl_name, r_config, deep_path, aud_dur
+        )
+        return df
