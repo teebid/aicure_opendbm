@@ -1,7 +1,7 @@
 import tempfile
 
-from dbm_lib.dbm_features.raw_features.movement.head_motion import run_head_movement
-from opendbm.model import VideoModel
+from opendbm.api_lib.model import VideoModel
+from opendbm.dbm_lib import run_head_movement
 
 
 class HeadMovement(VideoModel):
