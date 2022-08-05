@@ -3,11 +3,13 @@ import sys
 
 from pytest import fixture
 
-sys.path.append("")
-Movement = importlib.import_module("opendbm.movement")
-Speech = importlib.import_module("opendbm.speech")
-Facial = importlib.import_module("opendbm.facial_activity")
-Verbal_accoustics = importlib.import_module("opendbm.verbal_accoustics")
+from opendbm import FacialActivity, Movement, Speech, VerbalAccoustics
+
+# sys.path.append("")
+# Movement = importlib.import_module("api_lib.movement")
+# Speech = importlib.import_module("api_lib.speech")
+# Facial = importlib.import_module("api_lib.facial_activity")
+# Verbal_accoustics = importlib.import_module("api_lib.verbal_accoustics")
 
 
 class Model:
@@ -19,22 +21,22 @@ class Model:
 
     @property
     def movement(self):
-        return self._movement.Movement()
+        return self._movement()
 
     @property
     def speech(self):
-        return self._speech.Speech()
+        return self._speech()
 
     @property
     def facial(self):
-        return self._facial.FacialActivity()
+        return self._facial()
 
     @property
     def verbal_accoustics(self):
-        return self._verbal_accoustics.VerbalAccoustics()
+        return self._verbal_accoustics()
 
 
 @fixture(scope="session")
 def get_model():
-    m = Model(Movement, Speech, Facial, Verbal_accoustics)
+    m = Model(Movement, Speech, FacialActivity, VerbalAccoustics)
     return m

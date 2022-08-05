@@ -1,6 +1,6 @@
 from pytest import fixture
 
-path1 = "tests/test_data/movement_video_test.mp4"
+path1 = "tests/test_data/facial_speech_verbal_video_test.mp4"
 
 
 @fixture(scope="class")
