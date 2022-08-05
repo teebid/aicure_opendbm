@@ -1,7 +1,7 @@
 import tempfile
 
-from dbm_lib.dbm_features.raw_features.video import face_emotion_expressivity
-from opendbm.model import VideoModel
+from opendbm.api_lib.model import VideoModel
+from opendbm.dbm_lib.dbm_features.raw_features.video import face_emotion_expressivity
 
 
 class Expressivity(VideoModel):
