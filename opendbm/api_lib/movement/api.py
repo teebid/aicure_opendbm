@@ -3,8 +3,8 @@ import shutil
 import tempfile
 from collections import OrderedDict
 
-from dbm_lib.controller import process_feature as pf
-from opendbm.model import VideoModel
+from opendbm.api_lib.model import VideoModel
+from opendbm.dbm_lib.controller import process_feature as pf
 
 from ._eye_blink import EyeBlink
 from ._eye_gaze import EyeGaze
