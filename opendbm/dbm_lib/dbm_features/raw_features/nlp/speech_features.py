@@ -11,8 +11,8 @@ from os.path import join
 
 import pandas as pd
 
-from dbm_lib.dbm_features.raw_features.util import nlp_util as n_util
-from dbm_lib.dbm_features.raw_features.util import util as ut
+from opendbm.dbm_lib.dbm_features.raw_features.util import nlp_util as n_util
+from opendbm.dbm_lib.dbm_features.raw_features.util import util as ut
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
@@ -35,7 +35,6 @@ def run_speech_feature(video_uri, out_dir, r_config, tran_tog, save=True):
     input_loc, out_loc, fl_name = ut.filter_path(video_uri, out_dir)
 
     transcribe_path = glob.glob(join(out_loc, transcribe_ext))
-
     transcribe_df = pd.read_csv(transcribe_path[0])
     df_speech = n_util.process_speech(transcribe_df, r_config)
 
