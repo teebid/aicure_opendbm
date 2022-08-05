@@ -12,8 +12,8 @@ import librosa
 import numpy as np
 import pandas as pd
 
-from dbm_lib.dbm_features.raw_features.util import nlp_util as n_util
-from dbm_lib.dbm_features.raw_features.util import util as ut
+from opendbm.dbm_lib.dbm_features.raw_features.util import nlp_util as n_util
+from opendbm.dbm_lib.dbm_features.raw_features.util import util as ut
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
