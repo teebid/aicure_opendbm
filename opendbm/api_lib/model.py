@@ -4,8 +4,8 @@ import subprocess
 import tempfile
 from pathlib import Path
 
-from dbm_lib.config import config_derive_feature, config_raw_feature, config_reader
-from opendbm.util import docker_command_dec, wsllize
+from opendbm.api_lib.util import docker_command_dec, wsllize
+from opendbm.dbm_lib import config_derive_feature, config_raw_feature, config_reader
 
 OPENFACE_PATH_VIDEO = "pkg/open_dbm/OpenFace/build/bin/FaceLandmarkVid"
 OPENFACE_PATH = "pkg/open_dbm/OpenFace/build/bin/FeatureExtraction"
@@ -17,9 +17,16 @@ OPENFACE_URLS = [
     "https://onedrive.live.com/download?cid=2E2ADA578BFF6E6E&resid=2E2ADA578BFF6E6E%2153079&authkey=ANpDR1n3ckL_0gs",
     "https://onedrive.live.com/download?cid=2E2ADA578BFF6E6E&resid=2E2ADA578BFF6E6E%2153070&authkey=AD6KjtYipphwBPc",
 ]
-OPENDBM_DATA = Path.home() / ".opendbm"
+
 # OPENDBM_DATA = Path("pkg/speech")
-DLIB_SHAPE_MODEL = "pkg/shape_detector/shape_predictor_68_face_landmarks.dat"
+MODEL_PATH = os.path.dirname(__file__)
+OPENDBM_DATA = Path(os.path.abspath(os.path.join(MODEL_PATH, "../pkg/"))) / "speech"
+DLIB_SHAPE_MODEL = os.path.abspath(
+    os.path.join(
+        MODEL_PATH, "../pkg/shape_detector/shape_predictor_68_face_landmarks.dat"
+    )
+)
+# DLIB_SHAPE_MODEL = "pkg/shape_detector/shape_predictor_68_face_landmarks.dat"
 FACIAL_ACTIVITY_ARGS = [
     "-q",
     "-2Dfp",
