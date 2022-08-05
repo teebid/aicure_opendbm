@@ -10,7 +10,6 @@ __pycache__/
 
 # Distribution / packaging
 speech/
-*speech/
 .Python
 build/
 develop-eggs/
