@@ -9,6 +9,8 @@ __pycache__/
 *$py.class
 
 # Distribution / packaging
+speech/
+*speech/
 .Python
 build/
 develop-eggs/
@@ -26,7 +28,7 @@ share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-MANIFEST
+
 
 # Unit test / coverage reports
 htmlcov/
