@@ -1,5 +1,5 @@
-from dbm_lib.dbm_features.raw_features.movement.voice_tremor import run_vtremor
-from opendbm.model import VideoModel
+from opendbm.api_lib.model import VideoModel
+from opendbm.dbm_lib.dbm_features.raw_features.movement.voice_tremor import run_vtremor
 
 
 class VocalTremor(VideoModel):
