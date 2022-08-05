@@ -8,8 +8,8 @@ OpenDBM
 [![PyPI Latest Release](https://img.shields.io/pypi/v/odbm?style=plastic)](https://pypi.org/project/odbm/)
 [![Anaconda Latest Release](https://img.shields.io/badge/Anaconda.org-1.4.3-blue.svg?style=plastic)](https://anaconda.org/r/r-odbc)
 [![PyPI - License](https://img.shields.io/pypi/l/odbm?style=plastic)](https://github.com/AiCure/open_dbm/blob/master/license.txt)
-[![Test](https://github.com/teebid/aicure_opendbm/blob/master/images/badges/test_status.svg)](https://github.com/teebid/aicure_opendbm/actions/workflows/open_dbm-code-checking.yml?query=branch%3Amaster++)
-[![Coverage](https://github.com/teebid/aicure_opendbm/blob/master/images/badges/code_coverage.svg)](https://github.com/teebid/aicure_opendbm/actions/workflows/open_dbm-code-checking.yml?query=branch%3Amaster++)
+[![Test](https://raw.githubusercontent.com/teebid/aicure_opendbm/master/images/badges/test_status.svg)](https://github.com/teebid/aicure_opendbm/actions/workflows/open_dbm-code-checking.yml?query=branch%3Amaster++)
+[![Coverage](https://raw.githubusercontent.com/teebid/aicure_opendbm/master/images/badges/code_coverage.svg)](https://github.com/teebid/aicure_opendbm/actions/workflows/open_dbm-code-checking.yml?query=branch%3Amaster++)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=flat)](https://github.com/psf/black)
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
 </div>
@@ -18,9 +18,9 @@ OpenDBM
 
 OS                    | Build Status
 ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Linux**                 | [![Build](https://github.com/teebid/aicure_opendbm/blob/master/images/badges/linux_status.svg)](https://github.com/teebid/aicure_opendbm/actions/workflows/open_dbm-build-checking.yml)
-**Windows**                 | [![Build](https://github.com/teebid/aicure_opendbm/blob/master/images/badges/windows_status.svg)](https://github.com/teebid/aicure_opendbm/actions/workflows/open_dbm-build-checking.yml)
-**macOS**                 | [![Build](https://github.com/teebid/aicure_opendbm/blob/master/images/badges/macos_status.svg)](https://github.com/teebid/aicure_opendbm/actions/workflows/open_dbm-build-checking.yml)
+**Linux**                 | [![Build](https://raw.githubusercontent.com/teebid/aicure_opendbm/master/images/badges/linux_status.svg)](https://github.com/teebid/aicure_opendbm/actions/workflows/open_dbm-build-checking.yml)
+**Windows**                 | [![Build](https://raw.githubusercontent.com/teebid/aicure_opendbm/master/images/badges/windows_status.svg)](https://github.com/teebid/aicure_opendbm/actions/workflows/open_dbm-build-checking.yml)
+**macOS**                 | [![Build](https://raw.githubusercontent.com/teebid/aicure_opendbm/master/images/badges/macos_status.svg)](https://github.com/teebid/aicure_opendbm/actions/workflows/open_dbm-build-checking.yml)
 
 
 ## What is it
@@ -89,7 +89,7 @@ none required
 
 ### OpenDBM Installation
 ```bash
-$ pip install opendbm 
+$ pip install api_lib 
 ```
 
 <div align="right">
