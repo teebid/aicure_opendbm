@@ -1,7 +1,7 @@
 import tempfile
 
-from dbm_lib.dbm_features.raw_features.video.face_asymmetry import run_face_asymmetry
-from opendbm.model import VideoModel
+from opendbm.api_lib.model import VideoModel
+from opendbm.dbm_lib import run_face_asymmetry
 
 
 class Asymmetry(VideoModel):

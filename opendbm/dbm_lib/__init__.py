@@ -8,6 +8,8 @@ from __future__ import absolute_import, division, print_function
 
 import os
 
+from .dbm_features.raw_features.video.face_asymmetry import run_face_asymmetry
+
 DBMLIB_PATH = os.path.dirname(__file__)
 DBMLIB_SERVICE_CONFIG = os.path.abspath(
     os.path.join(DBMLIB_PATH, "../resources/services/services.yml")
