@@ -4,9 +4,14 @@ project_name: DBM
 created: 2020-20-07
 """
 
+import os
+
 import yaml
 
-from opendbm.dbm_lib import DBMLIB_SERVICE_CONFIG
+DBMLIB_PATH = os.path.dirname(__file__)
+DBMLIB_SERVICE_CONFIG = os.path.abspath(
+    os.path.join(DBMLIB_PATH, "../../resources/services/services.yml")
+)
 
 
 class ConfigReader(object):

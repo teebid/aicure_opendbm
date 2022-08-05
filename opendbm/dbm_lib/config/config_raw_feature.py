@@ -4,9 +4,14 @@ project_name: DBM
 created: 2020-20-07
 """
 
+import os
+
 import yaml
 
-from opendbm.dbm_lib import DBMLIB_FEATURE_CONFIG
+DBMLIB_PATH = os.path.dirname(__file__)
+DBMLIB_FEATURE_CONFIG = os.path.abspath(
+    os.path.join(DBMLIB_PATH, "../../resources/features/raw_feature.yml")
+)
 
 
 class ConfigRawReader(object):
