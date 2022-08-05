@@ -2,7 +2,7 @@ import shutil
 import tempfile
 from collections import OrderedDict
 
-from opendbm.model import VideoModel
+from opendbm.api_lib.model import VideoModel
 
 from ._action_unit import ActionUnit
 from ._asymmetry import Asymmetry
