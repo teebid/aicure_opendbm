@@ -1,7 +1,7 @@
 import tempfile
 
-from dbm_lib.dbm_features.raw_features.video.face_landmark import run_face_landmark
-from opendbm.model import VideoModel
+from opendbm.api_lib.model import VideoModel
+from opendbm.dbm_lib import run_face_landmark
 
 
 def r_num_fmt(fmt, rnum):
