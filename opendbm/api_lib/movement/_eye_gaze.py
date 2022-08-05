@@ -1,7 +1,7 @@
 import tempfile
 
-from dbm_lib.dbm_features.raw_features.movement.eye_gaze import run_eye_gaze
-from opendbm.model import VideoModel
+from opendbm.api_lib.model import VideoModel
+from opendbm.dbm_lib.dbm_features.raw_features.movement.eye_gaze import run_eye_gaze
 
 
 class EyeGaze(VideoModel):
