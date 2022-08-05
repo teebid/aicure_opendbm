@@ -1,9 +1,9 @@
 import logging
 import os
 
-from dbm_lib.controller import process_feature as pf
-from opendbm.model import DEEEPSPEECH_URL, DEEPSPEECH_MODELS, OPENDBM_DATA, AudioModel
-from opendbm.util import download_url
+from opendbm.api_lib import DEEEPSPEECH_URL, DEEPSPEECH_MODELS, OPENDBM_DATA, AudioModel
+from opendbm.api_lib.util import download_url
+from opendbm.dbm_lib.controller import process_feature as pf
 
 from ._speech_features import SpeechFeature
 from ._transcribe import Transcribe
