@@ -10,7 +10,7 @@ on:
       - 'dbm_lib/**'
       - '.github/workflows/open_dbm-build-checking.yml'
       - '.github/workflows/open_dbm-code-checking.yml'
-      - 'opendbm/**'
+      - 'api_lib/**'
       - 'tests/**'
       - 'pkg/**'
       - 'resources/**'
@@ -19,7 +19,7 @@ on:
     branches: [ master ]
     paths:
       - 'dbm_lib/**'
-      - 'opendbm/**'
+      - 'api_lib/**'
       - 'tests/**'
       - 'pkg/**'
       - 'resources/**'
