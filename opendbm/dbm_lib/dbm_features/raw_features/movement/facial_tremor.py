@@ -12,8 +12,8 @@ import numpy as np
 import numpy.ma as ma
 import pandas as pd
 
-from dbm_lib.dbm_features.raw_features.util import util as ut
-from dbm_lib.dbm_features.raw_features.util.math_util import calc_displacement_vec
+from opendbm.dbm_lib import calc_displacement_vec
+from opendbm.dbm_lib.dbm_features.raw_features.util import util as ut
 
 DBMLIB_PATH = os.path.dirname(__file__)
 
