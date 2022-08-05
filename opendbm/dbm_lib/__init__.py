@@ -14,6 +14,7 @@ from .dbm_features.raw_features.audio.pause_segment import run_pause_segment
 from .dbm_features.raw_features.movement.facial_tremor import fac_tremor_process
 from .dbm_features.raw_features.movement.head_motion import run_head_movement
 from .dbm_features.raw_features.nlp.speech_features import run_speech_feature
+from .dbm_features.raw_features.video import ConfigFaceReader
 from .dbm_features.raw_features.video.face_asymmetry import run_face_asymmetry
 from .dbm_features.raw_features.video.face_landmark import run_face_landmark
 
