@@ -11,7 +11,7 @@ import subprocess
 import tempfile
 from os.path import basename, dirname, isfile, join, splitext
 
-from dbm_lib.dbm_features.raw_features import audio, movement, nlp, video
+from opendbm.dbm_lib.dbm_features.raw_features import audio, movement, nlp, video
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
