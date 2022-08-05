@@ -1,7 +1,7 @@
 import tempfile
 
-from dbm_lib.dbm_features.raw_features.nlp.speech_features import run_speech_feature
-from opendbm.model import OPENDBM_DATA, AudioModel
+from opendbm.api_lib.model import OPENDBM_DATA, AudioModel
+from opendbm.dbm_lib import run_speech_feature
 
 
 class SpeechFeature(AudioModel):
@@ -29,7 +29,6 @@ class SpeechFeature(AudioModel):
 
     @AudioModel.prep_func
     def _fit_transform(self, path):
-
         return run_speech_feature(
             path, f"{tempfile.gettempdir()}/", self.r_config, OPENDBM_DATA, save=False
         )
