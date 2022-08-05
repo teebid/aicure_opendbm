@@ -1,7 +1,7 @@
 import tempfile
 
-from dbm_lib.dbm_features.raw_features.video.face_au import run_face_au
-from opendbm.model import VideoModel
+from opendbm.api_lib.model import VideoModel
+from opendbm.dbm_lib.dbm_features.raw_features.video.face_au import run_face_au
 
 
 class ActionUnit(VideoModel):
