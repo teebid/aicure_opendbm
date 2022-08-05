@@ -19,9 +19,10 @@ from matplotlib import pyplot as plt
 from mpl_toolkits import mplot3d
 from scipy.spatial.transform import Rotation as R
 
-from opendbm.dbm_lib import ConfigFaceReader
 from opendbm.dbm_lib.dbm_features.raw_features.util import util as ut
 from opendbm.dbm_lib.dbm_features.raw_features.util import video_util as vu
+
+from .face_config.face_config_reader import ConfigFaceReader
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
