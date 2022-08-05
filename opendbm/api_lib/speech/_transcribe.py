@@ -1,7 +1,7 @@
 import tempfile
 
-from dbm_lib.dbm_features.raw_features.nlp.transcribe import run_transcribe
-from opendbm.model import OPENDBM_DATA, AudioModel
+from opendbm.api_lib.model import OPENDBM_DATA, AudioModel
+from opendbm.dbm_lib.dbm_features.raw_features.nlp.transcribe import run_transcribe
 
 
 class Transcribe(AudioModel):
