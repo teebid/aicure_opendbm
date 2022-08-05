@@ -1,7 +1,7 @@
 import tempfile
 
-from dbm_lib.dbm_features.raw_features.movement.facial_tremor import fac_tremor_process
-from opendbm.model import VideoModel
+from opendbm.api_lib.model import VideoModel
+from opendbm.dbm_lib import fac_tremor_process
 
 
 class FacialTremor(VideoModel):
