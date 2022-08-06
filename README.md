@@ -3,7 +3,7 @@ OpenDBM
 </h2>
 
 <div align="center">
-  <img width="400" alt="GitHub Actions for deploying to GitHub Pages with Static Site Generators" src="./images/odbm.png">
+  <img width="400" alt="GitHub Actions for deploying to GitHub Pages with Static Site Generators" src="https://raw.githubusercontent.com/teebid/aicure_opendbm/master/images/odbm.png">
 
 [![PyPI Latest Release](https://img.shields.io/pypi/v/odbm?style=plastic)](https://pypi.org/project/odbm/)
 [![Anaconda Latest Release](https://img.shields.io/badge/Anaconda.org-1.4.3-blue.svg?style=plastic)](https://anaconda.org/r/r-odbc)
