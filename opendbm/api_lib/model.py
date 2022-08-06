@@ -20,7 +20,7 @@ OPENFACE_URLS = [
 
 # OPENDBM_DATA = Path("pkg/speech")
 MODEL_PATH = os.path.dirname(__file__)
-OPENDBM_DATA = Path(os.path.abspath(os.path.join(MODEL_PATH, "../pkg/"))) / "speech"
+OPENDBM_DATA = Path.home() / ".opendbm"
 DLIB_SHAPE_MODEL = os.path.abspath(
     os.path.join(
         MODEL_PATH, "../pkg/shape_detector/shape_predictor_68_face_landmarks.dat"
