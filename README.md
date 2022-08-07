@@ -5,7 +5,7 @@ OpenDBM
 <div align="center">
   <img width="400" alt="GitHub Actions for deploying to GitHub Pages with Static Site Generators" src="https://raw.githubusercontent.com/teebid/aicure_opendbm/master/images/odbm.png">
 
-[![PyPI Latest Release](https://img.shields.io/pypi/v/odbm?style=plastic)](https://pypi.org/project/dbm-test123/)
+[![PyPI Latest Release](https://img.shields.io/pypi/v/dbm-test123?style=plastic)](https://pypi.org/project/dbm-test123/)
 [![Anaconda Latest Release](https://img.shields.io/badge/Anaconda.org-1.4.3-blue.svg?style=plastic)](https://anaconda.org/r/r-odbc)
 [![PyPI - License](https://img.shields.io/pypi/l/odbm?style=plastic)](https://github.com/AiCure/open_dbm/blob/master/license.txt)
 [![Test](https://raw.githubusercontent.com/teebid/aicure_opendbm/master/images/badges/test_status.svg)](https://github.com/teebid/aicure_opendbm/actions/workflows/open_dbm-code-checking.yml?query=branch%3Amaster++)
