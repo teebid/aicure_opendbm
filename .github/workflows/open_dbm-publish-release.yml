@@ -7,6 +7,9 @@ on:
   release:
     types: [published]
 
+env:
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
 jobs:
   release-job:
     runs-on: ubuntu-latest
@@ -17,6 +20,7 @@ jobs:
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
+        token: ${{ env.GH_TOKEN }}
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
@@ -26,16 +30,6 @@ jobs:
       with:
         path: ${{ env.pythonLocation }}
         key: ${{ env.pythonLocation }}-${{ hashFiles('setup.cfg') }}-${{ hashFiles('requirements.txt') }}
-    - name: Install dependencies
-      if: steps.cache.outputs.cache-hit != 'true'
-      run: |
-        python -m pip install --upgrade pip
-        pip install wheel build twine
-        pip install -e .
-    - name : Install libsndfile and sox(only for linux machine)
-      run: |
-        sudo apt-get install libsndfile1
-        sudo apt-get install sox
     - name: Builds and uploads to PyPI
     ## can use python3 instead python if didnt work
       run: |
@@ -43,8 +37,6 @@ jobs:
         echo "${{ github.ref_name }}"
         tag='${{ github.ref_name }}'
         sed -Ei "s/^(version[[:blank:]]*=[[:blank:]]*).*/\1$tag/" setup.cfg
-        python -m build
-        twine upload dist/*
         git config --global user.name 'AiCure ODBM Pipeline'
         git config --global user.email 'system@aicure.com'
          if [[ `git status --porcelain` ]]; then
