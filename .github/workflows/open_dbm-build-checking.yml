@@ -8,21 +8,25 @@ on:
     branches: [ master ]
     paths:
       - 'dbm_lib/**'
+      - 'opendbm/**'
       - '.github/workflows/open_dbm-build-checking.yml'
       - '.github/workflows/open_dbm-code-checking.yml'
-      - 'api_lib/**'
       - 'tests/**'
       - 'pkg/**'
       - 'resources/**'
+      - 'requirements.txt'
 
   pull_request:
     branches: [ master ]
     paths:
       - 'dbm_lib/**'
-      - 'api_lib/**'
+      - 'opendbm/**'
+      - '.github/workflows/open_dbm-build-checking.yml'
+      - '.github/workflows/open_dbm-code-checking.yml'
       - 'tests/**'
       - 'pkg/**'
       - 'resources/**'
+      - 'requirements.txt'
   workflow_dispatch:
 
 env:

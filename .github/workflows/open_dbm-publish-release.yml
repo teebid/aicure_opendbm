@@ -5,7 +5,7 @@ name: OpenDBM Publish Release
 
 on:
   release:
-    types: [created]
+    types: [published]
 
 jobs:
   release-job:
@@ -22,7 +22,7 @@ jobs:
       id: cache
       with:
         path: ${{ env.pythonLocation }}
-        key: ${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements.txt') }}
+        key: ${{ env.pythonLocation }}-${{ hashFiles('setup.cfg') }}-${{ hashFiles('requirements.txt') }}
     - name: Install dependencies
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
@@ -39,5 +39,5 @@ jobs:
         python -m build
         twine upload dist/*
       env:
-        TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
+        TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
