@@ -9,8 +9,9 @@ on:
 
 jobs:
   release-job:
+    runs-on: ubuntu-latest
     name: Build and publish OpenDBM distributions 📦 to PyPI
-    if: github.event_name == 'release' && github.event.action == 'created'
+    if: github.event_name == 'release' && github.event.action == 'published'
     steps:
     - name: Checkout OpenDBM code
       uses: actions/checkout@v3
@@ -26,6 +27,8 @@ jobs:
     - name: Install dependencies
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
+        echo "GITHUB REFNAME"
+        echo "${{ github.ref_name }}"
         python -m pip install --upgrade pip
         pip install wheel twine
         pip install -e .
@@ -37,7 +40,19 @@ jobs:
     ## can use python3 instead python if didnt work
       run: |
         python -m build
+        tag='${{ steps.odbm_linux_test.outcome }}'
+        sed -Ei "" "s/^(version[[:blank:]]*=[[:blank:]]*).*/\1$tag/" setup.cfg
         twine upload dist/*
+        git config --global user.name 'AiCure ODBM Pipeline'
+        git config --global user.email 'system@aicure.com'
+         if [[ `git status --porcelain` ]]; then
+          git pull origin master
+          git add setup.cfg
+          git commit -am "Update opendbm library version"
+          git push
+        else
+          echo "no changes on linux build badge"
+        fi
       env:
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
