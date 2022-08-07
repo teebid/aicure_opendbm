@@ -36,6 +36,7 @@ jobs:
       run: |
         echo "GITHUB REFNAME"
         echo "${{ github.ref_name }}"
+        echo "${{ github.ref }}"
         tag='${{ github.ref_name }}'
         sed -Ei "s/^(version[[:blank:]]*=[[:blank:]]*).*/\1$tag/" setup.cfg
         git config --global user.name 'AiCure ODBM Pipeline'
