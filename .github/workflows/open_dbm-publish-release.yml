@@ -27,8 +27,6 @@ jobs:
     - name: Install dependencies
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
-        echo "GITHUB REFNAME"
-        echo "${{ github.ref_name }}"
         python -m pip install --upgrade pip
         pip install wheel build twine
         pip install -e .
@@ -39,7 +37,9 @@ jobs:
     - name: Builds and uploads to PyPI
     ## can use python3 instead python if didnt work
       run: |
-        tag='${{ steps.odbm_linux_test.outcome }}'
+        echo "GITHUB REFNAME"
+        echo "${{ github.ref_name }}"
+        tag='${{ github.ref_name }}'
         sed -Ei "s/^(version[[:blank:]]*=[[:blank:]]*).*/\1$tag/" setup.cfg
         python -m build
         twine upload dist/*
@@ -47,11 +47,11 @@ jobs:
         git config --global user.email 'system@aicure.com'
          if [[ `git status --porcelain` ]]; then
           git pull origin master
-          git add setup.cfg
+          git add --all setup.cfg
           git commit -am "Update opendbm library version"
           git push
         else
-          echo "no changes on linux build badge"
+          echo "no changes on setup.cfg"
         fi
       env:
         TWINE_USERNAME: __token__
