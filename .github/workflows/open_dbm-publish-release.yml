@@ -19,8 +19,9 @@ jobs:
     - name: Checkout OpenDBM code
       uses: actions/checkout@v3
       with:
-        fetch-depth: 0
+        fetch-depth: 2
         token: ${{ env.GH_TOKEN }}
+    - run: git checkout HEAD^
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
