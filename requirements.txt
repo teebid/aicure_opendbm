@@ -1,6 +1,6 @@
 Cython
 llvmlite
-numpy==1.17.0
+numpy>=1.17.0
 pandas==1.1.5
 praat-parselmouth
 moviepy
@@ -29,6 +29,7 @@ opencv-python>=4.5.5
 pre-commit
 ffmpeg
 git+https://github.com/cmusatyalab/openface.git
+cmake; "Windows" not in platform_system
 dlib>=19.13.0; "Windows" not in platform_system
 https://github.com/sachadee/Dlib/blob/main/dlib-19.22.99-cp37-cp37m-win_amd64.whl?raw=true; "Windows" in platform_system and python_version == "3.7"
 https://github.com/sachadee/Dlib/blob/main/dlib-19.22.99-cp38-cp38-win_amd64.whl?raw=true; "Windows" in platform_system and python_version == "3.8"

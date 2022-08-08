@@ -4,25 +4,17 @@
 name: OpenDBM Build Checking
 
 on:
-  push:
-    branches: [ master ]
-    paths:
-      - 'dbm_lib/**'
-      - '.github/workflows/open_dbm-build-checking.yml'
-      - '.github/workflows/open_dbm-code-checking.yml'
-      - 'api_lib/**'
-      - 'tests/**'
-      - 'pkg/**'
-      - 'resources/**'
-
   pull_request:
     branches: [ master ]
     paths:
       - 'dbm_lib/**'
-      - 'api_lib/**'
+      - 'opendbm/**'
+      - '.github/workflows/open_dbm-build-checking.yml'
+      - '.github/workflows/open_dbm-code-checking.yml'
       - 'tests/**'
       - 'pkg/**'
       - 'resources/**'
+      - 'requirements.txt'
   workflow_dispatch:
 
 env:
