@@ -143,6 +143,7 @@ jobs:
         git config --global user.name 'AiCure ODBM Pipeline'
         git config --global user.email 'system@aicure.com'
         if [[ `git status --porcelain` ]]; then
+          git pull origin master
           git add images/badges/test_status.svg
           git commit -am "Modify test status in test badge"
           git push
