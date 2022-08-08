@@ -35,8 +35,8 @@ class FacialTest:
         df_act = pd.read_csv("tests/test_data/expressivity.csv")
         res = processing_facial_activity.get_expressivity()
 
-        assert_allclose(df_act.mean(), res.mean(), rtol=0.1, atol=1e-8)
-        assert_allclose(df_act.std(), res.std(), rtol=0.1, atol=1e-8)
+        assert_allclose(df_act.mean(), res.mean(), rtol=0.35, atol=1e-8)
+        assert_allclose(df_act.std(), res.std(), rtol=0.35, atol=1e-8)
 
     def test_dummy_facial(self):
         assert True
