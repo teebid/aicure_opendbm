@@ -105,6 +105,7 @@ docker image tag jordihasianta/dbm-test2 dbm
 ```python
 from opendbm import FacialActivity
 
+#make sure Docker is active to access the model
 model = FacialActivity()
 path = "sample.mp4"
 model.fit(path)
@@ -154,37 +155,3 @@ OpenDBM was developed by Anzar Abbas and Vijay Yadav, alongside Vidya Koesmaharg
 
 
 
-
-
-
-
-Without conda
-```bash
-sudo apt-get install cmake
-sudo apt-get install libsndfile1
-sudo apt-get install ffmpeg
-sudo apt-get install sox
-```
-
-**On macOS**
-
-With Conda (recommended way).
-```bash
-conda install -c conda-forge ffmpeg sox
-```
-```bash
-brew install cmake
-brew install sox
-brew install ffmpeg
-
-```
-
-**On Windows**
-
-With Conda (recommended way).
-```bash
-conda install -c conda-forge ffmpeg sox dlib
-```
-- Install [ffmpeg](https://ffmpeg.org/)
-- Install [sox](https://www.tutorialexample.com/a-step-guide-to-install-sox-sound-exchange-on-windows-10-python-tutorial/)
-- Install [dlib](https://github.com/sachadee/Dlib)
