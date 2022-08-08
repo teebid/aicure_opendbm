@@ -34,6 +34,9 @@ const defaultJavaScriptSpecLanguages = 'flow';
 const guides = [{label: 'Install Dependencies', value: 'dep-install'}];
 const defaultGuide = 'dep-install';
 
+const guidesDocker = [{label: 'Installing Docker Images', value: 'docker-install'}];
+const defaultGuideDocker = 'docker-install';
+
 const platforms = [
   {label: 'Android', value: 'android'},
   {label: 'iOS', value: 'ios'},
@@ -42,8 +45,8 @@ const defaultPlatform = isMacOS ? 'ios' : 'android';
 
 const oses = [
   {label: 'macOS', value: 'macos'},
-  {label: 'Windows', value: 'windows'},
   {label: 'Linux', value: 'linux'},
+  {label: 'Windows', value: 'windows'},
 ];
 const defaultOs = isMacOS ? 'macos' : isWindows ? 'windows' : 'linux';
 
@@ -72,6 +75,7 @@ const getLibraryNotesTabs = (
 
 export default {
   defaultGuide,
+  defaultGuideDocker,
   defaultOs,
   defaultPackageManager,
   defaultPlatform,
@@ -82,6 +86,7 @@ export default {
   getDevNotesTabs,
   getLibraryNotesTabs,
   guides,
+  guidesDocker,
   oses,
   packageManagers,
   platforms,

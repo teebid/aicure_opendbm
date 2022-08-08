@@ -22,36 +22,63 @@ The instructions are a bit different depending on your development operating sys
 
 <Tabs groupId="os" defaultValue={constants.defaultOs} values={constants.oses} className="pill-tabs">
 <TabItem value="macos">
-<p> Install sox </p>
 
-```shell
+## Install with conda 
+
+```bash
+conda install -c conda-forge cmake ffmpeg sox
+```
+## Standalone installation (without conda)
+
+```bash
+brew install cmake
 brew install sox
+brew install ffmpeg
 ```
 
 </TabItem>
 <TabItem value="windows">
 
-## Standalone installation
+## Install with conda 
 
-> [Follow this guide to install sox in windows.](https://www.tutorialexample.com/a-step-guide-to-install-sox-sound-exchange-on-windows-10-python-tutorial/)
+```bash
+conda install -c conda-forge ffmpeg sox dlib
+```
+## Standalone installation (without conda)
+
+> [Install sox guide](https://www.tutorialexample.com/a-step-guide-to-install-sox-sound-exchange-on-windows-10-python-tutorial/)
+
+> Follow either of this guide to install ffmpeg
+> * [geeksforgeeks](https://www.geeksforgeeks.org/how-to-install-ffmpeg-on-windows/)
+> * [wikihow](https://www.wikihow.com/Install-FFmpeg-on-Windows)
+
+> [Install dlib guide](https://github.com/sachadee/Dlib)
+
 
 </TabItem>
 <TabItem value="linux">
 
-<p> Install sox </p>
+## Install with conda 
 
-```shell
+```bash
+conda install -c conda-forge cmake ffmpeg sox
+```
+## Standalone installation (without conda)
+
+```bash
+sudo apt-get install cmake
+sudo apt-get install libsndfile1
+sudo apt-get install ffmpeg
 sudo apt-get install sox
 ```
 
-<p> Install libsndfile1 </p>
 
-```shell
-sudo apt-get install libsndfile1
-```
 
 </TabItem>
 </Tabs>
 
 </TabItem>
 </Tabs>
+
+
+
