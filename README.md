@@ -1,6 +1,6 @@
-<h2 align="center">
+<h1 align="center">
 OpenDBM
-</h2>
+</h1>
 
 <div align="center">
   <img width="400" alt="GitHub Actions for deploying to GitHub Pages with Static Site Generators" src="https://raw.githubusercontent.com/teebid/aicure_opendbm/master/images/odbm.png">
@@ -14,7 +14,7 @@ OpenDBM
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
 </div>
 
-## Supported OS Platforms
+# Supported OS Platforms
 
 OS                    | Build Status
 ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -23,14 +23,14 @@ OS                    | Build Status
 **macOS**                 | [![Build](https://raw.githubusercontent.com/teebid/aicure_opendbm/master/images/badges/macos_status.svg)](https://github.com/teebid/aicure_opendbm/actions/workflows/open_dbm-build-checking.yml)
 
 
-## What is it
+# What is it
 OpenDBM is a software package that allows for calculation of digital 
 biomarkers of health and functioning from video or audio of an individual’s 
 behavior. It integrates existing tools for behavioral measurements such as
 facial activity, voice, speech, and movement into a single package for measurement 
 of overall behavior.
 
-## More About OpenDBM
+# More About OpenDBM
 
 At a modular level, OpenDBM is a library that consists of the following components:
 
@@ -46,7 +46,7 @@ Usually, OpenDBM is used for:
 - A digital biomaker extraction app
 - A helper tools to give insight of patient condition
 
-## Table of Contents
+# Table of Contents
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -64,59 +64,61 @@ Usually, OpenDBM is used for:
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## ⭐️ Installation
-### Prerequisites
-#### Install Dependencies
+# ⭐️ Installation
 
-**On Linux**
+## Prerequisites (Install Dependencies)
+### With Conda Environment (recommended)
+**Make sure to install conda first at** [anaconda](https://www.anaconda.com/)
 
+**On Linux/macOS**
 ```bash
-sudo apt-get install libsndfile1
-sudo apt-get install sox
+conda install -c conda-forge cmake ffmpeg sox
 ```
-
-**On macOS**
-
-```bash
-brew install sox
-```
-
 **On Windows**
-
 ```bash
-none required
+#Make sure to run in Anaconda Prompt, or add conda to the path.
+conda install -c conda-forge ffmpeg sox dlib
+```
+### Without Conda Environment
+[Installation instructions](https://teebid.github.io/aicure_opendbm/docs/dependencies-installation)
+## OpenDBM Installation
+```bash
+pip install opendbm 
 ```
 
-### OpenDBM Installation
+## Model Download ( Facial and Movement Components)
+Make sure you have installed docker and already login to Docker Hub. 
+
+If you haven't, Find the tutorial [here](https://teebid.github.io/aicure_opendbm/docs/openface-docker-installation)
 ```bash
-$ pip install api_lib 
+docker pull image tag jordihasianta/dbm-test2
+docker image tag jordihasianta/dbm-test2 dbm
 ```
 
 <div align="right">
 <a href="#table-of-contents">Back to TOC ☝️</a>
 </div>
 
-## ⭐️ Usage
-### Basic Usage
-#### *Try your first OpenDBM program*
+# ⭐️ Usage
+## Basic Usage
+### *Try your first OpenDBM program*
 ```python
-from opendbm.facial import FacialActivity
+from opendbm import FacialActivity
 
 model = FacialActivity()
+path = "sample.mp4"
+model.fit(path)
+landmark = model.get_landmark()
 ```
 
 To get the attribute like mean and std is as straighforward as `.mean()`:
 
 ```python
-from opendbm.facial import FacialActivity
-
-model = FacialActivity()
-
-m.fit()
-landmark = model.get_landmark()
 landmark.mean()
 landmark.std()
+landmark.to_dataframe() # convert results as pandas dataframe
 ```
+
 
 For more in-depth tutorials about OpenDBM, you can check out:
 
@@ -128,7 +130,7 @@ For more in-depth tutorials about OpenDBM, you can check out:
 <a href="#table-of-contents">Back to TOC ☝️</a>
 </div>
 
-## ⭐️ More resources
+# ⭐️ More resources
 -   [Our wiki](https://github.com/AiCure/open_dbm/wiki)
 -   [OpenDBM 2.0 Documentation](https://docs.google.com/document/d/1O6OUSY9FHFCZfpIWu3Kgg0Q_dyp073xjjQ2K3viEffU/edit#heading=h.rxr2y5t62mwa)
 -   [AiCure page](https://aicure.com/opendbm/)
@@ -137,13 +139,52 @@ For more in-depth tutorials about OpenDBM, you can check out:
 <a href="#table-of-contents">Back to TOC ☝️</a>
 </div>
 
-## ⭐️ License
+# ⭐️ License
 OpenDBM is published under the GNU AGPL 3.0 license.
 
 
-## ⭐️ People
+# ⭐️ People
 OpenDBM was developed by Anzar Abbas and Vijay Yadav, alongside Vidya Koesmahargyo and Isaac Galatzer-Levy, from within the Research and Development department at AiCure––a health tech startup in New York. It was made open source in October 2020. You can contact us at opendbm@aicure.com.
 
 <div align="right">
 <a href="#table-of-contents">Back to TOC ☝️</a>
 </div>
+
+
+
+
+
+
+
+
+
+Without conda
+```bash
+sudo apt-get install cmake
+sudo apt-get install libsndfile1
+sudo apt-get install ffmpeg
+sudo apt-get install sox
+```
+
+**On macOS**
+
+With Conda (recommended way).
+```bash
+conda install -c conda-forge ffmpeg sox
+```
+```bash
+brew install cmake
+brew install sox
+brew install ffmpeg
+
+```
+
+**On Windows**
+
+With Conda (recommended way).
+```bash
+conda install -c conda-forge ffmpeg sox dlib
+```
+- Install [ffmpeg](https://ffmpeg.org/)
+- Install [sox](https://www.tutorialexample.com/a-step-guide-to-install-sox-sound-exchange-on-windows-10-python-tutorial/)
+- Install [dlib](https://github.com/sachadee/Dlib)
