@@ -103,6 +103,8 @@ class BiomakerService:
                 au.to_dataframe().to_csv(var + '.csv', index=False)
                 zipObj.write(var + '.csv')
 
+        return zip_filename, methodName
+
     def process_speech(self, group, biomaker_request: BiomakerRequest):
         m = Speech()
         curWorkingDir = os.getcwd()

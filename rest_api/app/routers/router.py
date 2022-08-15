@@ -67,5 +67,5 @@ async def audio_accoustic(biomaker_request: BiomakerRequest = Depends()):
 
 @router.post('/audio/speech')
 async def audio_speech(biomaker_request: BiomakerRequest = Depends()):
-    result, file_name = BiomakerService().process('accoustic', biomaker_request)
+    result, file_name = BiomakerService().process('speech', biomaker_request)
     return FileResponse(path=result, filename=f"{file_name}.zip")
