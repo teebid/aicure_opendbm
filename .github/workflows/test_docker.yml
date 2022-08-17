@@ -19,7 +19,7 @@ jobs:
     - name: setup docker
       run: |
             brew install docker docker-machine
-            brew install virtualbox@5.0.12 --cask
+            brew install virtualbox@5.2.4 --cask
             docker-machine create --driver virtualbox default
             docker-machine env default
             eval "$(docker-machine env default)"
