@@ -18,6 +18,7 @@ jobs:
     steps:
     - name: setup docker
       run: |
+            brew uninstall virtualbox
             brew install --cask virtualbox
             brew install docker docker-machine
             brew services restart docker-machine
