@@ -16,11 +16,19 @@ jobs:
   unit_tests_macos:
     runs-on: macos-11
     steps:
-        - name: Install SoX and add to Path
-          uses: ./.github/actions/setup-docker
+        - name: 🔍 GH_TOKEN
+          if: env.GH_TOKEN == ''
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        - name: Checkout OpenDBM code
+          uses: actions/checkout@v3
+          with:
+            token: ${{ env.GH_TOKEN }}
+#         - name: Install docker
+#           uses: ./.github/actions/setup-docker
     
-#       - name: Setup Docker on macOS
-#         uses: douglascamata/setup-docker-macos-action@main
+        - name: Setup Docker on macOS
+          uses: douglascamata/setup-docker-macos-action@main
 
 #       - name: Install docker-compose
 #         run: HOMEBREW_NO_AUTO_UPDATE=1 brew install docker-compose
