@@ -17,7 +17,7 @@ jobs:
     runs-on: macos-11
     steps:
         - name: Install SoX and add to Path
-          uses: ./.github/actions/win-install-sox
+          uses: ./.github/actions/setup-docker
     
 #       - name: Setup Docker on macOS
 #         uses: douglascamata/setup-docker-macos-action@main
