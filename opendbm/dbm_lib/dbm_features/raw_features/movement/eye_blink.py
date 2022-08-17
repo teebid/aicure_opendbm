@@ -120,10 +120,9 @@ def blink_detection(video_path, facial_landmarks, raw_config):
 
             tot_frame += 1
         except Exception as e:
-            logger.error(
-                "blink detection processing failed for frame: {}, {}".format(
-                    tot_frame, e
-                )
+            e
+            logger.info(
+                "blink detection processing finished in frame: {}".format(tot_frame - 1)
             )
             continue
     vid_stream.stop()

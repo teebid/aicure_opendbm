@@ -6,6 +6,7 @@ created: 2020-13-11
 
 import glob
 import logging
+import os
 import shutil
 from os.path import join
 
@@ -40,13 +41,18 @@ def run_speech_feature(video_uri, out_dir, r_config, tran_tog, save=True):
 
     if save:
         logger.info("Saving Output file {} ".format(out_loc))
+        logger.info("filename {} ".format(fl_name))
         ut.save_output(df_speech, out_loc, fl_name, speech_dir, speech_ext)
 
     if (tran_tog is None) or (tran_tog != "on"):
-
-        if fl_name.endswith("mp4"):
-            shutil.rmtree(out_dir + fl_name)
-        else:
-            shutil.rmtree(out_dir + fl_name.strip(".mp4"))
+        if os.getcwd() == "/app":  # docker version
+            shutil.rmtree(os.path.dirname(transcribe_path[0]))
+        else:  # api_lib version
+            if fl_name.endswith("mp4"):
+                shutil.rmtree((out_dir + "/" + fl_name).replace("//", "/"))
+            else:
+                shutil.rmtree(
+                    (out_dir + "/" + fl_name.strip(".mp4")).replace("//", "/")
+                )
 
     return df_speech

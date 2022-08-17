@@ -161,31 +161,34 @@ def empty_frame(landmarks, r_config, error_reason):
     return empty_frame
 
 
-def fac_tremor_process(video_uri, out_dir, r_config, model_output=False, save=False):
+def fac_tremor_process(video_uri, out_dir, r_config, model_output=False, save=True):
     """
     processing input videos
 
 
     """
-    #     try:
+    try:
 
-    input_loc, out_loc, fl_name = ut.filter_path(video_uri, out_dir)
-    of_csv_path = glob.glob(join(out_loc, fl_name + "_openface_lmk/*.csv"))
+        input_loc, out_loc, fl_name = ut.filter_path(video_uri, out_dir)
+        of_csv_path = glob.glob(join(out_loc, fl_name + "_openface_lmk/*_output.csv"))
+        if len(of_csv_path) > 0:
+            of_csv = of_csv_path[0]
+            df_of = pd.read_csv(of_csv, error_bad_lines=False)
 
-    if len(of_csv_path) > 0:
-        of_csv = of_csv_path[0]
-        df_of = pd.read_csv(of_csv, error_bad_lines=False)
+            logger.info(
+                "Processing Output file for facial_tremor {} ".format(
+                    os.path.join(out_loc, fl_name)
+                )
+            )
 
-        logger.info("Processing Output file {} ".format(os.path.join(out_loc, fl_name)))
+            feats = compute_features(of_csv_path, df_of, r_config)
 
-        feats = compute_features(of_csv_path, df_of, r_config)
+            #         if model_output:
+            #             result = score(feats, r_config)
+            #             feats = pd.concat([feats, result], axis=1)
+            if save:
+                ut.save_output(feats, out_loc, fl_name, ft_dir, csv_ext)
+            return feats
 
-        #         if model_output:
-        #             result = score(feats, r_config)
-        #             feats = pd.concat([feats, result], axis=1)
-        if save:
-            ut.save_output(feats, out_loc, fl_name, ft_dir, csv_ext)
-        return feats
-
-        #     except Exception as e:
-        logger.error("Failed to process video file")
+    except Exception as e:
+        logger.error("Failed to process video file for facial_tremor", str(e))

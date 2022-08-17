@@ -185,12 +185,7 @@ def run_pause_segment(video_uri, out_dir, r_config, save=True):
                 if save:
                     logger.info("Processing Output file {} ".format(out_loc))
                     ut.save_output(
-                        df_pause_seg,
-                        out_loc,
-                        fl_name,
-                        pause_seg_dir,
-                        csv_ext,
-                        save=save,
+                        df_pause_seg, out_loc, fl_name, pause_seg_dir, csv_ext
                     )
                 df = df_pause_seg
 
@@ -203,4 +198,4 @@ def run_pause_segment(video_uri, out_dir, r_config, save=True):
 
     except Exception as e:
         e
-        logger.error("Failed to process audio file")
+        logger.error("Failed to process audio file", str(e))

@@ -22,10 +22,10 @@ from opendbm.dbm_lib.dbm_features.raw_features.video import open_face_process as
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
 
-OPENFACE_PATH_VIDEO = "pkg/open_dbm/OpenFace/build/bin/FaceLandmarkVid"
-OPENFACE_PATH = "pkg/open_dbm/OpenFace/build/bin/FeatureExtraction"
-DEEP_SPEECH = "pkg/DeepSpeech"
-DLIB_SHAPE_MODEL = "pkg/shape_detector/shape_predictor_68_face_landmarks.dat"
+OPENFACE_PATH_VIDEO = "opendbm/pkg/open_dbm/OpenFace/build/bin/FaceLandmarkVid"
+OPENFACE_PATH = "opendbm/pkg/open_dbm/OpenFace/build/bin/FeatureExtraction"
+DEEP_SPEECH = "opendbm/pkg/DeepSpeech"
+DLIB_SHAPE_MODEL = "opendbm/pkg/shape_detector/shape_predictor_68_face_landmarks.dat"
 
 
 def common_video(video_file, args, r_config):
@@ -50,11 +50,13 @@ def common_video(video_file, args, r_config):
     pf.process_facial(video_file, out_path, args.dbm_group, r_config)
     pf.process_acoustic(video_file, out_path, args.dbm_group, r_config)
     pf.process_nlp(video_file, out_path, args.dbm_group, args.tr, r_config, DEEP_SPEECH)
+
     if (
         args.dbm_group is None
         or len(args.dbm_group) > 0
         and "movement" in args.dbm_group
     ):
+
         of.process_open_face(
             video_file,
             os.path.dirname(video_file),
@@ -90,7 +92,7 @@ def process_raw_video_file(args, s_config, r_config):
 
     except Exception as e:
         e
-        logger.error("Failed to process mp4 file.")
+        logger.error("Failed to process mp4 file.", str(e))
         pf.remove_file(video_file[0])
 
 
@@ -122,8 +124,8 @@ def process_raw_audio_file(args, s_config, r_config):
             else:
                 logger.info("Enter correct audio(*.wav) file path.")
     except Exception as e:
-        e
-        logger.error("Failed to process wav file.")
+        # e
+        logger.error("Failed to process wav file.", str(e))
 
 
 def process_raw_video_dir(args, s_config, r_config):
@@ -159,7 +161,7 @@ def process_raw_video_dir(args, s_config, r_config):
                 )  # removing files(ffmpeg converted ) after processing
             except Exception as e:
                 e
-                logger.error("Failed to process mp4 file.")
+                logger.error("Failed to process mp4 file.", str(e))
                 pf.remove_file(vid_file)
 
 
