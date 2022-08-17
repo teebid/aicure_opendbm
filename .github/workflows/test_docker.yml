@@ -16,34 +16,34 @@ jobs:
   unit_tests_macos:
     runs-on: macos-11
     steps:
-      - name: Setup Docker on macOS
-        uses: douglascamata/setup-docker-macos-action@main
+#       - name: Setup Docker on macOS
+#         uses: douglascamata/setup-docker-macos-action@main
 
-      - name: Install docker-compose
-        run: HOMEBREW_NO_AUTO_UPDATE=1 brew install docker-compose
+#       - name: Install docker-compose
+#         run: HOMEBREW_NO_AUTO_UPDATE=1 brew install docker-compose
         
-      - name: test docker
-        run: docker run hello-world
-#     - name: setup docker1
-#       run: |
-#             brew install --cask virtualbox
+#       - name: test docker
+#         run: docker run hello-world 5.2.22
+    - name: setup docker1
+      run: |
+            brew cask install virtualbox@5.0.12
 
-#     - name: setup docker2
-#       run: |
-#             brew install docker docker-machine
-#             brew services restart docker-machine
+    - name: setup docker2
+      run: |
+            brew install docker docker-machine
+            brew services restart docker-machine
 
             
-#     - name: setup docker3
-#       run: |
-#             sudo "/Library/Application Support/VirtualBox/LaunchDaemons/VirtualBoxStartup.sh" restart
-#             docker-machine create --driver virtualbox default
+    - name: setup docker3
+      run: |
+            sudo "/Library/Application Support/VirtualBox/LaunchDaemons/VirtualBoxStartup.sh" restart
+            docker-machine create --driver virtualbox default
 
-#     - name: setup docker4
-#       run: |
+    - name: setup docker4
+      run: |
 
-#             docker-machine env default
-#             eval "$(docker-machine env default)"
-#             docker run hello-world
-#             docker-machine stop default
+            docker-machine env default
+            eval "$(docker-machine env default)"
+            docker run hello-world
+            docker-machine stop default
             
