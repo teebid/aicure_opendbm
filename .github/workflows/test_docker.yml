@@ -17,7 +17,7 @@ jobs:
     runs-on: macos-11
     steps:
       - name: Setup Docker on macOS
-        uses: douglascamata/setup-docker-macos-action@v1-alpha
+        uses: douglascamata/setup-docker-macos-action@master
 
       - name: Install docker-compose
         run: HOMEBREW_NO_AUTO_UPDATE=1 brew install docker-compose
