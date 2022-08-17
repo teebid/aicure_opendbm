@@ -18,8 +18,8 @@ jobs:
     steps:
     - name: setup docker
       run: |
+            brew install virtualbox@5.2.4
             brew install docker docker-machine
-            brew install virtualbox@5.2.4 --cask
             docker-machine create --driver virtualbox default
             docker-machine env default
             eval "$(docker-machine env default)"
