@@ -26,7 +26,7 @@ jobs:
 #         run: docker run hello-world 5.2.22
     - name: setup docker1
       run: |
-            brew cask install virtualbox@5.0.12
+            brew install virtualbox@5.0.12 --cask
 
     - name: setup docker2
       run: |
