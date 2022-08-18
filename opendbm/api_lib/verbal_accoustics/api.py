@@ -9,6 +9,7 @@ from ._formant_frequency import FormantFrequency
 from ._glottal_noise import GlottalNoiseRatio
 from ._harmonic_noise import HarmonicsNoiseRatio
 from ._jitter import Jitter
+from ._mfcc import MFCC
 from ._pause_characteristics import PauseCharacteristics
 from ._pitch_frequency import PitchFrequency
 from ._shimmer import Shimmer
@@ -27,6 +28,7 @@ class VerbalAccoustics(AudioModel):
         self._shimmer = Shimmer()
         self._pchar = PauseCharacteristics()
         self._vopre = VoicePrevalence()
+        self._mfcc = MFCC()
         self._models = OrderedDict(
             {
                 "audio_intensity": self._auint,
@@ -38,6 +40,7 @@ class VerbalAccoustics(AudioModel):
                 "shimmer": self._shimmer,
                 "pause_characteristics": self._pchar,
                 "voice_prevalence": self._vopre,
+                "mfcc": self._mfcc,
             }
         )
 
@@ -85,3 +88,6 @@ class VerbalAccoustics(AudioModel):
 
     def get_voice_prevalence(self):
         return self._vopre
+
+    def get_mfcc(self):
+        return self._mfcc

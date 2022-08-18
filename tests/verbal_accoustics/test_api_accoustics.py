@@ -135,6 +135,47 @@ class AccousticTest:
         assert_allclose(res_mp4.mean(), actual_mean, rtol=0.1, atol=1e-8)
         assert_allclose(res_wav.mean(), actual_mean, rtol=0.1, atol=1e-8)
 
+    def test_get_mfcc(
+        self, processing_verbal_accoustics_mp4, processing_verbal_accoustics_wav
+    ):
+        actual_mean = [
+            491.835,
+            -37.714,
+            82.164,
+            64.293,
+            -33.829,
+            54.35,
+            6.563,
+            -6.669,
+            31.392,
+            -8.672,
+            9.302,
+            8.096,
+        ]
+        actual_std = [
+            71.555,
+            83.91,
+            65.506,
+            32.296,
+            38.059,
+            35.283,
+            30.122,
+            23.462,
+            21.292,
+            21.183,
+            18.607,
+            17.101,
+        ]
+
+        res_mp4 = processing_verbal_accoustics_mp4.get_mfcc()
+        res_wav = processing_verbal_accoustics_wav.get_mfcc()
+
+        assert_allclose(res_mp4.mean(), actual_mean, rtol=0.1, atol=1e-8)
+        assert_allclose(res_wav.mean(), actual_mean, rtol=0.1, atol=1e-8)
+
+        assert_allclose(res_mp4.std(), actual_std, rtol=0.1, atol=1e-8)
+        assert_allclose(res_wav.std(), actual_std, rtol=0.1, atol=1e-8)
+
     def test_dummy_1(self):
         assert True
 

@@ -9,6 +9,7 @@ from __future__ import absolute_import, division, print_function
 from .config import config_derive_feature, config_raw_feature, config_reader
 from .dbm_features.raw_features.audio.formant_freq import run_formant
 from .dbm_features.raw_features.audio.intensity import run_intensity
+from .dbm_features.raw_features.audio.mfcc import run_mfcc
 from .dbm_features.raw_features.audio.pause_segment import run_pause_segment
 from .dbm_features.raw_features.movement.facial_tremor import fac_tremor_process
 from .dbm_features.raw_features.movement.head_motion import run_head_movement

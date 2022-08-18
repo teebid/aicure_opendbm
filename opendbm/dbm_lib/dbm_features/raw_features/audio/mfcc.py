@@ -24,7 +24,7 @@ csv_ext = "_mfcc.csv"
 error_txt = "error: length less than 0.064"
 
 
-def empty_mfcc(video_uri, out_loc, fl_name, r_config):
+def empty_mfcc(video_uri, out_loc, fl_name, r_config, save=True):
 
     """
     Preparing empty empty_mfcc matrix if something fails
@@ -66,8 +66,11 @@ def empty_mfcc(video_uri, out_loc, fl_name, r_config):
     df_mfcc = pd.DataFrame(out_val, columns=cols)
     df_mfcc["dbm_master_url"] = video_uri
 
-    logger.info("Saving Output file {} ".format(out_loc))
-    ut.save_output(df_mfcc, out_loc, fl_name, mfcc_dir, csv_ext)
+    if save:
+        logger.info("Saving Output file {} ".format(out_loc))
+        ut.save_output(df_mfcc, out_loc, fl_name, mfcc_dir, csv_ext)
+
+    return df_mfcc
 
 
 def audio_mfcc(path):
@@ -85,7 +88,7 @@ def audio_mfcc(path):
     return mfccs
 
 
-def calc_mfcc(video_uri, audio_file, out_loc, fl_name, r_config):
+def calc_mfcc(video_uri, audio_file, out_loc, fl_name, r_config, save=True):
     """
     Preparing mfcc matrix
     Args:
@@ -107,10 +110,13 @@ def calc_mfcc(video_uri, audio_file, out_loc, fl_name, r_config):
     df[r_config.err_reason] = "Pass"  # may replace based on threshold in future release
     df["dbm_master_url"] = video_uri
 
-    ut.save_output(df, out_loc, fl_name, mfcc_dir, csv_ext)
+    if save:
+        logger.info("Saving Output file {} ".format(out_loc))
+        ut.save_output(df, out_loc, fl_name, mfcc_dir, csv_ext)
+    return df
 
 
-def run_mfcc(video_uri, out_dir, r_config):
+def run_mfcc(video_uri, out_dir, r_config, save=True):
     """
     Processing all patients to fetch mfccs
 
@@ -132,10 +138,11 @@ def run_mfcc(video_uri, out_dir, r_config):
                     "Output file {} size is less than 0.064sec".format(audio_file)
                 )
 
-                empty_mfcc(video_uri, out_loc, fl_name, r_config)
-                return
+                return empty_mfcc(video_uri, out_loc, fl_name, r_config, save=save)
 
-            calc_mfcc(video_uri, audio_file, out_loc, fl_name, r_config)
+            return calc_mfcc(
+                video_uri, audio_file, out_loc, fl_name, r_config, save=save
+            )
     except Exception as e:
         e
         logger.error("Failed to process audio file")
