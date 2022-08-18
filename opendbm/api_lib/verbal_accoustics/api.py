@@ -41,7 +41,8 @@ class VerbalAccoustics(AudioModel):
             }
         )
 
-    def check_file(self, path):
+    @staticmethod
+    def check_file(path):
         return (
             (pf.audio_to_wav(path, tmp=True), False)
             if not path.endswith(".wav")

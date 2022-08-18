@@ -18,7 +18,7 @@ OPENFACE_URLS = [
     "https://onedrive.live.com/download?cid=2E2ADA578BFF6E6E&resid=2E2ADA578BFF6E6E%2153070&authkey=AD6KjtYipphwBPc",
 ]
 
-# OPENDBM_DATA = Path("pkg/speech")
+
 MODEL_PATH = os.path.dirname(__file__)
 OPENDBM_DATA = Path.home() / ".opendbm"
 DLIB_SHAPE_MODEL = os.path.abspath(
@@ -26,7 +26,6 @@ DLIB_SHAPE_MODEL = os.path.abspath(
         MODEL_PATH, "../pkg/shape_detector/shape_predictor_68_face_landmarks.dat"
     )
 )
-# DLIB_SHAPE_MODEL = "pkg/shape_detector/shape_predictor_68_face_landmarks.dat"
 FACIAL_ACTIVITY_ARGS = [
     "-q",
     "-2Dfp",
@@ -75,14 +74,13 @@ class VideoModel(Model):
         facial_args = " ".join(FACIAL_ACTIVITY_ARGS)
         docker_call = wsl_cmd + ["docker", "exec", "dbm_container", "/bin/bash", "-c"]
 
-        # docker_call = wsl_cmd + "docker exec dbm_container /bin/bash -c"
         openface_call = [
             docker_call
             + [f"{OPENFACE_PATH} {facial_args} {path} -out_dir {docker_temp_dir}"],
             docker_call
-            + [f"{OPENFACE_PATH_VIDEO} {facial_args} {path} -out_dir {docker_temp_dir}"]
-            # f'{docker_call} "{OPENFACE_PATH} {facial_args} {path} -out_dir {docker_temp_dir}"',
-            # f'{docker_call} "{OPENFACE_PATH_VIDEO} {facial_args} {path} -out_dir {docker_temp_dir}"',
+            + [
+                f"{OPENFACE_PATH_VIDEO} {facial_args} {path} -out_dir {docker_temp_dir}"
+            ],
         ]
 
         out_dir_openface = [
@@ -140,7 +138,6 @@ class VideoModel(Model):
             stdin=subprocess.PIPE,
         ).wait()
         mkdir_cmd = wsl_cmd + ["mkdir", "-p", out_dir]
-        # mkdir_cmd = wsl_cmd + f"mkdir -p {out_dir}"
 
         copy_cmd = wsl_cmd + ["docker", "cp", f"dbm_container:/{result_path}", out_dir]
         subprocess.Popen(

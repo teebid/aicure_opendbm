@@ -32,6 +32,9 @@ class TqdmUpTo(tqdm):
 
 
 def download_url(url, local_path):
+    """
+    Function to download url and drop it to the local path
+    """
     with TqdmUpTo(
         unit="B",
         unit_scale=True,
@@ -44,10 +47,18 @@ def download_url(url, local_path):
 
 
 def wsllize(path):
+    """
+    Add WSL prefix if the platform using windows.
+    This function will also convert input path to wsl structure based on given  path.
+    Args:
+        path: path of the input data
+
+    Returns:
+        wsl prefix
+    """
     if platform.system() == "Windows":
         wsl_cmd = ["wsl"]
         path = subprocess.check_output(["wsl", "wslpath", repr(path)]).decode("utf-8")
-        # path = subprocess.check_output(f"wsl wslpath '{path}'").decode("utf-8")
         if path.endswith("\n"):
             path = path[:-1]
         return wsl_cmd, path
@@ -55,24 +66,49 @@ def wsllize(path):
         return [], path
 
 
-def docker_command_dec(fn):
-    import os
+def check_model_exist(wsl_cmd, model_name):
+    """
+    check if docker model is present or not.
 
-    def inner(*args, **kwargs):
-        # args[1] is path argument
-        wsl_cmd, path = wsllize((args[1]))
+    Args:
+        wsl_cmd: wsl prefix is platform is Windows
+        model_name: self-explanatory
 
+    """
+
+    try:
         check_model_exist = subprocess.check_output(
-            ["wsl", "docker", "image", "ls"]
+            wsl_cmd + ["docker", "image", "ls"]
         ).decode("utf-8")
-        if "dbm-openface" not in check_model_exist:
+        if model_name not in check_model_exist:
             raise FileNotFoundError(
-                """
-                Openface model not found. Make sure to set the Docker to be active or
+                f"""
+                {model_name} model not found. Make sure to
                 download the model first. For further instruction about download,
                 please see our web documentation.
                 """
             )
+    except subprocess.CalledProcessError:
+        raise EnvironmentError("Make sure to set the Docker to be active")
+
+
+def docker_command_dec(fn):
+    """
+    Decorator to execute model in Docker environment.
+    Starting the container and exit state is handled here
+    Args:
+        fn: any fn that need to access docker
+
+    Returns:
+        decorated fn
+    """
+    import os
+
+    def inner(*args, **kwargs):
+        wsl_cmd, path = wsllize((args[1]))
+
+        check_model_exist(wsl_cmd, "dbm-openface")
+
         create_docker = wsl_cmd + [
             "docker",
             "create",
@@ -82,14 +118,10 @@ def docker_command_dec(fn):
             "dbm-openface",
             "bash",
         ]
-        # create_docker = wsl_cmd + "docker create -ti --name dbm_container dbm bash"
 
         copy_file_to_docker = wsl_cmd + ["docker", "cp", path, "dbm_container:/app/"]
-        # copy_file_to_docker = wsl_cmd + f"docker cp {path} dbm_container:/app/"
         start_container = wsl_cmd + ["docker", "start", "dbm_container"]
-        # start_container = wsl_cmd + "docker start dbm_container"
         terminate_container = wsl_cmd + ["docker", "stop", "dbm_container"]
-        # terminate_container = wsl_cmd + "docker stop dbm_container"
         remove_container = wsl_cmd + ["docker", "rm", "dbm_container"]
 
         subprocess.Popen(
@@ -123,7 +155,6 @@ def docker_command_dec(fn):
             logger.info(f"Failed: {e}")
 
         finally:
-            # pass
             subprocess.Popen(
                 terminate_container,
                 stdout=subprocess.PIPE,
