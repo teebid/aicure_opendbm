@@ -9,6 +9,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+
+#docker dependencies for mac
+.github/brew-colima
+.github/brew-docker
 # Distribution / packaging
 speech/
 .Python
