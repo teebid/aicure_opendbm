@@ -62,6 +62,17 @@ def docker_command_dec(fn):
         # args[1] is path argument
         wsl_cmd, path = wsllize((args[1]))
 
+        check_model_exist = subprocess.check_output(
+            ["wsl", "docker", "image", "ls"]
+        ).decode("utf-8")
+        if "dbm-openface" not in check_model_exist:
+            raise FileNotFoundError(
+                """
+                Model not found. Make sure to set the Docker to be active or
+                download the model first. For further instruction about download,
+                please see our web documentation.
+                """
+            )
         create_docker = wsl_cmd + [
             "docker",
             "create",
