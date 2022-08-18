@@ -68,7 +68,7 @@ def docker_command_dec(fn):
         if "dbm-openface" not in check_model_exist:
             raise FileNotFoundError(
                 """
-                Model not found. Make sure to set the Docker to be active or
+                Openface model not found. Make sure to set the Docker to be active or
                 download the model first. For further instruction about download,
                 please see our web documentation.
                 """
