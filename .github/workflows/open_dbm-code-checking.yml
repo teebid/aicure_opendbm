@@ -108,7 +108,7 @@ jobs:
     - name: Pull OpenFace Image
       run: |
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/dbm-test2:latest
-            docker image tag ${{ secrets.DOCKERHUB_USERNAME }}/dbm-test2:latest dbm
+            docker image tag ${{ secrets.DOCKERHUB_USERNAME }}/dbm-test2:latest dbm-openface
     - name: Install dependencies
       if: steps.cache.outputs.cache-hit != 'true'
       run: |

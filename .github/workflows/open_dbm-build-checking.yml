@@ -50,7 +50,7 @@ jobs:
     - name: Pull OpenFace Image
       run: |
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/dbm-test2:latest
-            docker image tag ${{ secrets.DOCKERHUB_USERNAME }}/dbm-test2:latest dbm
+            docker image tag ${{ secrets.DOCKERHUB_USERNAME }}/dbm-test2:latest dbm-openface
     - name: Setup FFmpeg
       uses: FedericoCarboni/setup-ffmpeg@v1.1.0
     - name: Install dependencies
@@ -125,7 +125,7 @@ jobs:
 #      - name: Pull OpenFace Image
 #        run: |
 #          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/dbm-windows-test:latest
-#          docker image tag ${{ secrets.DOCKERHUB_USERNAME }}/dbm-windows-test:latest dbm
+#          docker image tag ${{ secrets.DOCKERHUB_USERNAME }}/dbm-windows-test:latest dbm-openface
 #          docker images
     - name: Set up Python
       uses: actions/setup-python@v4
