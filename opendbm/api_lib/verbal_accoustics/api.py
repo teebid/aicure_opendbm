@@ -2,6 +2,7 @@ import os
 from collections import OrderedDict
 
 from opendbm.api_lib.model import AudioModel
+from opendbm.api_lib.util import check_file, check_isfile
 from opendbm.dbm_lib.controller import process_feature as pf
 
 from ._audio_intensity import AudioIntensity
@@ -44,16 +45,16 @@ class VerbalAccoustics(AudioModel):
             }
         )
 
-    @staticmethod
-    def check_file(path):
-        return (
-            (pf.audio_to_wav(path, tmp=True), False)
-            if not path.endswith(".wav")
-            else (path, True)
-        )
-
     def fit(self, path):
-        path, is_wav = self.check_file(path)
+        """Fit a file in filepath to parselmouth Model.
+
+        Parameters
+        ----------
+        path : string,
+            File Path of Video/Sound file format.
+        """
+        check_isfile(path)
+        path, is_wav = check_file(path)
         for k, v in self._models.items():
             if k in ["glottal_noise", "jitter", "shimmer"]:
                 v._df = v._fit_transform(path, ff_df=self._pitchfreq._df)
@@ -63,31 +64,91 @@ class VerbalAccoustics(AudioModel):
             os.remove(path)
 
     def get_audio_intensity(self):
+        """
+        Get the model object of Audio Intensity
+        Returns:
+        self: object
+            Model Object
+        """
         return self._auint
 
     def get_pitch_frequency(self):
+        """
+        Get the model object of Pitch Frequency
+        Returns:
+        self: object
+            Model Object
+        """
         return self._pitchfreq
 
     def get_formant_frequency(self):
+        """
+        Get the model object of Formant Frequency
+        Returns:
+        self: object
+            Model Object
+        """
         return self._forfreq
 
     def get_harmonic_noise(self):
+        """
+        Get the model object of Harmonic Noise
+        Returns:
+        self: object
+            Model Object
+        """
         return self._hnr
 
     def get_glottal_noise(self):
+        """
+        Get the model object of Glottal Noise
+        Returns:
+        self: object
+            Model Object
+        """
         return self._gne
 
     def get_jitter(self):
+        """
+        Get the model object of Jitter
+        Returns:
+        self: object
+            Model Object
+        """
         return self._jitter
 
     def get_shimmer(self):
+        """
+        Get the model object of Shimmer
+        Returns:
+        self: object
+            Model Object
+        """
         return self._shimmer
 
     def get_pause_characteristics(self):
+        """
+        Get the model object of Pause Characteristics
+        Returns:
+        self: object
+            Model Object
+        """
         return self._pchar
 
     def get_voice_prevalence(self):
+        """
+        Get the model object of Vocal Prevalence
+        Returns:
+        self: object
+            Model Object
+        """
         return self._vopre
 
     def get_mfcc(self):
+        """
+        Get the model object of MFCC
+        Returns:
+        self: object
+            Model Object
+        """
         return self._mfcc

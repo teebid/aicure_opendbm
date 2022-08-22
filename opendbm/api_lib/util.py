@@ -1,11 +1,14 @@
 # import urllib, os
 import logging
+import os
 import platform
 import subprocess
 import tempfile
 import urllib.request as ur
 
 from tqdm import tqdm
+
+from opendbm.dbm_lib.controller import process_feature as pf
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
@@ -66,7 +69,29 @@ def wsllize(path):
         return [], path
 
 
-def check_model_exist(wsl_cmd, model_name):
+def check_isfile(path):
+    if not os.path.isfile(path):
+        raise FileNotFoundError("File not found. Make sure specify the correct path")
+
+
+def check_file(path):
+    """
+    Check if file is in wav format. if not, convert to wav.
+    Args:
+        path: Input path
+
+    Returns:
+        path: output path of the new wav file
+        bool: returns True if file is wav format
+    """
+    return (
+        (pf.audio_to_wav(path, tmp=True), False)
+        if not path.endswith(".wav")
+        else (path, True)
+    )
+
+
+def check_docker_model_exist(wsl_cmd, model_name):
     """
     check if docker model is present or not.
 
@@ -77,10 +102,10 @@ def check_model_exist(wsl_cmd, model_name):
     """
 
     try:
-        check_model_exist = subprocess.check_output(
+        check_docker_model_exist = subprocess.check_output(
             wsl_cmd + ["docker", "image", "ls"]
         ).decode("utf-8")
-        if model_name not in check_model_exist:
+        if model_name not in check_docker_model_exist:
             raise FileNotFoundError(
                 f"""
                 {model_name} model not found. Make sure to
@@ -107,7 +132,7 @@ def docker_command_dec(fn):
     def inner(*args, **kwargs):
         wsl_cmd, path = wsllize((args[1]))
 
-        check_model_exist(wsl_cmd, "dbm-openface")
+        check_docker_model_exist(wsl_cmd, "dbm-openface")
 
         create_docker = wsl_cmd + [
             "docker",

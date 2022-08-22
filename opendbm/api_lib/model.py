@@ -11,14 +11,6 @@ OPENFACE_PATH_VIDEO = "pkg/open_dbm/OpenFace/build/bin/FaceLandmarkVid"
 OPENFACE_PATH = "pkg/open_dbm/OpenFace/build/bin/FeatureExtraction"
 DEEEPSPEECH_URL = "https://github.com/mozilla/DeepSpeech/releases/download/v0.9.1"
 DEEPSPEECH_MODELS = ["deepspeech-0.9.1-models.pbmm", "deepspeech-0.9.1-models.scorer"]
-OPENFACE_URLS = [
-    "https://onedrive.live.com/download?cid=2E2ADA578BFF6E6E&resid=2E2ADA578BFF6E6E%2153070&authkey=AD6KjtYipphwBPc",
-    "https://onedrive.live.com/download?cid=2E2ADA578BFF6E6E&resid=2E2ADA578BFF6E6E%2153072&authkey=AKqoZtcN0PSIZH4",
-    "https://onedrive.live.com/download?cid=2E2ADA578BFF6E6E&resid=2E2ADA578BFF6E6E%2153079&authkey=ANpDR1n3ckL_0gs",
-    "https://onedrive.live.com/download?cid=2E2ADA578BFF6E6E&resid=2E2ADA578BFF6E6E%2153070&authkey=AD6KjtYipphwBPc",
-]
-
-
 MODEL_PATH = os.path.dirname(__file__)
 OPENDBM_DATA = Path.home() / ".opendbm"
 DLIB_SHAPE_MODEL = os.path.abspath(
@@ -47,25 +39,54 @@ class Model(object):
         self._params = []
 
     def to_dataframe(self):
+        """
+        Convert the result of the processed data into dataframe.
+        Returns:
+            pandas dataframe
+        """
         if self._df is None:
             raise Exception("Model has not been fit yet")
         else:
             return self._df
 
     def mean(self):
+        """
+        get mean/average of data
+        Returns:
+            pandas.Series
+        """
         return self._df[self._params].mean()
 
     def std(self):
+        """
+        get std of data
+        Returns:
+            pandas.Series
+        """
         return self._df[self._params].std()
 
 
 class VideoModel(Model):
+    """
+    A class to process the data of facial and Movement.
+    """
+
     def __init__(self):
         super().__init__()
 
     @docker_command_dec
     def _fit(self, path, dbm_group):
+        """
+        A function where the model is processing the data.
+        The model lived in the docker image,
+        where the full path of the model is stated in a variable named openface_call
+        Args:
+            path: input path of the file
+            dbm_group: self-explanatory. This function only accept dbm_group of facial and movement.
 
+        Returns:
+           output path of the processed file by the model.
+        """
         docker_temp_dir = "/app/tmp/"
         wsl_cmd, temp_dir = wsllize((tempfile.gettempdir()))
         filename = os.path.basename(path)
@@ -130,6 +151,9 @@ class VideoModel(Model):
     def _processing_video(
         self, dbm_group, call, out_dir, result_path, wsl_cmd, temp_dir, bn
     ):
+        """
+        Helper function for _fit method
+        """
 
         subprocess.Popen(
             call,
@@ -164,6 +188,10 @@ class VideoModel(Model):
 
 
 class AudioModel(Model):
+    """
+    A class to process the data of speech and acoustic
+    """
+
     def __init__(self):
         super().__init__()
 

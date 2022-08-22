@@ -2,8 +2,7 @@ import logging
 import os
 
 from opendbm.api_lib import DEEEPSPEECH_URL, DEEPSPEECH_MODELS, OPENDBM_DATA, AudioModel
-from opendbm.api_lib.util import download_url
-from opendbm.dbm_lib.controller import process_feature as pf
+from opendbm.api_lib.util import check_file, check_isfile, download_url
 
 from ._speech_features import SpeechFeature
 from ._transcribe import Transcribe
@@ -22,22 +21,27 @@ class Speech(AudioModel):
             "speech_features": self._speech_features,
         }
 
-    def _check_file(self, path):
-        return (
-            (pf.audio_to_wav(path, tmp=True), False)
-            if not path.endswith(".wav")
-            else (path, True)
-        )
-
     def fit(self, path):
+        """Fit a file in filepath to Deepspeech Model.
+
+        Parameters
+        ----------
+        path : string,
+            File Path of Video/Sound file format.
+        """
+        check_isfile(path)
         self._check_model_exists()
-        path, is_wav = self._check_file(path)
+        path, is_wav = check_file(path)
         for v in self._models.values():
             v._df = v._fit_transform(path)
         if not is_wav:
             os.remove(path)
 
-    def _check_model_exists(self):
+    @staticmethod
+    def _check_model_exists():
+        """
+        Check if deepspeech model is exists. if not, download to OPENDBM Directory.
+        """
         if not OPENDBM_DATA.exists():
             os.mkdir(OPENDBM_DATA)
         for dm in DEEPSPEECH_MODELS:
@@ -51,7 +55,19 @@ class Speech(AudioModel):
                 continue
 
     def get_transcribe(self):
+        """
+        Get the model object of Transcribe
+        Returns:
+        self: object
+            Model Object
+        """
         return self._transcribe
 
     def get_speech_features(self):
+        """
+        Get the model object of Speech Features
+        Returns:
+        self: object
+            Model Object
+        """
         return self._speech_features
