@@ -8,7 +8,6 @@ import glob
 import logging
 from os.path import join
 
-import librosa
 import numpy as np
 import pandas as pd
 import parselmouth
@@ -138,7 +137,7 @@ def run_formant(video_uri, out_dir, r_config, save=True):
         if len(aud_filter) > 0:
 
             audio_file = aud_filter[0]
-            aud_dur = librosa.get_duration(filename=audio_file)
+            aud_dur = ut.get_length(audio_file)
 
             if float(aud_dur) < 0.064:
                 logger.info(

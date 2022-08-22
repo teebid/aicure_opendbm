@@ -8,7 +8,6 @@ import glob
 import logging
 from os.path import join
 
-import librosa
 import numpy as np
 import pandas as pd
 
@@ -82,7 +81,7 @@ def run_transcribe(video_uri, out_dir, r_config, deep_path, save=True):
     if len(aud_filter) > 0:
 
         audio_file = aud_filter[0]
-        aud_dur = librosa.get_duration(filename=audio_file)
+        aud_dur = ut.get_length(audio_file)
         if float(aud_dur) < 0.1:
             logger.info("Output file {} size is less than 0.1 sec".format(audio_file))
 

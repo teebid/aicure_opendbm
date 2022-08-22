@@ -13,6 +13,25 @@ import numpy as np
 import pandas as pd
 
 
+def get_length(filename):
+    result = subprocess.run(
+        [
+            "ffprobe",
+            "-v",
+            "error",
+            "-show_entries",
+            "format=duration",
+            "-of",
+            "default=noprint_wrappers=1:nokey=1",
+            filename,
+        ],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        stdin=subprocess.DEVNULL,
+    )
+    return float(result.stdout)
+
+
 def process_segment_pitch(ff_df, r_config):
     voice_label = ff_df[r_config.aco_voiceLabel]
 

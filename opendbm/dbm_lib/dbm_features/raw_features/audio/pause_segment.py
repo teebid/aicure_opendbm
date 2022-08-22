@@ -9,7 +9,6 @@ import logging
 import os
 from os.path import join
 
-import librosa
 import numpy as np
 import pandas as pd
 import webrtcvad
@@ -158,7 +157,7 @@ def run_pause_segment(video_uri, out_dir, r_config, save=True):
         if len(aud_filter) > 0:
 
             audio_file = aud_filter[0]
-            aud_dur = librosa.get_duration(filename=audio_file)
+            aud_dur = ut.get_length(audio_file)
 
             if float(aud_dur) < 0.064:
                 logger.info(
