@@ -168,7 +168,7 @@ def run_eye_gaze(video_uri, out_dir, r_config, save=True):
 
         if len(of_csv_path) > 0:
             of_csv = of_csv_path[0]
-            df_of = pd.read_csv(of_csv, error_bad_lines=False)
+            df_of = pd.read_csv(of_csv)
 
             logger.info(
                 "Processing Output file {} ".format(os.path.join(out_loc, fl_name))

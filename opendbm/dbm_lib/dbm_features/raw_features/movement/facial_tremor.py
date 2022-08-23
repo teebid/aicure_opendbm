@@ -173,7 +173,7 @@ def fac_tremor_process(video_uri, out_dir, r_config, model_output=False, save=Tr
         of_csv_path = glob.glob(join(out_loc, fl_name + "_openface_lmk/*_output.csv"))
         if len(of_csv_path) > 0:
             of_csv = of_csv_path[0]
-            df_of = pd.read_csv(of_csv, error_bad_lines=False)
+            df_of = pd.read_csv(of_csv)
 
             logger.info(
                 "Processing Output file for facial_tremor {} ".format(

@@ -407,7 +407,7 @@ def calc_asym_feature(open_face_csv, f_cfg):
     """
     df_list = []
 
-    of_df = pd.read_csv(open_face_csv, error_bad_lines=False)
+    of_df = pd.read_csv(open_face_csv)
     lmks_frms, pose_p = retrieve_attr(of_df)
 
     attr = {"lmks_frms": lmks_frms, "pose_param": pose_p}

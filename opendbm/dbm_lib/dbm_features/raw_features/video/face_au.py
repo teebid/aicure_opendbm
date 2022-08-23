@@ -79,7 +79,7 @@ def run_face_au(video_uri, out_dir, f_cfg, save=True):
         of_csv_path = glob.glob(join(out_loc, fl_name + "_openface/*.csv"))
         if len(of_csv_path) > 0:
 
-            df_of = pd.read_csv(of_csv_path[0], error_bad_lines=False)
+            df_of = pd.read_csv(of_csv_path[0])
             df_au = df_of[extract_col_nm_au(df_of)]
             df_au = df_au.copy()
 

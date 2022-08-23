@@ -76,7 +76,7 @@ def run_face_expressivity(video_uri, out_dir, f_cfg, save=True):
         of_csv_path = glob.glob(join(out_loc, fl_name + "_openface/*.csv"))
         if len(of_csv_path) > 0:
 
-            df_of = pd.read_csv(of_csv_path[0], error_bad_lines=False)
+            df_of = pd.read_csv(of_csv_path[0])
             df_of = df_of[cfr.AU_fl]
             expr_df_list = of_feature(df_of, cfr, f_cfg)
 
