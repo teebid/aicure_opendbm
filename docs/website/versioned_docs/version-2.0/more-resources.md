@@ -3,7 +3,7 @@ id: more-resources
 title: More Resources
 ---
 
-There’s always more to learn: how to use OpenDBM, OpenDBM Biomaker variables, Data Guidelines, and Extras
+There’s always more to learn: how to use OpenDBM, OpenDBM Biomaker variables, Data Guidelines, and Resource
 
 ## Where to go from here
 

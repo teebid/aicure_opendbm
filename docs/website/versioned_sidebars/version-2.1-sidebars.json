@@ -16,22 +16,30 @@
     },
     {
       "type": "category",
-      "label": "Using OpenDBM",
+      "label": "Using Docker OpenDBM",
       "collapsed": false,
       "collapsible": true,
-      "items": [
-        "mac-linux-usage",
-      "windows-usage"
-      ]
+      "items": ["mac-linux-usage", "windows-usage"]
     },
     {
       "type": "category",
       "label": "OpenDBM Output",
       "collapsed": false,
       "collapsible": true,
+      "items": ["derived-variables", "raw-variables"]
+    },
+    {
+      "type": "category",
+      "label": "Data Guidelines",
+      "collapsed": false,
+      "collapsible": true,
       "items": [
-        "derived-variables",
-      "raw-variables"
+        "data-guidelines",
+        "supported-file-types",
+        "video-guidelines",
+        "audio-guidelines",
+        "behavioral-considerations",
+        "amount-data-needed"
       ]
     }
   ],
@@ -102,22 +110,6 @@
             "vocal-tremor"
           ]
         }
-      ]
-    }
-  ],
-  "guidelines": [
-    {
-      "type": "category",
-      "label": "Data Guidelines",
-      "collapsed": false,
-      "collapsible": true,
-      "items": [
-        "data-guidelines",
-        "supported-file-types",
-        "video-guidelines",
-        "audio-guidelines",
-        "behavioral-considerations",
-        "amount-data-needed"
       ]
     }
   ]
