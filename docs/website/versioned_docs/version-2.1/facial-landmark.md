@@ -6,7 +6,7 @@ title: Facial Landmark
 Facial landmarks refer to specific regions of the face, with x, y, and z coordinates for each facial landmark variable indicating where in the image frame that specific region of the face is located. 
 
 <figure>
-  <img src="/docs/assets/facial-landmark-1.png" width="500" alt="Visual representation of the facial landmarks calculated by OpenDBM, which relies on OpenFace and OpenCV for its measurements." />
+  <img src="../docs/assets/facial-landmark-1.png" width="500" alt="Visual representation of the facial landmarks calculated by OpenDBM, which relies on OpenFace and OpenCV for its measurements." />
   <figcaption>Visual representation of the facial landmarks calculated by OpenDBM, which relies on OpenFace and OpenCV for its measurements.</figcaption>
 </figure>
 

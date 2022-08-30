@@ -24,7 +24,7 @@ There are two required parameters, the `--input_path` and the `--output_path`. W
 This is simply the path to the data you want to process. For example, let’s pretend you want to process all the videos in the **sample_data** folder that comes included with OpenDBM:
 
 <figure>
-  <img src="/docs/assets/mac_linux_1.png" width="1000" alt="Sample Data screenshot" />
+  <img src="../docs/assets/mac_linux_1.png" width="1000" alt="Sample Data screenshot" />
   <figcaption>Sample Data screenshot</figcaption>
 </figure>
 

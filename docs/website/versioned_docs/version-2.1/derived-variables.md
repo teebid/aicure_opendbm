@@ -17,7 +17,7 @@ For derived variables, a single CSV file is outputted. This CSV file, named deri
 
 And, in case you forgot what files and/or excel sheets look like, here are some illustrations:
 <figure>
-  <img src="/docs/assets/derived_var_1.png" width="1000" alt="Screenshot of output file" />
+  <img src="../docs/assets/derived_var_1.png" width="1000" alt="Screenshot of output file" />
   <figcaption>Screenshot of output file.</figcaption>
 </figure>
 
