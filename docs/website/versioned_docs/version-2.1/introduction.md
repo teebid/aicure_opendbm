@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
   <p>
     Welcome to the very start of your OpenDBM journey! If you're looking for straight install and usage instructions, you can move to <a href="dependencies-installation">this section</a>. Continue reading for an introduction of OpenDBM before installing.
   </p>
-  <img className="content-banner-img" src="/docs/assets/aicure_white.png" alt=" " />
+  <img className="content-banner-img" src="../docs/assets/aicure_white.png"  alt=" "  />
 </div>
 
 OpenDBM is an open-source tool for measurement of digital biomarkers from video and audio of patient behavior. It is built on existing software packages used to quantify behavioral characteristics. Our goal is to increase accessibility of methods in digital phenotyping to researchers trying to understand the relationship between neuropsychiatric illnesses and their behavioral manifestations. 

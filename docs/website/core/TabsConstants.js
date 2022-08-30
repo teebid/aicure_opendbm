@@ -66,7 +66,7 @@ const getLibraryNotesTabs = (
       ? {label: 'Researchers', value: 'researchers'}
       : undefined,
     tabs.includes('data_scientist')
-      ? {label: 'Data Sciencetist', value: 'data_scientist'}
+      ? {label: 'Data Scientist', value: 'data_scientist'}
       : undefined,
     tabs.includes('engineer')
       ? {label: 'Python Engineer', value: 'engineer'}
