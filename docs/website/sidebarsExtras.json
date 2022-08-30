@@ -8,7 +8,10 @@
         "extras",
         "ci-cd-pipeline",
         "odbm-rest-api",
-        "odbm-doc"
+        "odbm-doc",
+        "opendbm-python-api",
+        "opendbm-python-api-unittest",
+        "opendbm-python-api-add-new-variable"
       ]
     }
   ]
