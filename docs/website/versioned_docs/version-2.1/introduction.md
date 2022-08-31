@@ -20,17 +20,6 @@ Through OpenDBM, a user can objectively and sensitively measure behavioral chara
 We hope to encourage researchers to use objective quantification of symptomatology in their analyses and to inspire them to contribute their own code, leading to a central repository of methods. Only by doing so can academia, healthcare, and industry collaborate effectively on the advancement of digital measurement of health and create access to novel tools in digital phenotyping.
 
 
-## How to use these docs
-
-The purpose of this document is to fully detail the specifications of OpenDBM. 
-
-- Chapter 2 describes how to install and set up OpenDBM on your system.
-- Chapter 3 outlines how to use OpenDBM to calculate digital biomarkers from data.
-- Chapter 4 provides information on how the data output is organized and analyzed.
-- Chapter 5 lists and describes all digital biomarker variables outputted by OpenDBM.
-- Chapter 6 details considerations to have in mind for any data that is being processed.
-- Chapter 7 contains additional resources for the user and links to instructional videos.
-
 ## Prerequisites
 
 To work with OpenDBM, you will need to have an understanding of Python fundamentals. If you’re new to Python or need a refresher, you can [dive in](https://docs.python.org/3/tutorial/) or [brush up](https://www.w3schools.com/python/) at your convenience.
