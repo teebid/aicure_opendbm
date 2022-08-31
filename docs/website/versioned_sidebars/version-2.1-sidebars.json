@@ -8,7 +8,8 @@
       "items": [
         "getting-started",
         "dependencies-installation",
-        "openface-docker-installation"
+        "openface-docker-installation",
+        "basic-usage"
 
 
       ]
