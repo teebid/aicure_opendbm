@@ -2,16 +2,15 @@
   "docs": [
     {
       "type": "category",
-      "label": "The Basics",
+      "label": "OpenDBM API",
       "collapsed": false,
       "collapsible": true,
       "items": [
         "getting-started",
         "dependencies-installation",
-        "openface-docker-installation",
-        "beginner-installation",
-        "pro-installation",
-        "more-resources"
+        "openface-docker-installation"
+
+
       ]
     },
     {
@@ -19,15 +18,17 @@
       "label": "Using Docker OpenDBM",
       "collapsed": false,
       "collapsible": true,
-      "items": ["mac-linux-usage", "windows-usage"]
+      "items": [
+        "beginner-installation",
+        "pro-installation",
+        "opendbm-docker-usage",
+        "opendbm-docker-output",
+        "more-resources"
+
+
+      ]
     },
-    {
-      "type": "category",
-      "label": "OpenDBM Output",
-      "collapsed": false,
-      "collapsible": true,
-      "items": ["derived-variables", "raw-variables"]
-    },
+
     {
       "type": "category",
       "label": "Data Guidelines",

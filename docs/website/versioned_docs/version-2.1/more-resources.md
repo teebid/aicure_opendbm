@@ -7,8 +7,8 @@ There’s always more to learn: how to use OpenDBM, OpenDBM Biomaker variables, 
 
 ## Where to go from here
 
-- [How to use OpenDBM](mac-linux-usage)
-- [Learn about OpenDBM output](derived-variables)
+- [How to use OpenDBM](opendbm-docker-usage)
+- [Learn about OpenDBM output](opendbm-docker-output)
 - [OpenDBM Richful Biomaker Variables](biomaker-variables)
 - [OpenDBM Data Guidelines](data-guidelines)
 - [Learn about OpenDBM surrounding components](/extras/extras)

@@ -110,4 +110,4 @@ Let’s say you don’t run into any issues and everything runs smoothly. You’
 
 ---
 
-Now that you’ve covered OpenDBM installation, let’s dive deeper on some of these core modules by looking at [Usage](mac-linux-usage).
+Now that you’ve covered OpenDBM installation, let’s dive deeper on some of these core modules by looking at [Usage](opendbm-docker-usage).

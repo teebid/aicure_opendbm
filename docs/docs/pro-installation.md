@@ -15,4 +15,4 @@ to install the docker image. Then, you’re good to go.
 
 ---
 
-Now that you’ve covered OpenDBM installation, let’s dive deeper on some of these core modules by looking at [Usage](mac-linux-usage).
+Now that you’ve covered OpenDBM installation, let’s dive deeper on some of these core modules by looking at [Usage](opendbm-docker-usage).

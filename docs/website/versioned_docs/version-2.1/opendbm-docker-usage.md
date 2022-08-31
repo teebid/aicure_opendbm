@@ -1,6 +1,6 @@
 ---
-id: mac-linux-usage
-title: Mac / Linux Usage
+id: opendbm-docker-usage
+title: Docker Usage
 ---
 
 ## Mac / Linux
