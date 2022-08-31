@@ -20,7 +20,7 @@ GitHub is just where we––and most other people––store code and other stu
 <Tabs>
 <TabItem value="manual" label="The manual way" default>
     
-You can manually clone the [repo](https://github.com/AiCure/open_dbm/discussions) by finding the Download ZIP button shown below:
+You can manually clone the <a href="https://github.com/AiCure/open_dbm">repo</a>  by finding the Download ZIP button shown below:
 
 
 <figure>
