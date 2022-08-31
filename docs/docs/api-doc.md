@@ -9,7 +9,7 @@ Each module will have its own raw variables that's too big to be included in thi
 
 ## Table of Contents
 
-- [opendbm.facial_activity](ci-cd-pipeline)
-- [opendbm.movement](ci-cd-pipeline)
-- [opendbm.verbal_accoustics](ci-cd-pipeline)
-- [opendbm.speech](ci-cd-pipeline)
+- [Facial Activity API](facial-activity-api)
+- [Movement API](movement-api)
+- [Verbal Accoustics API](verbal-accoustics-api)
+- [Speech API](speech-api)
