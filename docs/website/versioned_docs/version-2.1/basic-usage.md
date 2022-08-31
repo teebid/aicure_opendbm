@@ -4,10 +4,20 @@ title: Basic Usage
 ---
 
 
-# Basic Usage
 
-In this section, we are gonna show the basic step to get biomarker variable from OpenDBM API
+#### Prerequisites read
+* [Dependencies Installation](dependencies-installation)
+* [OpenFace Installation](openface-docker-installation)
+* Make sure to install the distribution package first.
 
+
+
+
+```commandline
+pip install opendbm
+```
+
+In this section, we are gonna show the basic instruction on how to get biomarker variable from OpenDBM API
 
 ```python
 from opendbm import Movement
