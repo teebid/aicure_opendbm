@@ -18,7 +18,7 @@ from opendbm import Movement
 
 
 ```python
-path1 = "movement_video_test.mp4"
+path = "movement_video_test.mp4"
 ```
 
 
@@ -30,7 +30,7 @@ model = Movement()
 
 ```python
 #Feed input data to the model
-model.fit(path1)
+model.fit(path)
 ```
 
 
