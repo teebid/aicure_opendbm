@@ -7,6 +7,6 @@ This section is intended to share the surrounding components inside OpenDBM repo
 
 ## Table of Contents
 
-- [CI CD Pipeline](ci-cd-pipeline)
-- [REST API](odbm-rest-api)
-- [OpenDBM Documentation](odbm-doc)
+- [CI CD Pipeline](/extras/ci-cd-pipeline)
+- [REST API](/extras/odbm-rest-api)
+- [OpenDBM Documentation](/extras/odbm-doc)
