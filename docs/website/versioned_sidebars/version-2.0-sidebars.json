@@ -15,23 +15,17 @@
     },
     {
       "type": "category",
-      "label": "Using OpenDBM",
+      "label": "Using Docker OpenDBM",
       "collapsed": false,
       "collapsible": true,
-      "items": [
-        "mac-linux-usage",
-      "windows-usage"
-      ]
+      "items": ["mac-linux-usage", "windows-usage"]
     },
     {
       "type": "category",
       "label": "OpenDBM Output",
       "collapsed": false,
       "collapsible": true,
-      "items": [
-        "derived-variables",
-      "raw-variables"
-      ]
+      "items": ["derived-variables", "raw-variables"]
     }
   ],
   "variable": [

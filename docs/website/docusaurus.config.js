@@ -204,7 +204,7 @@ module.exports = {
         style: 'dark',
         items: [
           {
-            label: 'Guides',
+            label: 'Getting Started',
             type: 'doc',
             docId: 'getting-started',
             position: 'right',
@@ -216,24 +216,17 @@ module.exports = {
             position: 'right',
           },
           {
-            label: 'Data Guidelines',
+            label: 'API',
             type: 'doc',
-            docId: 'data-guidelines',
+            docId: 'api-doc',
             position: 'right',
           },
           {
-            label: 'Extras',
+            label: 'Resources',
             type: 'doc',
             docId: 'extras',
             position: 'right',
             docsPluginId: 'extras',
-          },
-          {
-            type: 'doc',
-            docId: 'overview',
-            label: 'Contributing',
-            position: 'right',
-            docsPluginId: 'contributing',
           },
           {
             to: '/blog',

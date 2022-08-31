@@ -2,13 +2,24 @@
   "extras": [
     {
       "type": "category",
-      "label": "Extras",
+      "label": "Resources",
       "collapsed": false,
+      "items": ["extras", "ci-cd-pipeline", "odbm-rest-api", "odbm-doc"]
+    },
+    {
+      "type": "category",
+      "label": "Contributing",
+      "collapsed": false,
+      "collapsible": true,
       "items": [
-        "extras",
-        "ci-cd-pipeline",
-        "odbm-rest-api",
-        "odbm-doc"
+        "overview",
+        "code-of-conduct",
+        "how-to-contribute-code",
+        "issue-reporting",
+        "community-discussions",
+        "publications-and-referencing",
+        "opendbm-listserv-signup",
+        "license-contact"
       ]
     }
   ]
