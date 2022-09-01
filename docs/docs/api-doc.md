@@ -9,7 +9,7 @@ Each module will have its own raw variables that's too big to be included in thi
 
 ## Table of Contents
 
-- [Facial Activity API](docs/facial-activity-api)
-- [Movement API](docs/movement-api)
-- [Verbal Accoustics API](docs/verbal-accoustics-api)
-- [Speech API](docs/speech-api)
+- [Facial Activity API](/docs/facial-activity-api)
+- [Movement API](/docs/movement-api)
+- [Verbal Accoustics API](/docs/verbal-accoustics-api)
+- [Speech API](/docs/speech-api)
