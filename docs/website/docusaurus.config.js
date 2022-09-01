@@ -130,6 +130,7 @@ module.exports = {
         id: 'api',
         path: 'api',
         routeBasePath: '/api',
+        sidebarPath: require.resolve('./sidebarsAPI.json'),
         ...commonDocsOptions,
       }),
     ],
