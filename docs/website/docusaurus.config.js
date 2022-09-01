@@ -124,6 +124,16 @@ module.exports = {
       }),
     ],
     [
+      'content-docs',
+      /** @type {import('@docusaurus/plugin-content-docs').Options} */
+      ({
+        id: 'api',
+        path: 'api',
+        routeBasePath: '/api',
+        ...commonDocsOptions,
+      }),
+    ],
+    [
       '@docusaurus/plugin-pwa',
       {
         debug: true,
@@ -220,6 +230,7 @@ module.exports = {
             type: 'doc',
             docId: 'api-doc',
             position: 'right',
+            docsPluginId: 'api',
           },
           {
             label: 'Resources',
@@ -227,7 +238,9 @@ module.exports = {
             docId: 'extras',
             position: 'right',
             docsPluginId: 'extras',
+
           },
+
           {
             to: '/blog',
             label: 'Blog',
