@@ -22,16 +22,15 @@ jobs:
         # cache-dependency-path: './docs/package-lock.json'
     - name: Install dependencies
       run: |
-      
-        yarn install --frozen-lockfile
         apt-get install python-markdown-doc
-    - name: Build website
-      run: |
-        ls -alrt
         pydoc-markdown -I opendbm/api_lib/facial_activity -m api --render-toc > docs/docs/facial_activity_api.md
         pydoc-markdown -I opendbm/api_lib/movement -m api --render-toc > docs/docs/movement_api.md
         pydoc-markdown -I opendbm/api_lib/verbal_accoustics -m api --render-toc > docs/docs/verbal_accoustics_api.md
         pydoc-markdown -I opendbm/api_lib/speech -m api --render-toc > docs/docs/speech_api.md
+        yarn install --frozen-lockfile
+    - name: Build website
+      run: |
+        ls -alrt
         cd website
         yarn build
     # Popular action to deploy to GitHub Pages:
