@@ -32,8 +32,6 @@ jobs:
         pydoc-markdown -I opendbm/api_lib/movement -m api --render-toc > docs/docs/movement_api.md
         pydoc-markdown -I opendbm/api_lib/verbal_accoustics -m api --render-toc > docs/docs/verbal_accoustics_api.md
         pydoc-markdown -I opendbm/api_lib/speech -m api --render-toc > docs/docs/speech_api.md
-
-        
         cd website
         yarn build
     # Popular action to deploy to GitHub Pages:
