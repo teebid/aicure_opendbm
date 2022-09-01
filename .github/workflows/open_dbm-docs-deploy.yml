@@ -24,6 +24,7 @@ jobs:
     - name: Install dependencies
       run: |
         pwd
+        ls
     - name: Build website
       run: |
         ls -alrt
