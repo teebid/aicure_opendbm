@@ -88,5 +88,5 @@ This pipeline triggered only if the release manager create a release tag. There 
 </figure>
 
 ## OpenDBM Web Documentation Deployment
-This pipeline is to make deployment of OpenDBM Web documentation. You can find the details about [OpenDBM documentation here]((odbm-doc)). 
+This pipeline is to make deployment of OpenDBM Web documentation. You can find the details about [OpenDBM documentation here](odbm-doc). 
 > This pipeline only triggered manually. We can go to github actions, select OpenDBM Web Documentation Deployment, the choose the Run WorkFlow
