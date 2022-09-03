@@ -60,6 +60,15 @@ Within this section, you can read other people perspectives, stories and bunch o
 ## OpenDBM Web Technical Documentation
 Below section will discuss in more detail about the technical aspect of OpenDBM Web documentation structure. 
 
+### How to install and run locally
+You need `node` version at least 16 to be able to install and run this documentation
+Under the docs directory:
+* ```bash yarn``` to install all the dependencies
+* Then go to the the `website` directory and run the app
+```bash
+cd website && yarn start
+```
+
 ### Dashboard
 The dashboard page is build on top of React framework. You need only a basic React knowledge in order to change stuff in the dashboard. 
 
@@ -71,3 +80,26 @@ The main config file of OpenDBM documentation is docusaurus.config.js. You can c
   <img src="../docs/assets/odbm_edit_button.png" width="300" alt="OpenDBM Edit this page button" />
   <figcaption>OpenDBM Edit this page button</figcaption>
 </figure>
+
+* You can set the url, baseUrl
+* in `presets[0][0]` you can set the sidebar file to show in the `getting-started` section. We can also set the limit number of versions that will be displayed in the documentation in this line `['current', ...versions.slice(0, 2)]` We will discuss about versioning deeper below
+> Support too many versions will make the web deployment much slower. 
+* Still in the same above parameter, we can also sync the google analytic tag in `googleAnalytics.trackingID` parameter.
+* in `plugins` we also can set the siderbar file to be shown in other section as well 
+
+### Versioned pages
+This documentation support versioning on the library as it very important that we could provide information and retain it so community can refer to specific version for their usecase. The versions are listed under `docs/website/versions.json`. The latest version must be the first element in that array. 
+
+That versions will be referred and used in these two directories `versioned_docs` and `versioned_sidebars`. So you can edit the documentation in specific version within these directories. 
+
+Those files and sidebars file also has duplicated contents in `sidebars.json` and files under directories `docs/docs`. These files are meant for future version. So if the community using **Edit This Page** button in the pages, it will create the MR for changes related to this directory. So you can say its a temporary directory for future changes on the documentations. Later, when you create future `version-x.x` version, you can just copy paste all the files under `docs/docs` to the new version directory.
+
+### Non Versioned pages
+Right now, the non versioned pages are API, Resources, Blog. It has its own directories under docs/website. If you need new section, you can create the directory and define it in `docusaurus.config.js`.
+
+### Navigation (Sidebar and page ID)
+In the `version-xx-sidebars.json`, you can define the sidebar and the IDs of pages that you want to categorize. You can set the id inside the page i.e.
+```
+id: action-units
+title: Actions Units
+```
