@@ -23,6 +23,7 @@ After it merged, again the Github Actions will be executed Code Checking on the 
   <figcaption>ODBM Workflows</figcaption>
 </figure>
 
+> The OpenDBM is also using caching to speed up the pipeline deployment. So the installation and dependencies installation will be done in fast time. The only time needed is to download the cache into the github action container. You can check the cache key in job `- uses: actions/cache@v3` in `.github/workflows/open_dbm-code-checking.yml` file.
 ## OpenDBM Code Checking
 The configuration for this pipelines is located under .github/workflows/open_dbm-code-checking.yml. Its the pipeline that will trigger in almost every git events. When you push your changes to your forked repository, it will run using your own github actions. It also only triggers when you change the files of the core library such as under dbm_lib directory. Any non-core files changes will not trigger this pipeline.
 
@@ -88,5 +89,10 @@ This pipeline triggered only if the release manager create a release tag. There 
 </figure>
 
 ## OpenDBM Web Documentation Deployment
-This pipeline is to make deployment of OpenDBM Web documentation. You can find the details about [OpenDBM documentation here](odbm-doc). 
+This pipeline is to make deployment of OpenDBM Web documentation. The configuration file is in `.github/workflows/open_dbm-docs-deploy.yml` file. You can find the details about [OpenDBM documentation here](odbm-doc). 
 > This pipeline only triggered manually. We can go to github actions, select OpenDBM Web Documentation Deployment, the choose the Run WorkFlow
+> We need a proper Github Token that can build and push the github pages. 
+
+## Github Environment Variables
+**GH_TOKEN** : Its to update the badge based on conditions defined in the pipeline. It push the new badge status if there's any status difference after pipeline. Its also used to deploy the Web Documentation to Github pages
+**TWINE_PASSWORD** : Pipeline use this variable to push into the PyPI. By default the pipeline use __token__ as the username, indicates that to push to PyPI we will use token instead of credentials
