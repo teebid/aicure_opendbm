@@ -10,7 +10,7 @@ Inside the OpenDBM repository, there is a folder named rest_api. This folder mea
 > The OpenDBM API designed with OpenAPI 2.0 to standardize API definition for programmatic usage, better developer experience and documentation. It will also protected by standard security protocol. 
 
 <figure>
-  <img src="../docs/assets/odbm_api_summary.png" width="500" alt="ODBM REST API Summary" />
+  <img src="../docs/assets/odbm_api_summary.png" width="500" alt="OpenDBM REST API Summary" />
   <figcaption>ODBM REST API Summary</figcaption>
 </figure>
 
@@ -39,7 +39,7 @@ After you execute the API, you will get the zip file, with the csv results compr
 
 ## Technology Stack
 <figure>
-  <img src="../docs/assets/odbm_tech_stack.png" width="500" alt="ODBM REST API Technology Stack" />
+  <img src="../docs/assets/odbm_tech_stack.png" width="500" alt="OpenDBM REST API Technology Stack" />
   <figcaption>ODBM REST API Technology Stack</figcaption>
 </figure>
 
@@ -50,9 +50,9 @@ We also use Uvicorn is an ASGI web server implementation for Python. Until recen
 ## API Documentations
 The Rest API documentations can be found when you run the the app. Change the relative path to /docs or /redoc
 <figure>
-  <img src="../docs/assets/odbm_api_docs.png" width="500" alt="ODBM REST API Swagger API Docs" />
+  <img src="../docs/assets/odbm_api_docs.png" width="500" alt="OpenDBM REST API Swagger API Docs" />
   <figcaption>ODBM REST API Swagger API Docs</figcaption>
 
-  <img src="../docs/assets/odbm_redocs.png" width="500" alt="ODBM REST API Redocs" />
+  <img src="../docs/assets/odbm_redocs.png" width="500" alt="OpenDBM REST API Redocs" />
   <figcaption>ODBM REST API Redocs</figcaption>
 </figure>

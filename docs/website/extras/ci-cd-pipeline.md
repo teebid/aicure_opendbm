@@ -8,7 +8,7 @@ title: OpenDBM CI CD Pipeline
 OpenDBM CI CD Pipeline is very important as its job is to maintain the quality of the library for each new changes. The OpenDBM CI CD pipeline is divided into multiple sections that serve different purposes. Before OpenDBM dive into those sections, please see below the summary of the entirer pipeline flow. 
 
 <figure>
-  <img src="../docs/assets/odbm_pipeline.png" width="500" alt="ODBM Pipeline Flow" />
+  <img src="../docs/assets/odbm_pipeline.png" width="500" alt="OpenDBM Pipeline Flow" />
   <figcaption>ODBM Pipeline Flow</figcaption>
 </figure>
 
@@ -19,7 +19,7 @@ After it pushed, you need to create a pull request. After the PR is created, Git
 After it merged, again the Github Actions will be executed Code Checking on the master branch. After the Code Checking is successful,  the developers need to create the tag which marked as release version. When tag created successfully, it will again run the Code Check, and additionally it will run the automatic update of OpenDBM to PyPi.
 
 <figure>
-  <img src="../docs/assets/odbm_workflows.png" width="500" alt="ODBM Workflows" />
+  <img src="../docs/assets/odbm_workflows.png" width="500" alt="OpenDBM Workflows" />
   <figcaption>ODBM Workflows</figcaption>
 </figure>
 
@@ -37,7 +37,7 @@ With a 650% increase in next-gen cyberattacks against open source tools recorded
 ODBM-G2 will be using safety (https://pypi.org/project/safety) to scan the third party vulnerabilities.
 
 <figure>
-  <img src="../docs/assets/odbm_safety.png" width="500" alt="ODBM Safety" />
+  <img src="../docs/assets/odbm_safety.png" width="500" alt="OpenDBM Safety" />
   <figcaption>ODBM Safety</figcaption>
 </figure>
 
@@ -49,7 +49,7 @@ OpenDBM is using one of the most popular frameworks for unit testing, Pytest. Py
 In OpenDBM project, the unit test will be stored in Test folder. The Unit Test file structure will mimic OpenDBM File Structure to improve the readability / easier to check. For example, as below.
 
 <figure>
-  <img src="../docs/assets/odbm_unittest.png" width="500" alt="ODBM Unit tests" />
+  <img src="../docs/assets/odbm_unittest.png" width="500" alt="OpenDBM Unit tests" />
   <figcaption>ODBM Unit tests</figcaption>
 </figure>
 
@@ -75,7 +75,7 @@ This pipeline is to ensure the new changes that will merged to OpenDBM library s
 The pipeline will trigger if there is new Merge Request created.
 
 <figure>
-  <img src="../docs/assets/odbm_build_checking.png" width="500" alt="ODBM Build Checking" />
+  <img src="../docs/assets/odbm_build_checking.png" width="500" alt="OpenDBM Build Checking" />
   <figcaption>ODBM Build Checking</figcaption>
 </figure>
 
@@ -83,7 +83,7 @@ The pipeline will trigger if there is new Merge Request created.
 This pipeline triggered only if the release manager create a release tag. There is also a condition in the pipeline that the release should not be draft / pre release tag. Only when official release created, it will run this pipeline and publish the new version of OpenDBM library to PyPI
 
 <figure>
-  <img src="../docs/assets/odbm_pypi_release.png" width="500" alt="ODBM PyPI release page" />
+  <img src="../docs/assets/odbm_pypi_release.png" width="500" alt="OpenDBM PyPI release page" />
   <figcaption>ODBM PyPI release page</figcaption>
 </figure>
 

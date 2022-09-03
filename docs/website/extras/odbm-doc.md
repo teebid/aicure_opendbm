@@ -3,14 +3,71 @@ id: odbm-doc
 title: OpenDBM Documentation
 ---
 
-:::info
-Welcome to the Resource section! If you're getting started with OpenDBM, please refer to <a href="/docs/getting-started">Guides</a> section. Continue reading to learn about OpenDBM surrounding components!
-:::
+## Summary
 
-This section is intended to share the surrounding components inside OpenDBM repository. The intended components includes CI/CD pipeline, REST API for demo purpose and how this documentation built. It is not a requirement to be familiar with this material to be effective with OpenDBM. You can still benefit from this section as it will give you insights into how we manage things to give added values to this repository. Feel free to share your feedback on the [discussion group](https://github.com/AiCure/open_dbm/discussions/categories/general) for this section.
+As book is the gate to knowledge, OpenDBM documentation is the gate to all the great features provided in this library! The OpenDBM team primary focus is how to make this library easily accessible, installable and usable in a very simple and straightforward as much as possible, and good documentation is the key to our objectives. 
 
-## Table of Contents
+## Github documentation
+<figure>
+  <img src="../docs/assets/odbm_github_doc.png" width="500" alt="OpenDBM Github documentation" />
+  <figcaption>OpenDBM Github documentation</figcaption>
+</figure>
+We want our github documentation as concise as possible. In here you can find the important information such as:
+* The latest OpenDBM version in PyPI
+* Unit test results which are coming from OpenDBM Code Checking Github Actions pipeline
+* The code coverage that also produced by above process
 
-- [CI CD Pipeline](ci-cd-pipeline)
-- [REST API](odbm-rest-api)
-- [OpenDBM Documentation](odbm-doc)
+Along with those informations, you can also see the OS build and test status on our documentation which produced from OpenDBM Build Checking Github Actions pipeline. This way you can check whether the last version of OpenDBM library can support which platforms
+
+### Basic usage and other informations
+We also provide a section how to install and use OpenDBM library inside our github page. But of course more detailed explanation are provided in OpenDBM Web documentation which you're probably looking right now
+
+### TOC Table of content
+We are using [DocToc](https://github.com/thlorenz/doctoc) in order to generate our table of contents. So dont change the table of content at all. If you want to add anything, just add it like a normal way, and you can use `## My Section`  if you feel need to add new section for your information. After that, just generate ```doctoc .``` in the root folder and DocToc will generate the ToC immediately and include your new information seamlessly.
+<figure>
+  <img src="../docs/assets/odbm_doctoc.png" width="500" alt="OpenDBM Github Table of Content Generator" />
+  <figcaption>OpenDBM Github Table of Content Generator</figcaption>
+</figure>
+
+## Web Documentation
+
+By good probability when you read this section, you're currently looking at our web documentation. (Unless you read this from our github blob files which is still normal, no worries!)
+> We are using [Docusaurus](https://docusaurus.io/) to generate this documentation as our primary objective is focus on the content and how to deliver the most straightfoward information to the community. So all the neccessary code to build this web documentation are coming from Docusaurus.
+
+## Documentation sections
+### Dashboard
+When you first arrived to the OpenDBM Web documentation, you will see the concise description about what is OpenDBM and Why to use it. We also provide talks and videos that provide informations about this library. We also put the acknowledgements to those libraries that make everything is possible in this OpenDBM library
+
+### Getting Started
+This section provide informations on everything you need to know to install and use the OpenDBM. It explains about the prerequisites before you install the OpenDBM. It makes sure to leave no one behind as we provide the informations to all OS platforms. 
+<figure>
+  <img src="../docs/assets/odbm_allOs.png" width="500" alt="OpenDBM Documentation to all platforms" />
+  <figcaption>OpenDBM Documentation to all platforms</figcaption>
+</figure>
+
+### Variables
+This section provide deeper informations about OpenDBM. There are a lot of variables you can fetch from OpenDBM, and this section provide you how to use those variables and what is the limitation on each modules. We also make sure to make annotation or reference to acknowledge other people contributions to make all this possible
+
+### API
+One of all thing about the OpenDBM generation 2 is how easy it is to use OpenDBM. We put another layer on top of the previous OpenDBM library to make it easier to use OpenDBM. All those APIs informations are provided within this section. This section is automatically generated by [pydoc](https://docs.python.org/3/library/pydoc.html)
+
+### Resources
+This section provide all informations surrounding the OpenDBM environment. It gives you information about the pipeline, REST API, Documentation (Hi, there!) and contributing guideines.
+
+### Blog
+Within this section, you can read other people perspectives, stories and bunch of interesting stuff about OpenDBM all around the world!
+
+## OpenDBM Web Technical Documentation
+Below section will discuss in more detail about the technical aspect of OpenDBM Web documentation structure. 
+
+### Dashboard
+The dashboard page is build on top of React framework. You need only a basic React knowledge in order to change stuff in the dashboard. 
+
+### Main config file
+The main config file of OpenDBM documentation is docusaurus.config.js. You can change things like:
+* You can set the footer content
+* You can set the `editUrl`. This parameter to define the url when you or other community members want to change this file
+<figure>
+  <img src="../docs/assets/odbm_edit_button.png" width="300" alt="OpenDBM Edit this page button" />
+  <figcaption>OpenDBM Edit this page button</figcaption>
+</figure>
