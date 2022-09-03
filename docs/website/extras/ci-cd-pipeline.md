@@ -19,7 +19,7 @@ After it pushed, you need to create a pull request. After the PR is created, Git
 After it merged, again the Github Actions will be executed Code Checking on the master branch. After the Code Checking is successful,  the developers need to create the tag which marked as release version. When tag created successfully, it will again run the Code Check, and additionally it will run the automatic update of OpenDBM to PyPi.
 
 <figure>
-  <img src="../docs/assets/odbm_pipeline.png" width="500" alt="ODBM Workflows" />
+  <img src="../docs/assets/odbm_workflows.png" width="500" alt="ODBM Workflows" />
   <figcaption>ODBM Workflows</figcaption>
 </figure>
 
@@ -86,3 +86,7 @@ This pipeline triggered only if the release manager create a release tag. There 
   <img src="../docs/assets/odbm_pypi_release.png" width="500" alt="ODBM PyPI release page" />
   <figcaption>ODBM PyPI release page</figcaption>
 </figure>
+
+## OpenDBM Web Documentation Deployment
+This pipeline is to make deployment of OpenDBM Web documentation. You can find the details about [OpenDBM documentation here]((odbm-doc)). 
+> This pipeline only triggered manually. We can go to github actions, select OpenDBM Web Documentation Deployment, the choose the Run WorkFlow
