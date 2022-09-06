@@ -35,3 +35,4 @@ https://github.com/sachadee/Dlib/blob/main/dlib-19.22.99-cp37-cp37m-win_amd64.wh
 https://github.com/sachadee/Dlib/blob/main/dlib-19.22.99-cp38-cp38-win_amd64.whl?raw=true; "Windows" in platform_system and python_version == "3.8"
 https://github.com/sachadee/Dlib/blob/main/dlib-19.22.99-cp39-cp39-win_amd64.whl?raw=true; "Windows" in platform_system and python_version == "3.9"
 matplotlib
+pydoc-markdown
