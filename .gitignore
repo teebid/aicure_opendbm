@@ -10,6 +10,9 @@ __pycache__/
 *$py.class
 
 
+#Pydoc generated_file for OpenDBM Python API Documentation
+docs/website/api/*api.md
+
 #docker dependencies for mac
 .github/brew-colima
 .github/brew-docker
