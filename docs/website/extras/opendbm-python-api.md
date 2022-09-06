@@ -8,6 +8,8 @@ title: OpenDBM Python API
 When we use OpenDBM python API, all the source codes come from the opendbm folder in our GitHub repo. opendbm folder is the main 
 package we use to process input data. opendbm has four folders that consist of api_lib, dbm_lib, pkg, and resources.
 
+To make it clear in the beginning, you will know that our structure in our repo reflects what is already documented in <a href="../docs/biomaker-variables">Variables</a> Section.
+
 <figure>
   <img src="../img/extras/api-docs-1.png" width="100%" alt="OpenDBM Folder" />
   <figcaption>OpenDBM Folder</figcaption>
@@ -17,7 +19,7 @@ package we use to process input data. opendbm has four folders that consist of a
 ### 1. dbm_lib
 <figure>
   <img src="../img/extras/api-docs-2.png" width="100%" alt="dbm_lib Folder" />
-  <figcaption>dbm_lib Folder</figcaption>
+  <figcaption>dbm_lib folder @ dbm_lib/dbm_features/raw_features</figcaption>
 </figure>
 
 
