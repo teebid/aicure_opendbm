@@ -1,3 +1,17 @@
 {
-
+  "api": [
+    {
+      "type": "category",
+      "label": "OpendDBM API",
+      "collapsed": false,
+      "collapsible": true,
+      "items": [
+        "api-doc",
+        "facial-activity-api",
+        "movement-api",
+        "speech-api",
+        "verbal-accoustics-api"
+      ]
+    }
+  ]
 }

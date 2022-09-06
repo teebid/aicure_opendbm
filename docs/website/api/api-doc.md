@@ -1,6 +1,6 @@
 ---
 id: api-doc
-title: OpendDBM API Documentation
+title: OpendDBM API
 ---
 
 This section give an overview of OpenDBM APi methods and functions. It is not a requirement to be familiar with all materials to be effective with OpenDBM. You can still benefit from this section as it will give you insights into how we manage things to give added values to this repository.
@@ -9,7 +9,7 @@ Each module will have its own raw variables that's too big to be included in thi
 
 ## Table of Contents
 
-- [Facial Activity API](facial_activity_api)
-- [Movement API](movement_api)
-- [Verbal Accoustics API](verbal_accoustics_api)
-- [Speech API](speech_api)
+- [Facial Activity API](facial-activity-api)
+- [Movement API](movement-api)
+- [Verbal Accoustics API](verbal-accoustics-api)
+- [Speech API](speech-api)
