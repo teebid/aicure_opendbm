@@ -6,11 +6,30 @@
       "collapsed": false,
       "collapsible": true,
       "items": [
-        "api-doc",
-        "facial-activity-api",
-        "movement-api",
-        "speech-api",
-        "verbal-accoustics-api"
+        {
+          "id": "api-doc",
+          "type": "doc"
+        },
+        {
+          "id": "facial-activity-api",
+          "type": "doc",
+          "label": "Facial Activity"
+        },
+        {
+          "id": "movement-api",
+          "type": "doc",
+          "label": "Movement"
+        },
+        {
+          "id": "verbal-accoustics-api",
+          "type": "doc",
+          "label": "Verbal Acoustics"
+        },
+        {
+          "id": "speech-api",
+          "type": "doc",
+          "label": "Speech"
+        }
       ]
     }
   ]
