@@ -7,6 +7,11 @@ title: OpenDBM API - Add New Variable
 * [OpenDBM Python API](opendbm-python-api)
 * [OpenDBM API - Unit Test](opendbm-python-api-unittest)
 
+<figure>
+  <img src="../img/extras/api-add-var-5.png" width="70%" alt="OpenDBM Folder" />
+  <figcaption>Simple Architecure Diagram on How to Add New Module</figcaption>
+</figure>
+
 ## Scenario
 We want to add a pose detector in OpenDBM API. The model file that we will use to do the pose detector is 2 GB in size. Here is the steps on how to do it
 
