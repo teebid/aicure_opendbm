@@ -2,7 +2,7 @@
   "api": [
     {
       "type": "category",
-      "label": "OpendDBM API",
+      "label": "OpenDBM API",
       "collapsed": false,
       "collapsible": true,
       "items": [
