@@ -45,30 +45,36 @@ Follow the instruction in the [official website](https://docs.docker.com/desktop
 
     **IMPORTANT NOTE**: 
    * Please follow the instructions to install **WSL-2** as system requirements instead of Hyper-V. Because we relying on WSL command to execute OpenFace Model.
-   * When in step Downloading and install the [Linux kernel update package](https://docs.microsoft.com/en-us/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package):
+   * After you installed WSL in [Linux kernel update package](https://docs.microsoft.com/en-us/windows/wsl/install):
      * Make sure to execute "wsl --set-default-version 2"
-     * Make sure to use Ubuntu as Linux distribution of choice
+     * Make sure to choose Ubuntu as Linux distribution of choice
+       * **wsl -l -o** to list distribution
+       * **wsl --install -d {DistributionName}** to install Ubuntu Distribution
+
+<figure>
+  <img src="../docs/assets/ubuntu-wsl.png" width="70%" alt="OpenDBM Folder" />
+  <figcaption>Example on how to List Distribution and Install Ubuntu</figcaption>
+</figure>
+
 2. After WSL and Docker is installed. check if Docker use WSL Integration by go to the Settings > Resources > WSL Integrations, and then enable Ubuntu as our Linux Distribution.
+<figure>
+  <img src="../docs/assets/ubuntu-enable-docker.png" width="100%" alt="OpenDBM Folder" />
+  <figcaption>WSL Integration in Docker Setting</figcaption>
+</figure>
+
 
 
 3. Make sure check and set wsl distributions to Linux distributions of your choice. In powershell/command prompt:
-    ```shell
-    C:\Users\user>wsl --list
-    #output
-    Windows Subsystem for Linux Distributions:
-    docker-desktop (Default)
-    Ubuntu-18.04
-    docker-desktop-data
+    * Type **wsl --list** to check WSL distributions list
+    * **wsl --setdefault {Distribution Name}** to set the default distribution **(Use Ubuntu)**
+    * **wsl --list** again to check if wsl default is set
    
-    C:\Users\user>wsl --setdefault Ubuntu-18.04
+<figure>
+  <img src="../docs/assets/ubuntu-set-dist.png" width="100%" alt="OpenDBM Folder" />
+  <figcaption>Set Default WSL</figcaption>
+</figure>
 
-    C:\Users\user>wsl --list #check if wsl default is changed
-    #output
-    Windows Subsystem for Linux Distributions:
-    Ubuntu-18.04 (Default)
-    docker-desktop
-    docker-desktop-data
-    ```
+
 4. And it's done! Now you can go to the next step by pulling the docker image from the step [above](#top)
 
 
