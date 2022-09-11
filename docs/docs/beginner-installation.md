@@ -71,8 +71,7 @@ This will all make more sense in a bit.
 
 So, follow the [instructions on the Docker website](https://docs.docker.com/desktop/) to install Docker on your system. We recommend you use the latest stable version. Once downloaded and installed, launch Docker, open Terminal / Command Prompt, and check the version to ensure that Docker is properly installed and running:
 
-**NOTE for Windows User**: Please use the instruction <a href="../docs/openface-docker-installation#if-you-havent-heres-the-instruction-on-how-to-install-docker">here</a>
-to install docker
+**NOTE for Windows User**: Please use the instruction [here](openface-docker-installation#if-you-havent-heres-the-instruction-on-how-to-install-docker) to install docker and/or enable WSL 2 as Docker Integration
 
 ```bash
 % docker --version
