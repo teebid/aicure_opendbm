@@ -148,11 +148,11 @@ The API response will be
 ```
 Save the file location returned somewhere `files/facial_speech_verbal_video_test.mp4`
 
-* Then you can use any API you want, insert the previous upload file url into `file_url` parameter. Then you can specify variables you want to get. For example, if you use the `/video/movement` API, you can specify the request body like 
+* Then you can use any API you want, insert the previous upload file url into `file_url` parameter. Then you can specify variables you want to get. For example, if you use the `/video/accoustic` API, you can specify the request body like 
 ```json
 [
-    "head_movement",
-    "eye_blink"
+    "audio_intensity",
+    "pitch_frequency"
 ]
 ```
 
@@ -164,18 +164,18 @@ Save the file location returned somewhere `files/facial_speech_verbal_video_test
   ]}>
   <TabItem value="docs">
     <figure>
-  <img src="../docs/assets/opendbm_movement.png" width="700" alt="OpenDBM Test Movement API" />
-  <figcaption>ODBM Test Movement API</figcaption>
+  <img src="../docs/assets/opendbm_accoustic.png" width="700" alt="OpenDBM Test Accoustic API" />
+  <figcaption>ODBM Test Accoustic API</figcaption>
 </figure>
   </TabItem>
   <TabItem value="curl">
 
 ```bash
-curl 'http://127.0.0.1:8000/odbm/v1/video/movement?file_url=files%2Ffacial_speech_verbal_video_test.mp4&platform=local' \
+curl 'http://127.0.0.1:8000/odbm/v1/video/accoustic?file_url=files%2Ffacial_speech_verbal_video_test.mp4&platform=local' \
   -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhaWN1cmUiLCJleHAiOjE2NjI5MDkwMzd9.RQgtXhPCcgzctfuNg2GbByR9OMdr1vWTerl1iKPWqfk' \
   -H 'Content-Type: application/json' \
   -H 'accept: application/json' \
-  --data-raw $'[\n    "head_movement",\n    "eye_blink"\n]' \
+  --data-raw $'[\n    "audio_intensity",\n    "pitch_frequency"\n]' \
   --compressed
 ```
 
