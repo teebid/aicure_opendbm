@@ -7,7 +7,7 @@ title: Raw Variables
 
 The raw variable data structure is slightly more complicated. The hierarchy is described below:
 <figure>
-  <img src="/docs/assets/raw_variables1.png" width="1000" alt="Variables hierarchy" />
+  <img src="../docs/assets/raw_variables1.png" width="1000" alt="Variables hierarchy" />
   <figcaption>Variables hierarchy</figcaption>
 </figure>
 
