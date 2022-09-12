@@ -25,7 +25,7 @@ After it merged, again the Github Actions will be executed Code Checking on the 
 
 > The OpenDBM is also using caching to speed up the pipeline deployment. So the installation and dependencies installation will be done in fast time. The only time needed is to download the cache into the github action container. You can check the cache key in job `- uses: actions/cache@v3` in `.github/workflows/open_dbm-code-checking.yml` file.
 ## OpenDBM Code Checking
-The configuration for this pipelines is located under .github/workflows/open_dbm-code-checking.yml. Its the pipeline that will trigger in almost every git events. When you push your changes to your forked repository, it will run using your own github actions. It also only triggers when you change the files of the core library such as under dbm_lib directory. Any non-core files changes will not trigger this pipeline.
+The configuration for this pipelines is located under `.github/workflows/open_dbm-code-checking.yml`. Its the pipeline that will trigger in almost every git events. When you push your changes to your forked repository, it will run using your own github actions. It also only triggers when you change the files of the core library such as under dbm_lib directory. Any non-core files changes will not trigger this pipeline.
 
 ### Linting
 Linting is a way of detecting errors in code that can be solved with syntax or style changes. People often use linting to find simple errors, such as inconsistent spacing or formatting. This is generally more effective than merely running the code. 
@@ -81,7 +81,7 @@ The pipeline will trigger if there is new Merge Request created.
 </figure>
 
 ## OpenDBM Publish Release
-This pipeline triggered only if the release manager create a release tag. There is also a condition in the pipeline that the release should not be draft / pre release tag. Only when official release created, it will run this pipeline and publish the new version of OpenDBM library to PyPI
+This pipeline triggered only if the release manager create a release tag. There is also a condition in the pipeline that the release should not be draft / pre release tag. Only when official release created, it will run the pipeline that lives in `.github/workflows/open_dbm-publish-release.yml`, and publish the new version of OpenDBM library to PyPI
 
 <figure>
   <img src="../docs/assets/odbm_pypi_release.png" width="500" alt="OpenDBM PyPI release page" />
