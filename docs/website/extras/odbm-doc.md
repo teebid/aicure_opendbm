@@ -66,7 +66,7 @@ Within this section, you can read other people perspectives, stories and bunch o
 Below section will discuss in more detail about the technical aspect of OpenDBM Web documentation structure. 
 
 ### How to install and run locally
-You need `node` version at least 16 to be able to install and run this documentation
+Your node must be set to stable version (as of now version 16) to be able to install and run this documentation
 Under the docs directory:
 * ```bash yarn``` to install all the dependencies
 * Then go to the the `website` directory and run the app by typing:

@@ -16,6 +16,6 @@ It is helpful to think of raw variables as quantifications of behavioral charact
 All variables are named according to a standard nomenclature. Raw variable names contain two sections, while derived variable names contain three sections. The figure below demonstrates what each section of the variable name, separated by underscores, refers to.
 
 <figure>
-  <img src="/docs/assets/biomaker-variables-1.png" width="1000" alt="Description of the standard nomenclature used to name all raw and derived variable outputs from OpenDBM, allowing for determination of variable contents without having to memorize all variable names." />
+  <img src="../docs/assets/biomaker-variables-1.png" width="1000" alt="Description of the standard nomenclature used to name all raw and derived variable outputs from OpenDBM, allowing for determination of variable contents without having to memorize all variable names." />
   <figcaption>Description of the standard nomenclature used to name all raw and derived variable outputs from OpenDBM, allowing for determination of variable contents without having to memorize all variable names.</figcaption>
 </figure>

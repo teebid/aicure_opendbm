@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
   <p>
     Welcome to the very start of your OpenDBM journey! If you're looking for straight install and usage instructions, you can move to <a href="dependencies-installation">this section</a>. Continue reading for an introduction of OpenDBM before installing.
   </p>
-  <img className="content-banner-img" src="/docs/assets/aicure_white.png" alt=" " />
+  <img className="content-banner-img" src="../docs/assets/aicure_white.png"  alt=" "  />
 </div>
 
 OpenDBM is an open-source tool for measurement of digital biomarkers from video and audio of patient behavior. It is built on existing software packages used to quantify behavioral characteristics. Our goal is to increase accessibility of methods in digital phenotyping to researchers trying to understand the relationship between neuropsychiatric illnesses and their behavioral manifestations. 
@@ -19,17 +19,6 @@ Through OpenDBM, a user can objectively and sensitively measure behavioral chara
 
 We hope to encourage researchers to use objective quantification of symptomatology in their analyses and to inspire them to contribute their own code, leading to a central repository of methods. Only by doing so can academia, healthcare, and industry collaborate effectively on the advancement of digital measurement of health and create access to novel tools in digital phenotyping.
 
-
-## How to use these docs
-
-The purpose of this document is to fully detail the specifications of OpenDBM. 
-
-- Chapter 2 describes how to install and set up OpenDBM on your system.
-- Chapter 3 outlines how to use OpenDBM to calculate digital biomarkers from data.
-- Chapter 4 provides information on how the data output is organized and analyzed.
-- Chapter 5 lists and describes all digital biomarker variables outputted by OpenDBM.
-- Chapter 6 details considerations to have in mind for any data that is being processed.
-- Chapter 7 contains additional resources for the user and links to instructional videos.
 
 ## Prerequisites
 

@@ -76,7 +76,7 @@ class BiomakerService:
         zipObj.close()
         return zip_filename, methodName
 
-    def process_movement(group, biomaker_request: BiomakerRequest):
+    def process_movement(self, group, biomaker_request: BiomakerRequest):
         m = Movement()
         curWorkingDir = os.getcwd()
         methodName = 'process_movement'

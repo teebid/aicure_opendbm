@@ -20,9 +20,11 @@ GitHub is just where we––and most other people––store code and other stu
 <Tabs>
 <TabItem value="manual" label="The manual way" default>
     
-You can manually clone the [repo](https://github.com/AiCure/open_dbm/discussions) by finding the Download ZIP button shown below:
+You can manually clone the <a href="https://github.com/AiCure/open_dbm">repo</a>  by finding the Download ZIP button shown below:
+
+
 <figure>
-  <img src="/docs/assets/githubodbm.png" width="1000" alt="Screenshot of OpenDBM Github page" />
+  <img src="../docs/assets/githubodbm.png" width="1000" alt="Screenshot of OpenDBM Github page" />
   <figcaption>Screenshot of OpenDBM Github page.</figcaption>
 </figure>
 
@@ -69,6 +71,8 @@ This will all make more sense in a bit.
 
 So, follow the [instructions on the Docker website](https://docs.docker.com/desktop/) to install Docker on your system. We recommend you use the latest stable version. Once downloaded and installed, launch Docker, open Terminal / Command Prompt, and check the version to ensure that Docker is properly installed and running:
 
+**NOTE for Windows User**: Please use the instruction [here](openface-docker-installation#if-you-havent-heres-the-instruction-on-how-to-install-docker) to install docker and/or enable WSL 2 as Docker Integration
+
 ```bash
 % docker --version
 Docker version 19.03.12, build 48a66213fe
@@ -77,7 +81,7 @@ Docker version 19.03.12, build 48a66213fe
 If you’re on a Mac, Docker should also show up in your Menu bar (I would give a screenshot for PC too but unfortunately I don’t have one). Make sure it states ‘Docker Desktop is running’
 
 <figure>
-  <img src="/docs/assets/docker_running.png" width="500" alt="Screenshot of Docker running" />
+  <img src="../docs/assets/docker_running.png" width="500" alt="Screenshot of Docker running" />
   <figcaption>Screenshot of Docker running.</figcaption>
 </figure>
 
