@@ -1,6 +1,6 @@
 ---
-id: verbal-accoustic
-title: Verbal Accoustic
+id: verbal-acoustic
+title: Verbal Acoustic
 ---
 
 Verbal acoustics refer to measurements of the acoustic properties of an individual’s voice. 

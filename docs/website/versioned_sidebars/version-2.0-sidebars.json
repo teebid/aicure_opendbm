@@ -53,11 +53,11 @@
         },
         {
           "type": "category",
-          "label": "Verbal Accoustic",
+          "label": "Verbal Acoustic",
           "collapsed": false,
           "collapsible": true,
           "items": [
-            "verbal-accoustic",
+            "verbal-acoustic",
             "fundamental-frequency",
             "formant-frequencies",
             "audio-intensity",

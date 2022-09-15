@@ -17,7 +17,7 @@ from ._shimmer import Shimmer
 from ._voice_prevalence import VoicePrevalence
 
 
-class VerbalAccoustics(AudioModel):
+class VerbalAcoustics(AudioModel):
     def __init__(self):
         super().__init__()
         self._auint = AudioIntensity()

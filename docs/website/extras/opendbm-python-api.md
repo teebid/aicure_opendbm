@@ -57,7 +57,7 @@ functions first so we don't need to reinvent the wheel.
 </figure>
 
 api_lib is a  supporting package created so that we can use openDBM core modules with the python API call. 
-Looking in the api_lib folder, we can see four folders (facial_activity, movement, speech, verbal_accoustics), 
+Looking in the api_lib folder, we can see four folders (facial_activity, movement, speech, verbal_acoustics), 
 which represent the dbm group, the same as we saw in the dmb_lib folder. In the same level of the dbm group folder, 
 there are also two modules that have functionality as follows:
 

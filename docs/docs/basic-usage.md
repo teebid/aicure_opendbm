@@ -23,7 +23,7 @@ In this section, we are gonna show the basic instruction on how to get biomarker
 from opendbm import Movement
 
 # code below is how to access to other dbm groups
-# from opendbm import FacialActivity, VerbalAccoustics, Speech
+# from opendbm import FacialActivity, VerbalAcoustics, Speech
 ```
 
 

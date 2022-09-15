@@ -38,7 +38,7 @@ At a modular level, OpenDBM is a library that consists of the following componen
 | ---- | --- |
 | [**Facial**](https://teebid.github.io/aicure_opendbm/docs/category/api/facial) | An OpenDBM module to get facial attributes |
 | [**Movement**](https://teebid.github.io/aicure_opendbm/docs/category/api/movement) | An OpenDBM module to get movement attributes |
-| [**Accoustic**](https://teebid.github.io/aicure_opendbm/docs/category/api/accoustic) | An OpenDBM module to get accoustic attributes  |
+| [**Acoustic**](https://teebid.github.io/aicure_opendbm/docs/category/api/acoustic) | An OpenDBM module to get acoustic attributes  |
 | [**Audio**](https://teebid.github.io/aicure_opendbm/docs/category/api/audio) | An OpenDBM module to get audio attributes |
 
 Usually, OpenDBM is used for:

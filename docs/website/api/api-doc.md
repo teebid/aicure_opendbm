@@ -11,5 +11,5 @@ Each module will have its own raw variables that's too big to be included in thi
 
 - [Facial Activity API](facial-activity-api)
 - [Movement API](movement-api)
-- [Verbal Accoustics API](verbal-accoustics-api)
+- [Verbal Acoustics API](verbal-acoustics-api)
 - [Speech API](speech-api)

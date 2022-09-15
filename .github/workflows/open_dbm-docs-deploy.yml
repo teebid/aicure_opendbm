@@ -26,7 +26,7 @@ jobs:
         pip install pydoc-markdown
         pydoc-markdown -I ../opendbm/api_lib/facial_activity -m api --render-toc > website/api/facial-activity-api.md
         pydoc-markdown -I ../opendbm/api_lib/movement -m api --render-toc > website/api/movement-api.md
-        pydoc-markdown -I ../opendbm/api_lib/verbal_accoustics -m api --render-toc > website/api/verbal-accoustics-api.md
+        pydoc-markdown -I ../opendbm/api_lib/verbal_acoustics -m api --render-toc > website/api/verbal-acoustics-api.md
         pydoc-markdown -I ../opendbm/api_lib/speech -m api --render-toc > website/api/speech-api.md
         yarn install --frozen-lockfile
     - name: Build website

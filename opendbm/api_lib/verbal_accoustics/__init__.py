@@ -1,1 +1,1 @@
-from opendbm.api_lib.verbal_accoustics.api import VerbalAccoustics
+from opendbm.api_lib.verbal_acoustics.api import VerbalAcoustics
