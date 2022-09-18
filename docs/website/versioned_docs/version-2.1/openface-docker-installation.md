@@ -57,7 +57,7 @@ Follow the instruction in the [official website](https://docs.docker.com/desktop
      * Make sure to execute "wsl --set-default-version 2"
      * Make sure to choose Ubuntu as Linux distribution of choice
        * **wsl -l -o** to list distribution
-       * **wsl --install -d {DistributionName}** to install Ubuntu Distribution
+       * **wsl --install -d Ubuntu-18.04** to install Ubuntu Distribution
 
 <figure>
   <img src="../docs/assets/ubuntu-wsl.png" width="70%" alt="OpenDBM Folder" />
