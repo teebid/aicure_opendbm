@@ -43,10 +43,6 @@ RUN wget https://github.com/mozilla/DeepSpeech/releases/download/v0.9.1/deepspee
 RUN wget https://github.com/mozilla/DeepSpeech/releases/download/v0.9.1/deepspeech-0.9.1-models.scorer
 
 WORKDIR /app
-# ENV LANG en_US.UTF-8
-# ENV LC_ALL en_US.UTF-8
-# RUN export LC_ALL=C
-# RUN export LANG=C.UTF-8
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 RUN echo "Requirement txt done!"
