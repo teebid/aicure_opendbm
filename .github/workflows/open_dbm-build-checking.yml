@@ -154,7 +154,7 @@ jobs:
     - name: Run Pytest
       id: odbm_windows_test
       run: |
-        pytest -m "speech or acoustics"
+        pytest -m "speech or acoustic"
     - name: Update shield WINDOWS BUILD status only for branch push master
       if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && always() }}
       run: |
