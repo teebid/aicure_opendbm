@@ -23,8 +23,9 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Docker build & push
-          run: |
+      -
+        name: Docker build & push
+        run: |
             docker pull jordihasianta/dbm-test2
             docker image tag jordihasianta/dbm-test2 ${{ secrets.DOCKERHUB_USERNAME }}/opendbm:latest
             docker push ${{ secrets.DOCKERHUB_USERNAME }}/opendbm:latest
