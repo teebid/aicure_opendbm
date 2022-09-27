@@ -107,8 +107,7 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Pull OpenFace Image
       run: |
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/dbm-test2:latest
-            docker image tag ${{ secrets.DOCKERHUB_USERNAME }}/dbm-test2:latest dbm-openface
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/dbm-openface:latest
     - name: Install dependencies
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
