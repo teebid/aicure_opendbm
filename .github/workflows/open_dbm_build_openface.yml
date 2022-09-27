@@ -23,10 +23,8 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      -
-        name: Build and push
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/dbm-test2:latest
+      - name: Docker build & push
+          run: |
+            docker pull jordihasianta/dbm-test2
+            docker image tag jordihasianta/dbm-test2 ${{ secrets.DOCKERHUB_USERNAME }}/opendbm:latest
+            docker push ${{ secrets.DOCKERHUB_USERNAME }}/opendbm:latest
