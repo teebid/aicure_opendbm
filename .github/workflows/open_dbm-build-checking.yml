@@ -144,7 +144,7 @@ jobs:
       uses: myci-actions/export-env-var-powershell@1
       with:
         name: PATH
-        value: $env:PATH;D:/a/aicure_opendbm/aicure_opendbm/bin/sox-14.4.2/
+        value: $env:PATH;D:/a/${{ github.event.repository.name }}/${{ github.event.repository.name }}/bin/sox-14.4.2/
     - name: Install dependencies
       if: steps.cache.outputs.cache-hit != 'true'
       run: |    
