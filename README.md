@@ -20,7 +20,7 @@ OS                    | Build Status
 ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Linux**                 | [![Build](https://raw.githubusercontent.com/teebid/aicure_opendbm/master/images/badges/linux_status.svg)](https://github.com/teebid/aicure_opendbm/actions/workflows/open_dbm-build-checking.yml)
 **Windows**                 | [![Build](https://raw.githubusercontent.com/teebid/aicure_opendbm/master/images/badges/windows_status.svg)](https://github.com/teebid/aicure_opendbm/actions/workflows/open_dbm-build-checking.yml)
-**macOS**                 | [![Build](https://raw.githubusercontent.com/teebid/aicure_opendbm/master/images/badges/macos_status.svg)](https://github.com/teebid/aicure_opendbm/actions/workflows/open_dbm-build-checking.yml)
+**macOS-Intel**                 | [![Build](https://raw.githubusercontent.com/teebid/aicure_opendbm/master/images/badges/macos_status.svg)](https://github.com/teebid/aicure_opendbm/actions/workflows/open_dbm-build-checking.yml)
 
 
 # What is it
