@@ -24,8 +24,7 @@ This page will help you install OpenFace model that is stored as Docker Image, s
 
 And then execute this command to download OpenFace model
 ```bash
-docker pull jordihasianta/dbm-test2
-docker image tag jordihasianta/dbm-test2 dbm-openface
+docker pull opendbmteam/dbm-openface
 ```
 Done!
 ## If you haven't, here's the instruction on how to install Docker

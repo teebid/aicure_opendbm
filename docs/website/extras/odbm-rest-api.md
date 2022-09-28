@@ -24,8 +24,7 @@ To use the Rest API is very straighforward
 * Install the neccessary dependencies
 ```commandline
 pip install -r requirements.txt
-docker pull jordihasianta/dbm-test2
-docker image tag jordihasianta/dbm-test2 dbm-openface
+docker pull opendbmteam/dbm-openface
 ```
 * Then you can use Make syntax to run it
 ```commandline

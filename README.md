@@ -91,8 +91,7 @@ Make sure you have installed docker and already login to Docker Hub.
 
 If you haven't, Find the tutorial [here](https://teebid.github.io/aicure_opendbm/docs/openface-docker-installation)
 ```bash
-docker pull jordihasianta/dbm-test2
-docker image tag jordihasianta/dbm-test2 dbm-openface
+docker pull opendbmteam/dbm-openface
 ```
 
 <div align="right">
